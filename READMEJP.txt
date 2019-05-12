@@ -2,4 +2,4 @@
 
 WinHier はウィンドウの階層構造やプロパティを調べるのに便利なツールです。
 
-対応環境: Windows Vista/7/10
+対応環境: Windows XP/Vista/7/10
