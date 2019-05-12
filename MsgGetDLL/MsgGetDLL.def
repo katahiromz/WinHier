@@ -1,0 +1,7 @@
+EXPORTS
+    InstallSendProc
+    InstallSendRetProc
+    InstallPostProc
+    UninstallSendProc
+    UninstallSendRetProc
+    UninstallPostProc
