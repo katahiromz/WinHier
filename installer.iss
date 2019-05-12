@@ -55,6 +55,7 @@ Source: "MsgGet64.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "MsgGetter32.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "MsgGetter64.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Constants.txt"; DestDir: "{app}"; Flags: ignoreversion
+Source: "v2xker32.dll"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
