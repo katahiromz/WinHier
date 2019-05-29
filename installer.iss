@@ -43,36 +43,41 @@ Name: "japanese"; MessagesFile: "compiler:Languages\Japanese.isl"
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"
+Name: "x64"; Description: "{cm:Installx64}"; GroupDescription: "{cm:Bit64Support}"
 
 [Files]
 Source: "README.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "READMEJP.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "LICENSE.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "WinHier32.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "WinHier64.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "WinHier64.exe"; DestDir: "{app}"; Flags: ignoreversion; Tasks: x64
 Source: "MsgGet32.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MsgGet64.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "MsgGet64.dll"; DestDir: "{app}"; Flags: ignoreversion; Tasks: x64
 Source: "MsgGetter32.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MsgGetter64.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "MsgGetter64.exe"; DestDir: "{app}"; Flags: ignoreversion; Tasks: x64
 Source: "Constants.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "v2xker32.dll"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
 Name: "{group}\WinHier32"; Filename: "{app}\WinHier32.exe"
-Name: "{group}\WinHier64"; Filename: "{app}\WinHier64.exe"
+Name: "{group}\WinHier64"; Filename: "{app}\WinHier64.exe"; Tasks: x64
 Name: "{group}\{cm:ReadmeEnglish}"; Filename: "{app}\README.txt"
 Name: "{group}\{cm:ReadmeJapanese}"; Filename: "{app}\READMEJP.txt"
 Name: "{group}\{cm:LicenseEnglish}"; Filename: "{app}\LICENSE.txt"
 Name: "{group}\{cm:ProgramOnTheWeb,WinHier}"; Filename: "http://katahiromz.web.fc2.com"
 Name: "{group}\{cm:UninstallProgram,WinHier}"; Filename: "{uninstallexe}"
 Name: "{commondesktop}\WinHier32"; Filename: "{app}\WinHier32.exe"; Tasks: desktopicon
-Name: "{commondesktop}\WinHier64"; Filename: "{app}\WinHier64.exe"; Tasks: desktopicon
+Name: "{commondesktop}\WinHier64"; Filename: "{app}\WinHier64.exe"; Tasks: desktopicon and x64
 
 [CustomMessages]
 english.ReadmeEnglish=ReadMe (English)
 english.ReadmeJapanese=ReadMe (Japanese)
 english.LicenseEnglish=License (English)
+english.Installx64=Install x64 version
+english.Bit64Support=Support 64-bit:
 japanese.ReadmeEnglish=ReadMe (英語)
 japanese.ReadmeJapanese=読んでね (日本語)
 japanese.LicenseEnglish=ライセンス (英語)
+japanese.Installx64=64ビット版をインストールする
+japanese.Bit64Support=64ビットのサポート:
