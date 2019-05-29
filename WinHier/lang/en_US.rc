@@ -86,7 +86,7 @@ STRINGTABLE
     IDS_SAVEAS, "Save As A Text File..."
     IDS_FILTER, "Text Files (*.txt)|*.txt|All Files (*.*)|*.*|"
     IDS_CANTSAVE, "Unable to save."
-    IDS_TXTNAME, "Properties.txt"
+    IDS_TXTNAME, "Properties for Window.txt"
 }
 
 //////////////////////////////////////////////////////////////////////////////
