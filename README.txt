@@ -33,6 +33,7 @@ please right-click the treeview item and choose the appropriate menu item.
 2019.XX.YY ver.1.6
     Improved saving.
     Don't search empty string.
+    Added version info to MsgGetter.
 
 ## Contact Us
 
