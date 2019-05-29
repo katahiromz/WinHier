@@ -521,6 +521,9 @@ public:
 
         mstr_trim(szText, L" \t");
 
+        if (szText[0] == 0)
+            return;
+
         std::vector<HTREEITEM> found;
         m_ctl1.find_text(found, szText);
         if (found.empty())
@@ -550,6 +553,9 @@ public:
         GetDlgItemTextW(hwnd, edt2, szText, ARRAYSIZE(szText));
 
         mstr_trim(szText, L" \t");
+
+        if (szText[0] == 0)
+            return;
 
         std::vector<HTREEITEM> found;
         m_ctl1.find_text(found, szText);

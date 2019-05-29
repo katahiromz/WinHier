@@ -32,6 +32,7 @@ please right-click the treeview item and choose the appropriate menu item.
     Able to save properties as a text file.
 2019.XX.YY ver.1.6
     Improved saving.
+    Don't search empty string.
 
 ## Contact Us
 
