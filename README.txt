@@ -30,7 +30,7 @@ please right-click the treeview item and choose the appropriate menu item.
     First release.
 2019.05.29 ver.1.5
     Able to save properties as a text file.
-2019.XX.YY ver.1.6
+2019.05.30 ver.1.6
     Improved saving.
     Don't search empty string.
     Added version info to MsgGetter.
