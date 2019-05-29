@@ -121,6 +121,7 @@ BOOL EnableProcessPriviledge(LPCTSTR pszSE_)
 BOOL OnInitDialog(HWND hwnd, HWND hwndFocus, LPARAM lParam)
 {
     MWindowTreeView::node_type *node = (MWindowTreeView::node_type *)lParam;
+    SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG_PTR)node);
 
     TCHAR szText[128];
 
@@ -206,6 +207,133 @@ BOOL OnInitDialog(HWND hwnd, HWND hwndFocus, LPARAM lParam)
     return TRUE;
 }
 
+BOOL WriteLine(FILE *fp, LPCWSTR fmt, ...)
+{
+    WCHAR szTextW[MAX_PATH];
+    CHAR szTextA[MAX_PATH];
+    va_list va;
+    va_start(va, fmt);
+    StringCbVPrintfW(szTextW, sizeof(szTextW), fmt, va);
+    WideCharToMultiByte(CP_UTF8, 0, szTextW, -1, szTextA, MAX_PATH, NULL, NULL);
+    va_end(va);
+    if (fputs(szTextA, fp) != 0)
+        throw 1;
+}
+
+static void
+OnSaveAs(HWND hwnd, LPCTSTR pszFile, MWindowTreeView::node_type *node)
+{
+    BOOL bOK = FALSE;
+    if (FILE *fp = _wfopen(pszFile, L"wb"))
+    {
+        bOK = TRUE;
+        try
+        {
+            fputs("\xEF\xBB\xBF", fp);  // BOM
+
+            if (node->m_type == MWindowTreeNode::WINDOW)
+            {
+                WriteLine(fp, TEXT("HWND: %p\r\n"), node->m_hwndTarget);
+                WriteLine(fp, TEXT("Class Name: '%s'\r\n"), node->m_szClass);
+
+                DWORD cls_style = node->m_cls_style;
+                std::wstring strClsStyle = mstr_hex(node->m_cls_style);
+                strClsStyle += L" (";
+                strClsStyle += g_db.DumpBitField(L"CLASS.STYLE", cls_style);
+                strClsStyle += L")";
+                WriteLine(fp, TEXT("Class Style: %s\r\n"), strClsStyle.c_str());
+
+                WriteLine(fp, TEXT("Window Text: '%s'\r\n"), node->m_szText);
+
+                DWORD style = node->m_style;
+                std::wstring strStyle = mstr_hex(node->m_style);
+                strStyle += L" (";
+                strStyle += g_db.DumpBitField(node->m_szClass, L"STYLE", style);
+                strStyle += L")";
+                WriteLine(fp, L"Window Style: %s\n", strStyle.c_str());
+
+                DWORD exstyle = node->m_exstyle;
+                std::wstring strExStyle = mstr_hex(node->m_exstyle);
+                strExStyle += L" (";
+                strExStyle += g_db.DumpBitField(L"EXSTYLE", exstyle);
+                strExStyle += L")";
+                WriteLine(fp, L"Extended Style: %s\r\n", strExStyle.c_str());
+
+                WriteLine(fp, TEXT("Owner: %p\r\n"), node->m_hwndOwner);
+
+                WriteLine(fp, TEXT("Parent: %p\r\n"), node->m_hwndParent);
+
+                WriteLine(fp, TEXT("First Child: %p\r\n"), node->m_hwndFirstChild);
+
+                WriteLine(fp, TEXT("Last Child: %p\r\n"), node->m_hwndLastChild);
+
+                WriteLine(fp, TEXT("Class Atom: 0x%04X (%u)\r\n"), node->m_wClassAtom, node->m_wClassAtom);
+
+                WriteLine(fp, TEXT("ID: %p\r\n"), node->m_id);
+
+                WriteLine(fp, TEXT("Window Rect: (%ld, %ld) - (%ld, %ld)\r\n"),
+                               node->m_rcWnd.left,
+                               node->m_rcWnd.top,
+                               node->m_rcWnd.right,
+                               node->m_rcWnd.bottom);
+
+                WriteLine(fp, TEXT("Client Rect: (%ld, %ld) - (%ld, %ld)\r\n"),
+                               node->m_rcClient.left,
+                               node->m_rcClient.top,
+                               node->m_rcClient.right,
+                               node->m_rcClient.bottom);
+
+                WriteLine(fp, L"EXE Filename: '%s'\n", node->m_szExeFile);
+            }
+            else if (node->m_type == MWindowTreeNode::PROCESS)
+            {
+                WriteLine(fp, TEXT("ID: 0x%08X (%lu)"), (DWORD)node->m_id, (DWORD)node->m_id);
+
+                WriteLine(fp, L"EXE Filename: '%s'\n", node->m_szExeFile);
+            }
+            else if (node->m_type == MWindowTreeNode::THREAD)
+            {
+                WriteLine(fp, TEXT("ID: 0x%08X (%lu)"), (DWORD)node->m_id, (DWORD)node->m_id);
+            }
+        }
+        catch (int)
+        {
+            bOK = FALSE;
+        }
+
+        fclose(fp);
+    }
+
+    if (!bOK)
+    {
+        DeleteFile(pszFile);
+        MessageBoxW(hwnd, L"Unable to save it!", NULL, MB_ICONERROR);
+    }
+}
+
+void OnPsh1(HWND hwnd)
+{
+    MWindowTreeView::node_type *node;
+    node = (MWindowTreeView::node_type *)GetWindowLongPtr(hwnd, GWLP_USERDATA);
+
+    OPENFILENAME ofn;
+    TCHAR szFile[MAX_PATH] = TEXT("Properties.txt");
+    ZeroMemory(&ofn, sizeof(ofn));
+    ofn.lStructSize = OPENFILENAME_SIZE_VERSION_400;
+    ofn.hwndOwner = hwnd;
+    ofn.lpstrFilter = TEXT("Text Files (*.txt)\0*.txt\0All Files (*.*)\0*.*\0");
+    ofn.lpstrFile = szFile;
+    ofn.nMaxFile = ARRAYSIZE(szFile);
+    ofn.lpstrTitle = TEXT("Save As...");
+    ofn.Flags = OFN_EXPLORER | OFN_ENABLESIZING | OFN_HIDEREADONLY |
+                OFN_PATHMUSTEXIST | OFN_OVERWRITEPROMPT;
+    ofn.lpstrDefExt = TEXT("txt");
+    if (GetSaveFileName(&ofn))
+    {
+        OnSaveAs(hwnd, szFile, node);
+    }
+}
+
 void OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeNotify)
 {
     switch (id)
@@ -213,6 +341,9 @@ void OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeNotify)
     case IDOK:
     case IDCANCEL:
         EndDialog(hwnd, id);
+        break;
+    case psh1:
+        OnPsh1(hwnd);
         break;
     }
 }
