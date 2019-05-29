@@ -13,6 +13,9 @@
 #define IDI_MAIN                            100
 #define IDI_NULL                            101
 
+#define IDS_SAVEAS                          100
+#define IDS_FILTER                          101
+
 #define ID_WINDOW_CHOOSED                   100
 #define ID_PROP                             101
 #define ID_MESSAGES                         102

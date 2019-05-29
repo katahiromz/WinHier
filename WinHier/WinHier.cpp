@@ -322,10 +322,10 @@ void OnPsh1(HWND hwnd)
     ZeroMemory(&ofn, sizeof(ofn));
     ofn.lStructSize = OPENFILENAME_SIZE_VERSION_400;
     ofn.hwndOwner = hwnd;
-    ofn.lpstrFilter = TEXT("Text Files (*.txt)\0*.txt\0All Files (*.*)\0*.*\0");
+    ofn.lpstrFilter = MakeFilterDx(LoadStringDx(IDS_FILTER));
     ofn.lpstrFile = szFile;
     ofn.nMaxFile = ARRAYSIZE(szFile);
-    ofn.lpstrTitle = TEXT("Save As...");
+    ofn.lpstrTitle = LoadStringDx(IDS_SAVEAS);
     ofn.Flags = OFN_EXPLORER | OFN_ENABLESIZING | OFN_HIDEREADONLY |
                 OFN_PATHMUSTEXIST | OFN_OVERWRITEPROMPT;
     ofn.lpstrDefExt = TEXT("txt");
