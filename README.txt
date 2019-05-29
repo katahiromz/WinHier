@@ -28,7 +28,8 @@ please right-click the treeview item and choose the appropriate menu item.
 
 2019.05.12 ver.1.4
     First release.
-2019.XX.YY ver.1.5
+2019.05.29 ver.1.5
+    Able to save properties as a text file.
 
 ## Contact Us
 

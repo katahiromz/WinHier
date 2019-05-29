@@ -218,6 +218,7 @@ BOOL WriteLine(FILE *fp, LPCWSTR fmt, ...)
     va_end(va);
     if (fputs(szTextA, fp) != 0)
         throw 1;
+    return TRUE;
 }
 
 static void
