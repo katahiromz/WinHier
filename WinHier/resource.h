@@ -15,6 +15,8 @@
 
 #define IDS_SAVEAS                          100
 #define IDS_FILTER                          101
+#define IDS_CANTSAVE                        102
+#define IDS_TXTNAME                         103
 
 #define ID_WINDOW_CHOOSED                   100
 #define ID_PROP                             101

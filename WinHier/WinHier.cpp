@@ -308,7 +308,7 @@ OnSaveAs(HWND hwnd, LPCTSTR pszFile, MWindowTreeView::node_type *node)
     if (!bOK)
     {
         DeleteFile(pszFile);
-        MessageBoxW(hwnd, L"Unable to save it!", NULL, MB_ICONERROR);
+        MessageBoxW(hwnd, LoadStringDx(IDS_CANTSAVE), NULL, MB_ICONERROR);
     }
 }
 
@@ -317,8 +317,10 @@ void OnPsh1(HWND hwnd)
     MWindowTreeView::node_type *node;
     node = (MWindowTreeView::node_type *)GetWindowLongPtr(hwnd, GWLP_USERDATA);
 
+    TCHAR szFile[MAX_PATH];
+    StringCbCopy(szFile, sizeof(szFile), LoadStringDx(IDS_TXTNAME));
+
     OPENFILENAME ofn;
-    TCHAR szFile[MAX_PATH] = TEXT("Properties.txt");
     ZeroMemory(&ofn, sizeof(ofn));
     ofn.lStructSize = OPENFILENAME_SIZE_VERSION_400;
     ofn.hwndOwner = hwnd;
