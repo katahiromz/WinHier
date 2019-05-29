@@ -191,8 +191,7 @@ BOOL DoData(HWND hwnd, LPTSTR psz)
     iItem = (INT)SendMessage(g_hLst1, LB_GETCOUNT, 0, 0);
     if (iItem != LB_ERR)
     {
-        SendMessage(g_hLst1, LB_SETSEL, FALSE, -1);
-        SendMessage(g_hLst1, LB_SETSEL, TRUE, iItem - 1);
+        SendMessage(g_hLst1, LB_SETCURSEL, iItem - 1, 0);
     }
 
     return TRUE;
