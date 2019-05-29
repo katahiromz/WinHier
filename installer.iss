@@ -41,7 +41,7 @@ Name: "japanese"; MessagesFile: "compiler:Languages\Japanese.isl"
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"
-Name: "x64"; Description: "{cm:Installx64}"; GroupDescription: "{cm:Bit64Support}"
+Name: "x64"; Description: "{cm:Installx64}"; GroupDescription: "{cm:Bit64Support}"; Check: IsX64
 
 [Files]
 Source: "README.txt"; DestDir: "{app}"; Flags: ignoreversion
