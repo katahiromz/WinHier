@@ -1,4 +1,4 @@
-set PACK=WinHier-1.5
+set PACK=WinHier-1.6
 if not exist %PACK% mkdir %PACK%
 copy READMEJP.txt %PACK%
 copy README.txt %PACK%

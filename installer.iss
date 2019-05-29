@@ -12,7 +12,7 @@
 
 AppId={{0163C188-0568-4EB6-9901-C68373A719D5}
 AppName=WinHier
-AppVerName=WinHier 1.5
+AppVerName=WinHier 1.6
 AppPublisher=Katayama Hirofumi MZ
 AppPublisherURL=http://katahiromz.web.fc2.com/
 AppSupportURL=http://katahiromz.web.fc2.com/
@@ -23,7 +23,7 @@ DisableDirPage=no
 AllowNoIcons=yes
 LicenseFile=LICENSE.txt
 OutputDir=.
-OutputBaseFilename=WinHier-1.5-setup
+OutputBaseFilename=WinHier-1.6-setup
 SetupIconFile=WinHier\res\Icon_100.ico
 Compression=lzma
 SolidCompression=yes
@@ -33,9 +33,9 @@ VersionInfoCompany=Katayama Hirofumi MZ
 VersionInfoCopyright=Copyright (C) 2019 Katayama Hirofumi MZ.
 VersionInfoDescription=WinHier
 VersionInfoProductName=WinHier
-VersionInfoProductTextVersion=1.5
-VersionInfoProductVersion=1.5
-VersionInfoVersion=1.5
+VersionInfoProductTextVersion=1.6
+VersionInfoProductVersion=1.6
+VersionInfoVersion=1.6
 
 [Languages]
 Name: "english"; MessagesFile:  "compiler:Default.isl"
