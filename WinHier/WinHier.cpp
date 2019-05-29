@@ -251,7 +251,7 @@ OnSaveAs(HWND hwnd, LPCTSTR pszFile, MWindowTreeView::node_type *node)
                 strStyle += L" (";
                 strStyle += g_db.DumpBitField(node->m_szClass, L"STYLE", style);
                 strStyle += L")";
-                WriteLine(fp, L"Window Style: %s\n", strStyle.c_str());
+                WriteLine(fp, L"Window Style: %s\r\n", strStyle.c_str());
 
                 DWORD exstyle = node->m_exstyle;
                 std::wstring strExStyle = mstr_hex(node->m_exstyle);
@@ -284,17 +284,17 @@ OnSaveAs(HWND hwnd, LPCTSTR pszFile, MWindowTreeView::node_type *node)
                                node->m_rcClient.right,
                                node->m_rcClient.bottom);
 
-                WriteLine(fp, L"EXE Filename: '%s'\n", node->m_szExeFile);
+                WriteLine(fp, L"EXE Filename: '%s'\r\n", node->m_szExeFile);
             }
             else if (node->m_type == MWindowTreeNode::PROCESS)
             {
                 WriteLine(fp, TEXT("ID: 0x%08X (%lu)"), (DWORD)node->m_id, (DWORD)node->m_id);
 
-                WriteLine(fp, L"EXE Filename: '%s'\n", node->m_szExeFile);
+                WriteLine(fp, L"EXE Filename: '%s'\r\n", node->m_szExeFile);
             }
             else if (node->m_type == MWindowTreeNode::THREAD)
             {
-                WriteLine(fp, TEXT("ID: 0x%08X (%lu)"), (DWORD)node->m_id, (DWORD)node->m_id);
+                WriteLine(fp, TEXT("ID: 0x%08X (%lu)\r\n"), (DWORD)node->m_id, (DWORD)node->m_id);
             }
         }
         catch (int)
