@@ -34,6 +34,7 @@ please right-click the treeview item and choose the appropriate menu item.
     Improved saving.
     Don't search empty string.
     Added version info to MsgGetter.
+    Improved installer.
 
 ## Contact Us
 
