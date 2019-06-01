@@ -5,6 +5,8 @@
 
 #define IDC_STATIC                          -1
 
+#define IDS_MSGFOR                          100
+
 #define ID_COPY                             100
 #define ID_COPY_ALL                         101
 #define ID_SAVE_AS                          102

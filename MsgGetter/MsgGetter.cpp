@@ -291,6 +291,10 @@ BOOL OnInitDialog(HWND hwnd, HWND hwndFocus, LPARAM lParam)
     }
 
     TCHAR szText[256], szText2[64];
+    LoadString(NULL, IDS_MSGFOR, szText2, ARRAYSIZE(szText2));
+    StringCbPrintf(szText, sizeof(szText), szText2, hwndTarget);
+    SetWindowText(hwnd, szText);
+
     DWORD osver = GetVersion();
     GetWindowsDirectory(szText2, ARRAYSIZE(szText2));
     StringCbPrintf(szText, sizeof(szText), TEXT("GetVersion():0x%08lX, WinDir:'%s'"), osver, szText2);
