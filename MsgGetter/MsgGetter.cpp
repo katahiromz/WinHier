@@ -291,6 +291,11 @@ BOOL OnInitDialog(HWND hwnd, HWND hwndFocus, LPARAM lParam)
     }
 
     TCHAR szText[256], szText2[64];
+    DWORD osver = GetVersion();
+    GetWindowsDirectory(szText2, ARRAYSIZE(szText2));
+    StringCbPrintf(szText, sizeof(szText), TEXT("GetVersion():0x%08lX, WinDir:'%s'"), osver, szText2);
+    DoData(hwnd, szText);
+
     GetClassName(hwndTarget, szText2, ARRAYSIZE(szText2));
     StringCbPrintf(szText, sizeof(szText), TEXT("hwndTarget:%p, ClassName:'%s'"), hwndTarget, szText2);
     DoData(hwnd, szText);
