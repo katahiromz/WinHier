@@ -26,17 +26,18 @@ please right-click the treeview item and choose the appropriate menu item.
 
 ## History
 
-2019.05.12 ver.1.4
-    First release.
-2019.05.29 ver.1.5
-    Able to save properties as a text file.
-2019.05.30 ver.1.6
-    Improved saving.
-    Don't search empty string.
-    Added version info to MsgGetter.
-    Improved installer.
-2019.XX.YY ver.1.7
-    Support of registered window messages.
+- 2019.05.12 ver.1.4
+    - First release.
+- 2019.05.29 ver.1.5
+    - Able to save properties as a text file.
+- 2019.05.30 ver.1.6
+    - Improved saving.
+    - Don't search empty string.
+    - Added version info to MsgGetter.
+    - Improved installer.
+- 2019.XX.YY ver.1.7
+    - Support of registered window messages.
+    - Able to copy a node as text.
 
 ## Contact Us
 

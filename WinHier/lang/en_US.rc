@@ -12,6 +12,8 @@ LANGUAGE LANG_ENGLISH, SUBLANG_DEFAULT
 {
     POPUP "Popup #1"
     {
+        MENUITEM "&Copy As Text", ID_COPYASTEXT
+        MENUITEM SEPARATOR
         MENUITEM "&Messages...", ID_MESSAGES
         MENUITEM SEPARATOR
         MENUITEM "&Properties...", ID_PROP

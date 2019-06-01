@@ -21,12 +21,13 @@
 #define ID_WINDOW_CHOOSED                   100
 #define ID_PROP                             101
 #define ID_MESSAGES                         102
+#define ID_COPYASTEXT                       103
 
 #ifdef APSTUDIO_INVOKED
     #ifndef APSTUDIO_READONLY_SYMBOLS
         #define _APS_NO_MFC                 1
         #define _APS_NEXT_RESOURCE_VALUE    100
-        #define _APS_NEXT_COMMAND_VALUE     103
+        #define _APS_NEXT_COMMAND_VALUE     104
         #define _APS_NEXT_CONTROL_VALUE     1000
         #define _APS_NEXT_SYMED_VALUE       300
     #endif

@@ -12,6 +12,8 @@ LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
 {
     POPUP "Popup #1"
     {
+        MENUITEM "テキストをコピー(&C)", ID_COPYASTEXT
+        MENUITEM SEPARATOR
         MENUITEM "メッセージ(&M)...", ID_MESSAGES
         MENUITEM SEPARATOR
         MENUITEM "プロパティ(&P)...", ID_PROP

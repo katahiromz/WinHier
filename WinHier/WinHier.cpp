@@ -612,6 +612,34 @@ public:
         }
     }
 
+    void OnCopyAsText(HWND hwnd)
+    {
+        HTREEITEM hItem = TreeView_GetSelection(m_ctl1);
+        MWindowTreeView::node_type *node = m_ctl1.NodeFromItem(hItem);
+        if (node)
+        {
+            MString text = m_ctl1.text_from_node(node);
+            if (::OpenClipboard(hwnd))
+            {
+                ::EmptyClipboard();
+
+                size_t cb = (text.size() + 1) * sizeof(WCHAR);
+                if (HGLOBAL hGlobal = GlobalAlloc(GHND | GMEM_SHARE, cb))
+                {
+                    if (LPWSTR psz = (LPWSTR)GlobalLock(hGlobal))
+                    {
+                        CopyMemory(psz, text.c_str(), cb);
+                        GlobalUnlock(hGlobal);
+                    }
+
+                    ::SetClipboardData(CF_UNICODETEXT, hGlobal);
+                }
+
+                ::CloseClipboard();
+            }
+        }
+    }
+
     void OnMessages(HWND hwnd)
     {
         HTREEITEM hItem = TreeView_GetSelection(m_ctl1);
@@ -696,6 +724,9 @@ public:
         case ID_WINDOW_CHOOSED:
             m_ctl1.refresh();
             m_ctl1.select_hwnd(m_ico1.GetSelectedWindow());
+            break;
+        case ID_COPYASTEXT:
+            OnCopyAsText(hwnd);
             break;
         }
     }
