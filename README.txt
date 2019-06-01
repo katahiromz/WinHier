@@ -35,6 +35,8 @@ please right-click the treeview item and choose the appropriate menu item.
     Don't search empty string.
     Added version info to MsgGetter.
     Improved installer.
+2019.XX.YY ver.1.7
+    Support of registered window messages.
 
 ## Contact Us
 
