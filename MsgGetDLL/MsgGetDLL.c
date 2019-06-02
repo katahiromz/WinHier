@@ -106,7 +106,7 @@ MsgSendRetProc(INT code, WPARAM wParam, LPARAM lParam)
         }
         else
         {
-			HWND hwnd;
+            HWND hwnd;
             pMsg = (PCWPRETSTRUCT)lParam;
             hwnd = pMsg->hwnd;
             tid1 = GetWindowThreadProcessId(hwnd, NULL);
@@ -172,7 +172,7 @@ BOOL APIENTRY UninstallSendProc(void)
 
 BOOL APIENTRY InstallSendProc(HWND hwndNotify, HWND hwndTarget)
 {
-	DWORD tid;
+    DWORD tid;
     UninstallSendProc();
 
     g_hwndNotify = hwndNotify;
@@ -195,7 +195,7 @@ BOOL APIENTRY UninstallSendRetProc(void)
 
 BOOL APIENTRY InstallSendRetProc(HWND hwndNotify, HWND hwndTarget)
 {
-	DWORD tid;
+    DWORD tid;
     UninstallSendRetProc();
 
     g_hwndNotify = hwndNotify;
@@ -218,7 +218,7 @@ BOOL APIENTRY UninstallPostProc(void)
 
 BOOL APIENTRY InstallPostProc(HWND hwndNotify, HWND hwndTarget)
 {
-	DWORD tid;
+    DWORD tid;
     UninstallPostProc();
 
     g_hwndNotify = hwndNotify;

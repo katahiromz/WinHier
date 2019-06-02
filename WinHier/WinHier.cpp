@@ -60,7 +60,7 @@ inline BOOL GetFileNameFromProcess(LPWSTR pszPath, DWORD cchPath, HANDLE hProces
     }
     else
     {
-        WCHAR szPath[MAX_PATH];
+        TCHAR szPath[MAX_PATH];
         BOOL ret = GetProcessImageFileName(hProcess, szPath, ARRAYSIZE(szPath));
         NormalizeNTPath(pszPath, cchPath, szPath);
         return ret;
