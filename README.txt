@@ -39,6 +39,7 @@ please right-click the treeview item and choose the appropriate menu item.
     - Support of registered window messages.
     - Able to copy a node as text.
     - Supported ListView messages.
+    - Supported TreeView messages.
 
 ## Contact Us
 
