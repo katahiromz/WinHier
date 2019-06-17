@@ -3276,21 +3276,23 @@ MD_ListView_OnGetStringWidthW(HWND hwnd, LPCWSTR psz)
     return 0;
 }
 
-static __inline UINT MSGDUMP_API
-MD_ListView_OnGetGroupState(HWND hwnd, DWORD dwGroupId, DWORD dwMask)
-{
-    MSGDUMP_TPRINTF(TEXT("%sLVM_GETGROUPSTATE(hwnd:%p, dwGroupId:0x%08lX, dwMask:0x%08lX)\n"),
-                    MSGDUMP_PREFIX, (void *)hwnd, dwGroupId, dwMask);
-    return 0;
-}
+#if NTDDI_VERSION >= 0x06000000
+    static __inline UINT MSGDUMP_API
+    MD_ListView_OnGetGroupState(HWND hwnd, DWORD dwGroupId, DWORD dwMask)
+    {
+        MSGDUMP_TPRINTF(TEXT("%sLVM_GETGROUPSTATE(hwnd:%p, dwGroupId:0x%08lX, dwMask:0x%08lX)\n"),
+                        MSGDUMP_PREFIX, (void *)hwnd, dwGroupId, dwMask);
+        return 0;
+    }
 
-static __inline INT MSGDUMP_API
-MD_ListView_OnGetFocusedGroup(HWND hwnd)
-{
-    MSGDUMP_TPRINTF(TEXT("%sLVM_GETFOCUSEDGROUP(hwnd:%p)\n"),
-                    MSGDUMP_PREFIX, (void *)hwnd);
-    return 0;
-}
+    static __inline INT MSGDUMP_API
+    MD_ListView_OnGetFocusedGroup(HWND hwnd)
+    {
+        MSGDUMP_TPRINTF(TEXT("%sLVM_GETFOCUSEDGROUP(hwnd:%p)\n"),
+                        MSGDUMP_PREFIX, (void *)hwnd);
+        return 0;
+    }
+#endif
 
 static __inline INT MSGDUMP_API
 MD_ListView_OnGetColumnW(HWND hwnd, INT iCol)
@@ -3316,13 +3318,15 @@ MD_ListView_OnInsertColumnW(HWND hwnd, INT iCol, const LV_COLUMNW *pcol)
     return 0;
 }
 
-static __inline BOOL MSGDUMP_API
-MD_ListView_OnGetGroupRect(HWND hwnd, INT iGroupId, RECT *prc)
-{
-    MSGDUMP_TPRINTF(TEXT("%sLVM_GETGROUPRECT(hwnd:%p, iGroupId:%d, prc:%p)\n"),
-                    MSGDUMP_PREFIX, (void *)hwnd, iGroupId, (void *)prc);
-    return FALSE;
-}
+#if NTDDI_VERSION >= 0x06000000
+    static __inline BOOL MSGDUMP_API
+    MD_ListView_OnGetGroupRect(HWND hwnd, INT iGroupId, RECT *prc)
+    {
+        MSGDUMP_TPRINTF(TEXT("%sLVM_GETGROUPRECT(hwnd:%p, iGroupId:%d, prc:%p)\n"),
+                        MSGDUMP_PREFIX, (void *)hwnd, iGroupId, (void *)prc);
+        return FALSE;
+    }
+#endif
 
 static __inline INT MSGDUMP_API
 MD_ListView_OnGetItemTextW(HWND hwnd, INT i, LV_ITEMW *pitem)
@@ -3403,121 +3407,123 @@ MD_ListView_OnGetView(HWND hwnd)
     return 0;
 }
 
-static __inline INT MSGDUMP_API
-MD_ListView_OnInsertGroup(HWND hwnd, INT iGroupId, const LVGROUP *pGroup)
-{
-    MSGDUMP_TPRINTF(TEXT("%sLVM_INSERTGROUP(hwnd:%p, iGroupId:%d, pGroup:%p)\n"),
-                    MSGDUMP_PREFIX, (void *)hwnd, iGroupId, (const void *)pGroup);
-    return 0;
-}
+#if NTDDI_VERSION >= 0x06000000
+    static __inline INT MSGDUMP_API
+    MD_ListView_OnInsertGroup(HWND hwnd, INT iGroupId, const LVGROUP *pGroup)
+    {
+        MSGDUMP_TPRINTF(TEXT("%sLVM_INSERTGROUP(hwnd:%p, iGroupId:%d, pGroup:%p)\n"),
+                        MSGDUMP_PREFIX, (void *)hwnd, iGroupId, (const void *)pGroup);
+        return 0;
+    }
 
-static __inline INT MSGDUMP_API
-MD_ListView_OnSetGroupInfo(HWND hwnd, INT iGroupId, const LVGROUP *pGroup)
-{
-    MSGDUMP_TPRINTF(TEXT("%sLVM_SETGROUPINFO(hwnd:%p, iGroupId:%d, pGroup:%p)\n"),
-                    MSGDUMP_PREFIX, (void *)hwnd, iGroupId, (const void *)pGroup);
-    return 0;
-}
+    static __inline INT MSGDUMP_API
+    MD_ListView_OnSetGroupInfo(HWND hwnd, INT iGroupId, const LVGROUP *pGroup)
+    {
+        MSGDUMP_TPRINTF(TEXT("%sLVM_SETGROUPINFO(hwnd:%p, iGroupId:%d, pGroup:%p)\n"),
+                        MSGDUMP_PREFIX, (void *)hwnd, iGroupId, (const void *)pGroup);
+        return 0;
+    }
 
-static __inline INT MSGDUMP_API
-MD_ListView_OnGetGroupInfo(HWND hwnd, INT iGroupId, LVGROUP *pGroup)
-{
-    MSGDUMP_TPRINTF(TEXT("%sLVM_GETGROUPINFO(hwnd:%p, iGroupId:%d, pGroup:%p)\n"),
-                    MSGDUMP_PREFIX, (void *)hwnd, iGroupId, (void *)pGroup);
-    return 0;
-}
+    static __inline INT MSGDUMP_API
+    MD_ListView_OnGetGroupInfo(HWND hwnd, INT iGroupId, LVGROUP *pGroup)
+    {
+        MSGDUMP_TPRINTF(TEXT("%sLVM_GETGROUPINFO(hwnd:%p, iGroupId:%d, pGroup:%p)\n"),
+                        MSGDUMP_PREFIX, (void *)hwnd, iGroupId, (void *)pGroup);
+        return 0;
+    }
 
-static __inline INT MSGDUMP_API
-MD_ListView_OnRemoveGroup(HWND hwnd, INT iGroupId)
-{
-    MSGDUMP_TPRINTF(TEXT("%sLVM_REMOVEGROUP(hwnd:%p, iGroupId:%d)\n"),
-                    MSGDUMP_PREFIX, (void *)hwnd, iGroupId);
-    return 0;
-}
+    static __inline INT MSGDUMP_API
+    MD_ListView_OnRemoveGroup(HWND hwnd, INT iGroupId)
+    {
+        MSGDUMP_TPRINTF(TEXT("%sLVM_REMOVEGROUP(hwnd:%p, iGroupId:%d)\n"),
+                        MSGDUMP_PREFIX, (void *)hwnd, iGroupId);
+        return 0;
+    }
 
-static __inline LRESULT MSGDUMP_API
-MD_ListView_OnMoveGroup(HWND hwnd, WPARAM wParam, LPARAM lParam)
-{
-    MSGDUMP_TPRINTF(TEXT("%sLVM_MOVEGROUP(hwnd:%p, wParam:%p, lParam:%p)\n"),
-                    MSGDUMP_PREFIX, (void *)hwnd, wParam, lParam);
-    return 0;
-}
+    static __inline LRESULT MSGDUMP_API
+    MD_ListView_OnMoveGroup(HWND hwnd, WPARAM wParam, LPARAM lParam)
+    {
+        MSGDUMP_TPRINTF(TEXT("%sLVM_MOVEGROUP(hwnd:%p, wParam:%p, lParam:%p)\n"),
+                        MSGDUMP_PREFIX, (void *)hwnd, wParam, lParam);
+        return 0;
+    }
 
-static __inline INT MSGDUMP_API
-MD_ListView_OnGetGroupCount(HWND hwnd)
-{
-    MSGDUMP_TPRINTF(TEXT("%sLVM_GETGROUPCOUNT(hwnd:%p)\n"),
-                    MSGDUMP_PREFIX, (void *)hwnd);
-    return 0;
-}
+    static __inline INT MSGDUMP_API
+    MD_ListView_OnGetGroupCount(HWND hwnd)
+    {
+        MSGDUMP_TPRINTF(TEXT("%sLVM_GETGROUPCOUNT(hwnd:%p)\n"),
+                        MSGDUMP_PREFIX, (void *)hwnd);
+        return 0;
+    }
 
-static __inline BOOL MSGDUMP_API
-MD_ListView_OnGetGroupInfoByIndex(HWND hwnd, INT iIndex, LVGROUP *pgrp)
-{
-    MSGDUMP_TPRINTF(TEXT("%sLVM_GETGROUPINFOBYINDEX(hwnd:%p, iIndex:%d, pgrp:%p)\n"),
-                    MSGDUMP_PREFIX, (void *)hwnd, iIndex, (void *)pgrp);
-    return FALSE;
-}
+    static __inline BOOL MSGDUMP_API
+    MD_ListView_OnGetGroupInfoByIndex(HWND hwnd, INT iIndex, LVGROUP *pgrp)
+    {
+        MSGDUMP_TPRINTF(TEXT("%sLVM_GETGROUPINFOBYINDEX(hwnd:%p, iIndex:%d, pgrp:%p)\n"),
+                        MSGDUMP_PREFIX, (void *)hwnd, iIndex, (void *)pgrp);
+        return FALSE;
+    }
 
-static __inline LRESULT MSGDUMP_API
-MD_ListView_OnMoveItemToGroup(HWND hwnd, WPARAM wParam, LPARAM lParam)
-{
-    MSGDUMP_TPRINTF(TEXT("%sLVM_MOVEITEMTOGROUP(hwnd:%p, wParam:%p, lParam:%p)\n"),
-                    MSGDUMP_PREFIX, (void *)hwnd, (void *)wParam, (void *)lParam);
-    return 0;
-}
+    static __inline LRESULT MSGDUMP_API
+    MD_ListView_OnMoveItemToGroup(HWND hwnd, WPARAM wParam, LPARAM lParam)
+    {
+        MSGDUMP_TPRINTF(TEXT("%sLVM_MOVEITEMTOGROUP(hwnd:%p, wParam:%p, lParam:%p)\n"),
+                        MSGDUMP_PREFIX, (void *)hwnd, (void *)wParam, (void *)lParam);
+        return 0;
+    }
 
-static __inline void MSGDUMP_API
-MD_ListView_OnSetGroupMetrics(HWND hwnd, const LVGROUPMETRICS *pGroupMetrics)
-{
-    MSGDUMP_TPRINTF(TEXT("%sLVM_SETGROUPMETRICS(hwnd:%p, pGroupMetrics:%p)\n"),
-                    MSGDUMP_PREFIX, (void *)hwnd, (const void *)pGroupMetrics);
-}
+    static __inline void MSGDUMP_API
+    MD_ListView_OnSetGroupMetrics(HWND hwnd, const LVGROUPMETRICS *pGroupMetrics)
+    {
+        MSGDUMP_TPRINTF(TEXT("%sLVM_SETGROUPMETRICS(hwnd:%p, pGroupMetrics:%p)\n"),
+                        MSGDUMP_PREFIX, (void *)hwnd, (const void *)pGroupMetrics);
+    }
 
-static __inline void MSGDUMP_API
-MD_ListView_OnGetGroupMetrics(HWND hwnd, LVGROUPMETRICS *pGroupMetrics)
-{
-    MSGDUMP_TPRINTF(TEXT("%sLVM_GETGROUPMETRICS(hwnd:%p, pGroupMetrics:%p)\n"),
-                    MSGDUMP_PREFIX, (void *)hwnd, (void *)pGroupMetrics);
-}
+    static __inline void MSGDUMP_API
+    MD_ListView_OnGetGroupMetrics(HWND hwnd, LVGROUPMETRICS *pGroupMetrics)
+    {
+        MSGDUMP_TPRINTF(TEXT("%sLVM_GETGROUPMETRICS(hwnd:%p, pGroupMetrics:%p)\n"),
+                        MSGDUMP_PREFIX, (void *)hwnd, (void *)pGroupMetrics);
+    }
 
-static __inline INT MSGDUMP_API
-MD_ListView_OnEnableGroupView(HWND hwnd, BOOL fEnable)
-{
-    MSGDUMP_TPRINTF(TEXT("%sLVM_ENABLEGROUPVIEW(hwnd:%p, fEnable:%d)\n"),
-                    MSGDUMP_PREFIX, (void *)hwnd, fEnable);
-    return 0;
-}
+    static __inline INT MSGDUMP_API
+    MD_ListView_OnEnableGroupView(HWND hwnd, BOOL fEnable)
+    {
+        MSGDUMP_TPRINTF(TEXT("%sLVM_ENABLEGROUPVIEW(hwnd:%p, fEnable:%d)\n"),
+                        MSGDUMP_PREFIX, (void *)hwnd, fEnable);
+        return 0;
+    }
 
-static __inline BOOL MSGDUMP_API
-MD_ListView_OnSortGroups(HWND hwnd, PFNLVGROUPCOMPARE pfnGroupCompate, void *plv)
-{
-    MSGDUMP_TPRINTF(TEXT("%sLVM_SORTGROUPS(hwnd:%p, pfnGroupCompate:%p, plv:%p)\n"),
-                    MSGDUMP_PREFIX, (void *)hwnd, *(void **)&pfnGroupCompate, plv);
-    return FALSE;
-}
+    static __inline BOOL MSGDUMP_API
+    MD_ListView_OnSortGroups(HWND hwnd, PFNLVGROUPCOMPARE pfnGroupCompate, void *plv)
+    {
+        MSGDUMP_TPRINTF(TEXT("%sLVM_SORTGROUPS(hwnd:%p, pfnGroupCompate:%p, plv:%p)\n"),
+                        MSGDUMP_PREFIX, (void *)hwnd, *(void **)&pfnGroupCompate, plv);
+        return FALSE;
+    }
 
-static __inline void MSGDUMP_API
-MD_ListView_OnInsertGroupSorted(HWND hwnd, const LVINSERTGROUPSORTED *structInsert)
-{
-    MSGDUMP_TPRINTF(TEXT("%sLVM_INSERTGROUPSORTED(hwnd:%p, structInsert:%p)\n"),
-                    MSGDUMP_PREFIX, (void *)hwnd, (void *)structInsert);
-}
+    static __inline void MSGDUMP_API
+    MD_ListView_OnInsertGroupSorted(HWND hwnd, const LVINSERTGROUPSORTED *structInsert)
+    {
+        MSGDUMP_TPRINTF(TEXT("%sLVM_INSERTGROUPSORTED(hwnd:%p, structInsert:%p)\n"),
+                        MSGDUMP_PREFIX, (void *)hwnd, (void *)structInsert);
+    }
 
-static __inline void MSGDUMP_API
-MD_ListView_OnRemoveAllGroups(HWND hwnd)
-{
-    MSGDUMP_TPRINTF(TEXT("%sLVM_REMOVEALLGROUPS(hwnd:%p)\n"),
-                    MSGDUMP_PREFIX, (void *)hwnd);
-}
+    static __inline void MSGDUMP_API
+    MD_ListView_OnRemoveAllGroups(HWND hwnd)
+    {
+        MSGDUMP_TPRINTF(TEXT("%sLVM_REMOVEALLGROUPS(hwnd:%p)\n"),
+                        MSGDUMP_PREFIX, (void *)hwnd);
+    }
 
-static __inline BOOL MSGDUMP_API
-MD_ListView_OnHasGroup(HWND hwnd, DWORD dwGroupId)
-{
-    MSGDUMP_TPRINTF(TEXT("%sLVM_HASGROUP(hwnd:%p, dwGroupId:0x%08lX)\n"),
-                    MSGDUMP_PREFIX, (void *)hwnd, dwGroupId);
-    return FALSE;
-}
+    static __inline BOOL MSGDUMP_API
+    MD_ListView_OnHasGroup(HWND hwnd, DWORD dwGroupId)
+    {
+        MSGDUMP_TPRINTF(TEXT("%sLVM_HASGROUP(hwnd:%p, dwGroupId:0x%08lX)\n"),
+                        MSGDUMP_PREFIX, (void *)hwnd, dwGroupId);
+        return FALSE;
+    }
+#endif
 
 static __inline BOOL MSGDUMP_API
 MD_ListView_OnSetTileViewInfo(HWND hwnd, const LVTILEVIEWINFO *ptvi)
@@ -3668,22 +3674,22 @@ MD_ListView_OnIsItemVisible(HWND hwnd, UINT index)
     return FALSE;
 }
 
-static __inline void MSGDUMP_API
-MD_ListView_OnGetEmptyText(HWND hwnd, PWSTR pszText, UINT cchText)
-{
-    MSGDUMP_TPRINTF(TEXT("%sLVM_GETEMPTYTEXT(hwnd:%p, pszText:%p, cchText:%u)\n"),
-                    MSGDUMP_PREFIX, (void *)hwnd, (void *)pszText, cchText);
-}
-
-static __inline BOOL MSGDUMP_API
-MD_ListView_OnGetFooterRect(HWND hwnd, RECT *prc)
-{
-    MSGDUMP_TPRINTF(TEXT("%sLVM_GETFOOTERRECT(hwnd:%p, prc:%p)\n"),
-                    MSGDUMP_PREFIX, (void *)hwnd, (void *)prc);
-    return FALSE;
-}
-
 #if NTDDI_VERSION >= 0x06000000
+    static __inline void MSGDUMP_API
+    MD_ListView_OnGetEmptyText(HWND hwnd, PWSTR pszText, UINT cchText)
+    {
+        MSGDUMP_TPRINTF(TEXT("%sLVM_GETEMPTYTEXT(hwnd:%p, pszText:%p, cchText:%u)\n"),
+                        MSGDUMP_PREFIX, (void *)hwnd, (void *)pszText, cchText);
+    }
+
+    static __inline BOOL MSGDUMP_API
+    MD_ListView_OnGetFooterRect(HWND hwnd, RECT *prc)
+    {
+        MSGDUMP_TPRINTF(TEXT("%sLVM_GETFOOTERRECT(hwnd:%p, prc:%p)\n"),
+                        MSGDUMP_PREFIX, (void *)hwnd, (void *)prc);
+        return FALSE;
+    }
+
     static __inline BOOL MSGDUMP_API
     MD_ListView_OnGetFooterInfo(HWND hwnd, LVFOOTERINFO *plvfi)
     {
@@ -4005,13 +4011,15 @@ MD_TreeView_OnGetScrollTime(HWND hwnd)
     return 0;
 }
 
-static __inline INT MSGDUMP_API
-MD_TreeView_OnSetBorder(HWND hwnd, DWORD dwFlags, INT xBorder, INT yBorder)
-{
-    MSGDUMP_TPRINTF(TEXT("%sTVM_SETBORDER(hwnd:%p, dwFlags:0x%08lX, xBorder:%d, yBorder:%d)\n"),
-                    MSGDUMP_PREFIX, (void *)hwnd, dwFlags, xBorder, yBorder);
-    return 0;
-}
+#if NTDDI_VERSION >= 0x06000000
+    static __inline INT MSGDUMP_API
+    MD_TreeView_OnSetBorder(HWND hwnd, DWORD dwFlags, INT xBorder, INT yBorder)
+    {
+        MSGDUMP_TPRINTF(TEXT("%sTVM_SETBORDER(hwnd:%p, dwFlags:0x%08lX, xBorder:%d, yBorder:%d)\n"),
+                        MSGDUMP_PREFIX, (void *)hwnd, dwFlags, xBorder, yBorder);
+        return 0;
+    }
+#endif
 
 static __inline COLORREF MSGDUMP_API
 MD_TreeView_OnSetInsertMarkColor(HWND hwnd, COLORREF clr)
@@ -4069,21 +4077,23 @@ MD_TreeView_OnMapHTREEITEMToAccID(HWND hwnd, HTREEITEM htreeitem)
     return 0;
 }
 
-static __inline DWORD MSGDUMP_API
-MD_TreeView_OnSetExtendedStyle(HWND hwnd, DWORD dw, DWORD mask)
-{
-    MSGDUMP_TPRINTF(TEXT("%sTVM_SETEXTENDEDSTYLE(hwnd:%p, dw:0x%08lX, mask:0x%08lX)\n"),
-                    MSGDUMP_PREFIX, (void *)hwnd, dw, mask);
-    return 0;
-}
+#if NTDDI_VERSION >= 0x06000000
+    static __inline DWORD MSGDUMP_API
+    MD_TreeView_OnSetExtendedStyle(HWND hwnd, DWORD dw, DWORD mask)
+    {
+        MSGDUMP_TPRINTF(TEXT("%sTVM_SETEXTENDEDSTYLE(hwnd:%p, dw:0x%08lX, mask:0x%08lX)\n"),
+                        MSGDUMP_PREFIX, (void *)hwnd, dw, mask);
+        return 0;
+    }
 
-static __inline DWORD MSGDUMP_API
-MD_TreeView_OnGetExtendedStyle(HWND hwnd)
-{
-    MSGDUMP_TPRINTF(TEXT("%sTVM_GETEXTENDEDSTYLE(hwnd:%p)\n"),
-                    MSGDUMP_PREFIX, (void *)hwnd);
-    return 0;
-}
+    static __inline DWORD MSGDUMP_API
+    MD_TreeView_OnGetExtendedStyle(HWND hwnd)
+    {
+        MSGDUMP_TPRINTF(TEXT("%sTVM_GETEXTENDEDSTYLE(hwnd:%p)\n"),
+                        MSGDUMP_PREFIX, (void *)hwnd);
+        return 0;
+    }
+#endif
 
 static __inline HTREEITEM MSGDUMP_API
 MD_TreeView_OnInsertItemW(HWND hwnd, LPTV_INSERTSTRUCTW lpis)
@@ -4093,21 +4103,23 @@ MD_TreeView_OnInsertItemW(HWND hwnd, LPTV_INSERTSTRUCTW lpis)
     return NULL;
 }
 
-static __inline BOOL MSGDUMP_API
-MD_TreeView_OnSetHot(HWND hwnd, HTREEITEM hitem)
-{
-    MSGDUMP_TPRINTF(TEXT("%sTVM_SETHOT(hwnd:%p, hitem:%p)\n"),
-                    MSGDUMP_PREFIX, (void *)hwnd, (void *)hitem);
-    return FALSE;
-}
+#if NTDDI_VERSION >= 0x06000000
+    static __inline BOOL MSGDUMP_API
+    MD_TreeView_OnSetHot(HWND hwnd, HTREEITEM hitem)
+    {
+        MSGDUMP_TPRINTF(TEXT("%sTVM_SETHOT(hwnd:%p, hitem:%p)\n"),
+                        MSGDUMP_PREFIX, (void *)hwnd, (void *)hitem);
+        return FALSE;
+    }
 
-static __inline BOOL MSGDUMP_API
-MD_TreeView_OnSetAutoScrollInfo(HWND hwnd, UINT uPixPerSec, UINT uUpdateTime)
-{
-    MSGDUMP_TPRINTF(TEXT("%sTVM_SETAUTOSCROLLINFO(hwnd:%p, uPixPerSec:%u, uUpdateTime:%u)\n"),
-                    MSGDUMP_PREFIX, (void *)hwnd, uPixPerSec, uUpdateTime);
-    return FALSE;
-}
+    static __inline BOOL MSGDUMP_API
+    MD_TreeView_OnSetAutoScrollInfo(HWND hwnd, UINT uPixPerSec, UINT uUpdateTime)
+    {
+        MSGDUMP_TPRINTF(TEXT("%sTVM_SETAUTOSCROLLINFO(hwnd:%p, uPixPerSec:%u, uUpdateTime:%u)\n"),
+                        MSGDUMP_PREFIX, (void *)hwnd, uPixPerSec, uUpdateTime);
+        return FALSE;
+    }
+#endif
 
 static __inline BOOL MSGDUMP_API
 MD_TreeView_OnGetItemW(HWND hwnd, TV_ITEMW *pitem)
@@ -4416,12 +4428,16 @@ MD_msgdump(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             HANDLE_MSG(hwnd, LVM_SORTITEMSEX, MD_ListView_OnSortItemsEx);
             HANDLE_MSG(hwnd, LVM_FINDITEMW, MD_ListView_OnFindItemW);
             HANDLE_MSG(hwnd, LVM_GETSTRINGWIDTHW, MD_ListView_OnGetStringWidthW);
+#if NTDDI_VERSION >= 0x06000000
             HANDLE_MSG(hwnd, LVM_GETGROUPSTATE, MD_ListView_OnGetGroupState);
             HANDLE_MSG(hwnd, LVM_GETFOCUSEDGROUP, MD_ListView_OnGetFocusedGroup);
+#endif
             HANDLE_MSG(hwnd, LVM_GETCOLUMNW, MD_ListView_OnGetColumnW);
             HANDLE_MSG(hwnd, LVM_SETCOLUMNW, MD_ListView_OnSetColumnW);
             HANDLE_MSG(hwnd, LVM_INSERTCOLUMNW, MD_ListView_OnInsertColumnW);
+#if NTDDI_VERSION >= 0x06000000
             HANDLE_MSG(hwnd, LVM_GETGROUPRECT, MD_ListView_OnGetGroupRect);
+#endif
             HANDLE_MSG(hwnd, LVM_GETITEMTEXTW, MD_ListView_OnGetItemTextW);
             HANDLE_MSG(hwnd, LVM_SETITEMTEXTW, MD_ListView_OnSetItemTextW);
             HANDLE_MSG(hwnd, LVM_GETISEARCHSTRINGW, MD_ListView_OnGetISearchStringW);
@@ -4432,6 +4448,7 @@ MD_msgdump(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             HANDLE_MSG(hwnd, LVM_SETTILEWIDTH, MD_ListView_OnSetTileWidth);
             HANDLE_MSG(hwnd, LVM_SETVIEW, MD_ListView_OnSetView);
             HANDLE_MSG(hwnd, LVM_GETVIEW, MD_ListView_OnGetView);
+#if NTDDI_VERSION >= 0x06000000
             HANDLE_MSG(hwnd, LVM_INSERTGROUP, MD_ListView_OnInsertGroup);
             HANDLE_MSG(hwnd, LVM_SETGROUPINFO, MD_ListView_OnSetGroupInfo);
             HANDLE_MSG(hwnd, LVM_GETGROUPINFO, MD_ListView_OnGetGroupInfo);
@@ -4447,6 +4464,7 @@ MD_msgdump(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             HANDLE_MSG(hwnd, LVM_INSERTGROUPSORTED, MD_ListView_OnInsertGroupSorted);
             HANDLE_MSG(hwnd, LVM_REMOVEALLGROUPS, MD_ListView_OnRemoveAllGroups);
             HANDLE_MSG(hwnd, LVM_HASGROUP, MD_ListView_OnHasGroup);
+#endif
             HANDLE_MSG(hwnd, LVM_SETTILEVIEWINFO, MD_ListView_OnSetTileViewInfo);
             HANDLE_MSG(hwnd, LVM_GETTILEVIEWINFO, MD_ListView_OnGetTileViewInfo);
             HANDLE_MSG(hwnd, LVM_SETTILEINFO, MD_ListView_OnSetTileInfo);
@@ -4516,7 +4534,9 @@ MD_msgdump(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             HANDLE_MSG(hwnd, TVM_GETTEXTCOLOR, MD_TreeView_OnGetTextColor);
             HANDLE_MSG(hwnd, TVM_SETSCROLLTIME, MD_TreeView_OnSetScrollTime);
             HANDLE_MSG(hwnd, TVM_GETSCROLLTIME, MD_TreeView_OnGetScrollTime);
+#if NTDDI_VERSION >= 0x06000000
             HANDLE_MSG(hwnd, TVM_SETBORDER, MD_TreeView_OnSetBorder);
+#endif
             HANDLE_MSG(hwnd, TVM_SETINSERTMARKCOLOR, MD_TreeView_OnSetInsertMarkColor);
             HANDLE_MSG(hwnd, TVM_GETINSERTMARKCOLOR, MD_TreeView_OnGetInsertMarkColor);
             HANDLE_MSG(hwnd, TVM_GETITEMSTATE, MD_TreeView_OnGetItemState);
@@ -4524,11 +4544,15 @@ MD_msgdump(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             HANDLE_MSG(hwnd, TVM_GETLINECOLOR, MD_TreeView_OnGetLineColor);
             HANDLE_MSG(hwnd, TVM_MAPACCIDTOHTREEITEM, MD_TreeView_OnMapAccIDToHTREEITEM);
             HANDLE_MSG(hwnd, TVM_MAPHTREEITEMTOACCID, MD_TreeView_OnMapHTREEITEMToAccID);
+#if NTDDI_VERSION >= 0x06000000
             HANDLE_MSG(hwnd, TVM_SETEXTENDEDSTYLE, MD_TreeView_OnSetExtendedStyle);
             HANDLE_MSG(hwnd, TVM_GETEXTENDEDSTYLE, MD_TreeView_OnGetExtendedStyle);
+#endif
             HANDLE_MSG(hwnd, TVM_INSERTITEMW, MD_TreeView_OnInsertItemW);
+#if NTDDI_VERSION >= 0x06000000
             HANDLE_MSG(hwnd, TVM_SETHOT, MD_TreeView_OnSetHot);
             HANDLE_MSG(hwnd, TVM_SETAUTOSCROLLINFO, MD_TreeView_OnSetAutoScrollInfo);
+#endif
             HANDLE_MSG(hwnd, TVM_GETITEMW, MD_TreeView_OnGetItemW);
             HANDLE_MSG(hwnd, TVM_SETITEMW, MD_TreeView_OnSetItemW);
             HANDLE_MSG(hwnd, TVM_GETISEARCHSTRINGW, MD_TreeView_OnGetISearchStringW);
@@ -5061,12 +5085,16 @@ MD_msgresult(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam, LRESULT lResult
             DEFINE_RESULT(LVM_SORTITEMSEX);
             DEFINE_RESULT(LVM_FINDITEMW);
             DEFINE_RESULT(LVM_GETSTRINGWIDTHW);
+#if NTDDI_VERSION >= 0x06000000
             DEFINE_RESULT(LVM_GETGROUPSTATE);
             DEFINE_RESULT(LVM_GETFOCUSEDGROUP);
+#endif
             DEFINE_RESULT(LVM_GETCOLUMNW);
             DEFINE_RESULT(LVM_SETCOLUMNW);
             DEFINE_RESULT(LVM_INSERTCOLUMNW);
+#if NTDDI_VERSION >= 0x06000000
             DEFINE_RESULT(LVM_GETGROUPRECT);
+#endif
             DEFINE_RESULT(LVM_GETITEMTEXTW);
             DEFINE_RESULT(LVM_SETITEMTEXTW);
             DEFINE_RESULT(LVM_GETISEARCHSTRINGW);
@@ -5077,6 +5105,7 @@ MD_msgresult(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam, LRESULT lResult
             DEFINE_RESULT(LVM_SETTILEWIDTH);
             DEFINE_RESULT(LVM_SETVIEW);
             DEFINE_RESULT(LVM_GETVIEW);
+#if NTDDI_VERSION >= 0x06000000
             DEFINE_RESULT(LVM_INSERTGROUP);
             DEFINE_RESULT(LVM_SETGROUPINFO);
             DEFINE_RESULT(LVM_GETGROUPINFO);
@@ -5092,6 +5121,7 @@ MD_msgresult(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam, LRESULT lResult
             DEFINE_RESULT(LVM_INSERTGROUPSORTED);
             DEFINE_RESULT(LVM_REMOVEALLGROUPS);
             DEFINE_RESULT(LVM_HASGROUP);
+#endif
             DEFINE_RESULT(LVM_SETTILEVIEWINFO);
             DEFINE_RESULT(LVM_GETTILEVIEWINFO);
             DEFINE_RESULT(LVM_SETTILEINFO);
@@ -5161,7 +5191,9 @@ MD_msgresult(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam, LRESULT lResult
             DEFINE_RESULT(TVM_GETTEXTCOLOR);
             DEFINE_RESULT(TVM_SETSCROLLTIME);
             DEFINE_RESULT(TVM_GETSCROLLTIME);
+#if NTDDI_VERSION >= 0x06000000
             DEFINE_RESULT(TVM_SETBORDER);
+#endif
             DEFINE_RESULT(TVM_SETINSERTMARKCOLOR);
             DEFINE_RESULT(TVM_GETINSERTMARKCOLOR);
             DEFINE_RESULT(TVM_GETITEMSTATE);
@@ -5169,11 +5201,15 @@ MD_msgresult(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam, LRESULT lResult
             DEFINE_RESULT(TVM_GETLINECOLOR);
             DEFINE_RESULT(TVM_MAPACCIDTOHTREEITEM);
             DEFINE_RESULT(TVM_MAPHTREEITEMTOACCID);
+#if NTDDI_VERSION >= 0x06000000
             DEFINE_RESULT(TVM_SETEXTENDEDSTYLE);
             DEFINE_RESULT(TVM_GETEXTENDEDSTYLE);
+#endif
             DEFINE_RESULT(TVM_INSERTITEMW);
+#if NTDDI_VERSION >= 0x06000000
             DEFINE_RESULT(TVM_SETHOT);
             DEFINE_RESULT(TVM_SETAUTOSCROLLINFO);
+#endif
             DEFINE_RESULT(TVM_GETITEMW);
             DEFINE_RESULT(TVM_SETITEMW);
             DEFINE_RESULT(TVM_GETISEARCHSTRINGW);
@@ -5212,7 +5248,7 @@ MD_msgresult(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam, LRESULT lResult
     DEFINE_RESULT(WM_SYSCOLORCHANGE);
     DEFINE_RESULT(WM_SHOWWINDOW);
     DEFINE_RESULT(WM_WININICHANGE);
-    //DEFINE_RESULT(WM_SETTINGCHANGE);    // same as WM_WININICHANGE
+    /* DEFINE_RESULT(WM_SETTINGCHANGE); */    /* same as WM_WININICHANGE */
     DEFINE_RESULT(WM_DEVMODECHANGE);
     DEFINE_RESULT(WM_ACTIVATEAPP);
     DEFINE_RESULT(WM_FONTCHANGE);

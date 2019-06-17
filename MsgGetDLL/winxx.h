@@ -868,7 +868,7 @@
 #define HANDLE_LB_ITEMFROMPOINT(hwnd, wParam, lParam, fn) \
     (LRESULT)(DWORD)(fn)((hwnd), (SHORT)LOWORD(lParam), (SHORT)HIWORD(lParam))
 
-// TODO: HANDLE_LB_MULTIPLEADDSTRING and HANDLE_LB_GETLISTBOXINFO.
+/* TODO: HANDLE_LB_MULTIPLEADDSTRING and HANDLE_LB_GETLISTBOXINFO. */
 
 /* DWORD ComboBox_OnGetEditSel(HWND hwnd, LPDWORD lpdwStart, LPDWORD lpdwEnd) */
 #define HANDLE_CB_GETEDITSEL(hwnd, wParam, lParam, fn) \
@@ -1006,7 +1006,7 @@
 #define HANDLE_CB_INITSTORAGE(hwnd, wParam, lParam, fn) \
     (LRESULT)(INT_PTR)(INT)(fn)((hwnd), (INT)(wParam), (DWORD)(lParam))
 
-// TODO: CB_MULTIPLEADDSTRING and CB_GETCOMBOBOXINFO
+/* TODO: CB_MULTIPLEADDSTRING and CB_GETCOMBOBOXINFO */
 
 /* INT ScrollBar_OnSetPos(HWND hwnd, INT nPos, BOOL fRedraw) */
 #define HANDLE_SBM_SETPOS(hwnd, wParam, lParam, fn) \
@@ -1368,13 +1368,15 @@
 #define HANDLE_LVM_GETSTRINGWIDTHW(hwnd, wParam, lParam, fn) \
     (INT)(fn)((hwnd), (LPCWSTR)(lParam))
 
-/* UINT ListView_OnGetGroupState(HWND hwnd, DWORD dwGroupId, DWORD dwMask) */
-#define HANDLE_LVM_GETGROUPSTATE(hwnd, wParam, lParam, fn) \
-    (UINT)(fn)((hwnd), (DWORD)(wParam), (DWORD)(lParam))
+#if NTDDI_VERSION >= 0x06000000
+    /* UINT ListView_OnGetGroupState(HWND hwnd, DWORD dwGroupId, DWORD dwMask) */
+    #define HANDLE_LVM_GETGROUPSTATE(hwnd, wParam, lParam, fn) \
+        (UINT)(fn)((hwnd), (DWORD)(wParam), (DWORD)(lParam))
 
-/* INT ListView_OnGetFocusedGroup(HWND hwnd) */
-#define HANDLE_LVM_GETFOCUSEDGROUP(hwnd, wParam, lParam, fn) \
-    (INT)(fn)((hwnd))
+    /* INT ListView_OnGetFocusedGroup(HWND hwnd) */
+    #define HANDLE_LVM_GETFOCUSEDGROUP(hwnd, wParam, lParam, fn) \
+        (INT)(fn)((hwnd))
+#endif
 
 /* INT ListView_OnGetColumnW(HWND hwnd, INT iCol) */
 #define HANDLE_LVM_GETCOLUMNW(hwnd, wParam, lParam, fn) \
@@ -1388,9 +1390,11 @@
 #define HANDLE_LVM_INSERTCOLUMNW(hwnd, wParam, lParam, fn) \
     (INT)(fn)((hwnd), (INT)(wParam), (const LV_COLUMNW *)(lParam))
 
-/* BOOL ListView_OnGetGroupRect(HWND hwnd, INT iGroupId, RECT *prc) */
-#define HANDLE_LVM_GETGROUPRECT(hwnd, wParam, lParam, fn) \
-    (BOOL)(fn)((hwnd), (INT)(wParam), (RECT *)(lParam))
+#if NTDDI_VERSION >= 0x06000000
+    /* BOOL ListView_OnGetGroupRect(HWND hwnd, INT iGroupId, RECT *prc) */
+    #define HANDLE_LVM_GETGROUPRECT(hwnd, wParam, lParam, fn) \
+        (BOOL)(fn)((hwnd), (INT)(wParam), (RECT *)(lParam))
+#endif
 
 /* INT ListView_OnGetItemTextW(HWND hwnd, INT i, LV_ITEMW *pitem) */
 #define HANDLE_LVM_GETITEMTEXTW(hwnd, wParam, lParam, fn) \
@@ -1432,65 +1436,67 @@
 #define HANDLE_LVM_GETVIEW(hwnd, wParam, lParam, fn) \
     (DWORD)(fn)((hwnd))
 
-/* INT ListView_OnInsertGroup(HWND hwnd, INT iGroupId, const LVGROUP *pGroup) */
-#define HANDLE_LVM_INSERTGROUP(hwnd, wParam, lParam, fn) \
-    (INT)(fn)((hwnd), (INT)(wParam), (const LVGROUP *)(lParam))
+#if NTDDI_VERSION >= 0x06000000
+    /* INT ListView_OnInsertGroup(HWND hwnd, INT iGroupId, const LVGROUP *pGroup) */
+    #define HANDLE_LVM_INSERTGROUP(hwnd, wParam, lParam, fn) \
+        (INT)(fn)((hwnd), (INT)(wParam), (const LVGROUP *)(lParam))
 
-/* INT ListView_OnSetGroupInfo(HWND hwnd, INT iGroupId, const LVGROUP *pGroup) */
-#define HANDLE_LVM_SETGROUPINFO(hwnd, wParam, lParam, fn) \
-    (INT)(fn)((hwnd), (INT)(wParam), (const LVGROUP *)(lParam))
+    /* INT ListView_OnSetGroupInfo(HWND hwnd, INT iGroupId, const LVGROUP *pGroup) */
+    #define HANDLE_LVM_SETGROUPINFO(hwnd, wParam, lParam, fn) \
+        (INT)(fn)((hwnd), (INT)(wParam), (const LVGROUP *)(lParam))
 
-/* INT ListView_OnGetGroupInfo(HWND hwnd, INT iGroupId, LVGROUP *pGroup) */
-#define HANDLE_LVM_GETGROUPINFO(hwnd, wParam, lParam, fn) \
-    (INT)(fn)((hwnd), (INT)(wParam), (LVGROUP *)(lParam))
+    /* INT ListView_OnGetGroupInfo(HWND hwnd, INT iGroupId, LVGROUP *pGroup) */
+    #define HANDLE_LVM_GETGROUPINFO(hwnd, wParam, lParam, fn) \
+        (INT)(fn)((hwnd), (INT)(wParam), (LVGROUP *)(lParam))
 
-/* INT ListView_OnRemoveGroup(HWND hwnd, INT iGroupId) */
-#define HANDLE_LVM_REMOVEGROUP(hwnd, wParam, lParam, fn) \
-    (INT)(fn)((hwnd), (INT)(wParam))
+    /* INT ListView_OnRemoveGroup(HWND hwnd, INT iGroupId) */
+    #define HANDLE_LVM_REMOVEGROUP(hwnd, wParam, lParam, fn) \
+        (INT)(fn)((hwnd), (INT)(wParam))
 
-/* LRESULT ListView_OnMoveGroup(HWND hwnd, WPARAM wParam, LPARAM lParam) */
-#define HANDLE_LVM_MOVEGROUP(hwnd, wParam, lParam, fn) \
-    (LRESULT)(fn)((hwnd), (wParam), (lParam))
+    /* LRESULT ListView_OnMoveGroup(HWND hwnd, WPARAM wParam, LPARAM lParam) */
+    #define HANDLE_LVM_MOVEGROUP(hwnd, wParam, lParam, fn) \
+        (LRESULT)(fn)((hwnd), (wParam), (lParam))
 
-/* INT ListView_OnGetGroupCount(HWND hwnd) */
-#define HANDLE_LVM_GETGROUPCOUNT(hwnd, wParam, lParam, fn) \
-    (INT)(fn)((hwnd))
+    /* INT ListView_OnGetGroupCount(HWND hwnd) */
+    #define HANDLE_LVM_GETGROUPCOUNT(hwnd, wParam, lParam, fn) \
+        (INT)(fn)((hwnd))
 
-/* BOOL ListView_OnGetGroupInfoByIndex(HWND hwnd, INT iIndex, LVGROUP *pgrp) */
-#define HANDLE_LVM_GETGROUPINFOBYINDEX(hwnd, wParam, lParam, fn) \
-    (BOOL)(fn)((hwnd), (INT)(wParam), (LVGROUP *)(lParam))
+    /* BOOL ListView_OnGetGroupInfoByIndex(HWND hwnd, INT iIndex, LVGROUP *pgrp) */
+    #define HANDLE_LVM_GETGROUPINFOBYINDEX(hwnd, wParam, lParam, fn) \
+        (BOOL)(fn)((hwnd), (INT)(wParam), (LVGROUP *)(lParam))
 
-/* LRESULT ListView_OnMoveItemToGroup(HWND hwnd, WPARAM wParam, LPARAM lParam) */
-#define HANDLE_LVM_MOVEITEMTOGROUP(hwnd, wParam, lParam, fn) \
-    (LRESULT)(fn)((hwnd), (wParam), (lParam))
+    /* LRESULT ListView_OnMoveItemToGroup(HWND hwnd, WPARAM wParam, LPARAM lParam) */
+    #define HANDLE_LVM_MOVEITEMTOGROUP(hwnd, wParam, lParam, fn) \
+        (LRESULT)(fn)((hwnd), (wParam), (lParam))
 
-/* void ListView_OnSetGroupMetrics(HWND hwnd, const LVGROUPMETRICS *pGroupMetrics) */
-#define HANDLE_LVM_SETGROUPMETRICS(hwnd, wParam, lParam, fn) \
-    ((fn)((hwnd), (const LVGROUPMETRICS *)(lParam)), 0L)
+    /* void ListView_OnSetGroupMetrics(HWND hwnd, const LVGROUPMETRICS *pGroupMetrics) */
+    #define HANDLE_LVM_SETGROUPMETRICS(hwnd, wParam, lParam, fn) \
+        ((fn)((hwnd), (const LVGROUPMETRICS *)(lParam)), 0L)
 
-/* void ListView_OnGetGroupMetrics(HWND hwnd, LVGROUPMETRICS *pGroupMetrics) */
-#define HANDLE_LVM_GETGROUPMETRICS(hwnd, wParam, lParam, fn) \
-    ((fn)((hwnd), (LVGROUPMETRICS *)(lParam)), 0L)
+    /* void ListView_OnGetGroupMetrics(HWND hwnd, LVGROUPMETRICS *pGroupMetrics) */
+    #define HANDLE_LVM_GETGROUPMETRICS(hwnd, wParam, lParam, fn) \
+        ((fn)((hwnd), (LVGROUPMETRICS *)(lParam)), 0L)
 
-/* INT ListView_OnEnableGroupView(HWND hwnd, BOOL fEnable) */
-#define HANDLE_LVM_ENABLEGROUPVIEW(hwnd, wParam, lParam, fn) \
-    (INT)(fn)((hwnd), (BOOL)(wParam))
+    /* INT ListView_OnEnableGroupView(HWND hwnd, BOOL fEnable) */
+    #define HANDLE_LVM_ENABLEGROUPVIEW(hwnd, wParam, lParam, fn) \
+        (INT)(fn)((hwnd), (BOOL)(wParam))
 
-/* BOOL ListView_OnSortGroups(HWND hwnd, PFNLVGROUPCOMPARE pfnGroupCompate, void *plv) */
-#define HANDLE_LVM_SORTGROUPS(hwnd, wParam, lParam, fn) \
-    (BOOL)(fn)((hwnd), (PFNLVGROUPCOMPARE)(wParam), (void *)(lParam))
+    /* BOOL ListView_OnSortGroups(HWND hwnd, PFNLVGROUPCOMPARE pfnGroupCompate, void *plv) */
+    #define HANDLE_LVM_SORTGROUPS(hwnd, wParam, lParam, fn) \
+        (BOOL)(fn)((hwnd), (PFNLVGROUPCOMPARE)(wParam), (void *)(lParam))
 
-/* void ListView_OnInsertGroupSorted(HWND hwnd, const LVINSERTGROUPSORTED *structInsert) */
-#define HANDLE_LVM_INSERTGROUPSORTED(hwnd, wParam, lParam, fn) \
-    ((fn)((hwnd), (const LVINSERTGROUPSORTED *)(wParam)), 0L)
+    /* void ListView_OnInsertGroupSorted(HWND hwnd, const LVINSERTGROUPSORTED *structInsert) */
+    #define HANDLE_LVM_INSERTGROUPSORTED(hwnd, wParam, lParam, fn) \
+        ((fn)((hwnd), (const LVINSERTGROUPSORTED *)(wParam)), 0L)
 
-/* void ListView_OnRemoveAllGroups(HWND hwnd) */
-#define HANDLE_LVM_REMOVEALLGROUPS(hwnd, wParam, lParam, fn) \
-    ((fn)((hwnd)), 0L)
+    /* void ListView_OnRemoveAllGroups(HWND hwnd) */
+    #define HANDLE_LVM_REMOVEALLGROUPS(hwnd, wParam, lParam, fn) \
+        ((fn)((hwnd)), 0L)
 
-/* BOOL ListView_OnHasGroup(HWND hwnd, DWORD dwGroupId) */
-#define HANDLE_LVM_HASGROUP(hwnd, wParam, lParam, fn) \
-    (BOOL)(fn)((hwnd), (DWORD)(wParam))
+    /* BOOL ListView_OnHasGroup(HWND hwnd, DWORD dwGroupId) */
+    #define HANDLE_LVM_HASGROUP(hwnd, wParam, lParam, fn) \
+        (BOOL)(fn)((hwnd), (DWORD)(wParam))
+#endif
 
 /* BOOL ListView_OnSetTileViewInfo(HWND hwnd, const LVTILEVIEWINFO *ptvi) */
 #define HANDLE_LVM_SETTILEVIEWINFO(hwnd, wParam, lParam, fn) \
@@ -1568,15 +1574,15 @@
 #define HANDLE_LVM_ISITEMVISIBLE(hwnd, wParam, lParam, fn) \
     (BOOL)(fn)((hwnd), (UINT)(wParam))
 
-/* void ListView_OnGetEmptyText(HWND hwnd, PWSTR pszText, UINT cchText) */
-#define HANDLE_LVM_GETEMPTYTEXT(hwnd, wParam, lParam, fn) \
-    ((fn)((hwnd), (PWSTR)(lParam), (UINT)(wParam)), 0L)
-
-/* BOOL ListView_OnGetFooterRect(HWND hwnd, RECT *prc) */
-#define HANDLE_LVM_GETFOOTERRECT(hwnd, wParam, lParam, fn) \
-    (BOOL)(fn)((hwnd), (RECT *)(lParam))
-
 #if NTDDI_VERSION >= 0x06000000
+    /* void ListView_OnGetEmptyText(HWND hwnd, PWSTR pszText, UINT cchText) */
+    #define HANDLE_LVM_GETEMPTYTEXT(hwnd, wParam, lParam, fn) \
+        ((fn)((hwnd), (PWSTR)(lParam), (UINT)(wParam)), 0L)
+
+    /* BOOL ListView_OnGetFooterRect(HWND hwnd, RECT *prc) */
+    #define HANDLE_LVM_GETFOOTERRECT(hwnd, wParam, lParam, fn) \
+        (BOOL)(fn)((hwnd), (RECT *)(lParam))
+
     /* BOOL ListView_OnGetFooterInfo(HWND hwnd, LVFOOTERINFO *plvfi) */
     #define HANDLE_LVM_GETFOOTERINFO(hwnd, wParam, lParam, fn) \
         (BOOL)(fn)((hwnd), (LVFOOTERINFO *)(lParam))
@@ -1738,9 +1744,11 @@
 #define HANDLE_TVM_GETSCROLLTIME(hwnd, wParam, lParam, fn) \
     (UINT)(fn)((hwnd))
 
-/* INT TreeView_OnSetBorder(HWND hwnd, DWORD dwFlags, INT xBorder, INT yBorder) */
-#define HANDLE_TVM_SETBORDER(hwnd, wParam, lParam, fn) \
-    (INT)(fn)((hwnd), (DWORD)(wParam), (SHORT)LOWORD(lParam), (SHORT)HIWORD(lParam))
+#if NTDDI_VERSION >= 0x06000000
+    /* INT TreeView_OnSetBorder(HWND hwnd, DWORD dwFlags, INT xBorder, INT yBorder) */
+    #define HANDLE_TVM_SETBORDER(hwnd, wParam, lParam, fn) \
+        (INT)(fn)((hwnd), (DWORD)(wParam), (SHORT)LOWORD(lParam), (SHORT)HIWORD(lParam))
+#endif
 
 /* COLORREF TreeView_OnSetInsertMarkColor(HWND hwnd, COLORREF clr) */
 #define HANDLE_TVM_SETINSERTMARKCOLOR(hwnd, wParam, lParam, fn) \
@@ -1770,25 +1778,29 @@
 #define HANDLE_TVM_MAPHTREEITEMTOACCID(hwnd, wParam, lParam, fn) \
     (UINT)(fn)((hwnd), (HTREEITEM)(wParam))
 
-/* DWORD TreeView_OnSetExtendedStyle(HWND hwnd, DWORD dw, DWORD mask) */
-#define HANDLE_TVM_SETEXTENDEDSTYLE(hwnd, wParam, lParam, fn) \
-    (DWORD)(fn)((hwnd), (DWORD)(wParam), (DWORD)(lParam))
+#if NTDDI_VERSION >= 0x06000000
+    /* DWORD TreeView_OnSetExtendedStyle(HWND hwnd, DWORD dw, DWORD mask) */
+    #define HANDLE_TVM_SETEXTENDEDSTYLE(hwnd, wParam, lParam, fn) \
+        (DWORD)(fn)((hwnd), (DWORD)(wParam), (DWORD)(lParam))
 
-/* DWORD TreeView_OnGetExtendedStyle(HWND hwnd) */
-#define HANDLE_TVM_GETEXTENDEDSTYLE(hwnd, wParam, lParam, fn) \
-    (DWORD)(fn)((hwnd))
+    /* DWORD TreeView_OnGetExtendedStyle(HWND hwnd) */
+    #define HANDLE_TVM_GETEXTENDEDSTYLE(hwnd, wParam, lParam, fn) \
+        (DWORD)(fn)((hwnd))
+#endif
 
 /* HTREEITEM TreeView_OnInsertItemW(HWND hwnd, LPTV_INSERTSTRUCTW lpis) */
 #define HANDLE_TVM_INSERTITEMW(hwnd, wParam, lParam, fn) \
     (LRESULT)(HTREEITEM)(fn)((hwnd), (LPTV_INSERTSTRUCTW)(lParam))
 
-/* BOOL TreeView_OnSetHot(HWND hwnd, HTREEITEM hitem) */
-#define HANDLE_TVM_SETHOT(hwnd, wParam, lParam, fn) \
-    (BOOL)(fn)((hwnd), (HTREEITEM)(lParam))
+#if NTDDI_VERSION >= 0x06000000
+    /* BOOL TreeView_OnSetHot(HWND hwnd, HTREEITEM hitem) */
+    #define HANDLE_TVM_SETHOT(hwnd, wParam, lParam, fn) \
+        (BOOL)(fn)((hwnd), (HTREEITEM)(lParam))
 
-/* BOOL TreeView_OnSetAutoScrollInfo(HWND hwnd, UINT uPixPerSec, UINT uUpdateTime) */
-#define HANDLE_TVM_SETAUTOSCROLLINFO(hwnd, wParam, lParam, fn) \
-    (BOOL)(fn)((hwnd), (UINT)(wParam), (UINT)(lParam))
+    /* BOOL TreeView_OnSetAutoScrollInfo(HWND hwnd, UINT uPixPerSec, UINT uUpdateTime) */
+    #define HANDLE_TVM_SETAUTOSCROLLINFO(hwnd, wParam, lParam, fn) \
+        (BOOL)(fn)((hwnd), (UINT)(wParam), (UINT)(lParam))
+#endif
 
 /* BOOL TreeView_OnGetItemW(HWND hwnd, TV_ITEMW *pitem) */
 #define HANDLE_TVM_GETITEMW(hwnd, wParam, lParam, fn) \

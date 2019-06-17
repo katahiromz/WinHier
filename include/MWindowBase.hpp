@@ -189,7 +189,7 @@ public:
     }
     HWND Handle() const
     {
-        return (this ? m_hwnd : NULL);
+        return m_hwnd;
     }
 
 #ifdef MZC4_HANDLE_MAP

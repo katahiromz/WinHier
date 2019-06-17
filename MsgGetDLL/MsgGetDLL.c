@@ -1,6 +1,7 @@
-// MsgGetDLL.c --- Win32 message tracing DLL
-// Copyright (C) 2019 Katayama Hirofumi MZ <katayama.hirofumi.mz@gmail.com>
-// This file is public domain software.
+/* MsgGetDLL.c --- Win32 message tracing DLL
+ * Copyright (C) 2019 Katayama Hirofumi MZ <katayama.hirofumi.mz@gmail.com>
+ * This file is public domain software.
+ */
 
 #include "targetver.h"
 #include <windows.h>
