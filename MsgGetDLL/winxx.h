@@ -6,7 +6,7 @@
  */
 
 #ifndef _INC_WINXX
-#define _INC_WINXX      5   /* Version 5 */
+#define _INC_WINXX      6   /* Version 6 */
 
 #pragma once
 
@@ -1576,29 +1576,31 @@
 #define HANDLE_LVM_GETFOOTERRECT(hwnd, wParam, lParam, fn) \
     (BOOL)(fn)((hwnd), (RECT *)(lParam))
 
-/* BOOL ListView_OnGetFooterInfo(HWND hwnd, LVFOOTERINFO *plvfi) */
-#define HANDLE_LVM_GETFOOTERINFO(hwnd, wParam, lParam, fn) \
-    (BOOL)(fn)((hwnd), (LVFOOTERINFO *)(lParam))
+#if NTDDI_VERSION >= 0x06000000
+    /* BOOL ListView_OnGetFooterInfo(HWND hwnd, LVFOOTERINFO *plvfi) */
+    #define HANDLE_LVM_GETFOOTERINFO(hwnd, wParam, lParam, fn) \
+        (BOOL)(fn)((hwnd), (LVFOOTERINFO *)(lParam))
 
-/* BOOL ListView_OnGetFooterItemRect(HWND hwnd, INT iItem, RECT *prc) */
-#define HANDLE_LVM_GETFOOTERITEMRECT(hwnd, wParam, lParam, fn) \
-    (BOOL)(fn)((hwnd), (INT)(wParam), (RECT *)(lParam))
+    /* BOOL ListView_OnGetFooterItemRect(HWND hwnd, INT iItem, RECT *prc) */
+    #define HANDLE_LVM_GETFOOTERITEMRECT(hwnd, wParam, lParam, fn) \
+        (BOOL)(fn)((hwnd), (INT)(wParam), (RECT *)(lParam))
 
-/* BOOL ListView_OnGetFooterItem(HWND hwnd, INT iItem, LVFOOTERITEM *pfi) */
-#define HANDLE_LVM_GETFOOTERITEM(hwnd, wParam, lParam, fn) \
-    (BOOL)(fn)((hwnd), (INT)(wParam), (LVFOOTERITEM *)(lParam))
+    /* BOOL ListView_OnGetFooterItem(HWND hwnd, INT iItem, LVFOOTERITEM *pfi) */
+    #define HANDLE_LVM_GETFOOTERITEM(hwnd, wParam, lParam, fn) \
+        (BOOL)(fn)((hwnd), (INT)(wParam), (LVFOOTERITEM *)(lParam))
 
-/* BOOL ListView_OnGetItemIndexRect(HWND hwnd, const LVITEMINDEX *plvii, RECT *prc) */
-#define HANDLE_LVM_GETITEMINDEXRECT(hwnd, wParam, lParam, fn) \
-    (BOOL)(fn)((hwnd), (const LVITEMINDEX *)(wParam), (RECT *)(lParam))
+    /* BOOL ListView_OnGetItemIndexRect(HWND hwnd, const LVITEMINDEX *plvii, RECT *prc) */
+    #define HANDLE_LVM_GETITEMINDEXRECT(hwnd, wParam, lParam, fn) \
+        (BOOL)(fn)((hwnd), (const LVITEMINDEX *)(wParam), (RECT *)(lParam))
 
-/* HRESULT ListView_OnSetItemIndexState(HWND hwnd, const LVITEMINDEX *plvii, const LV_ITEM *lvi) */
-#define HANDLE_LVM_SETITEMINDEXSTATE(hwnd, wParam, lParam, fn) \
-    (HRESULT)(fn)((hwnd), (const LVITEMINDEX *)(wParam), (const LV_ITEM *)(lParam))
+    /* HRESULT ListView_OnSetItemIndexState(HWND hwnd, const LVITEMINDEX *plvii, const LV_ITEM *lvi) */
+    #define HANDLE_LVM_SETITEMINDEXSTATE(hwnd, wParam, lParam, fn) \
+        (HRESULT)(fn)((hwnd), (const LVITEMINDEX *)(wParam), (const LV_ITEM *)(lParam))
 
-/* BOOL ListView_OnGetNextItemIndex(HWND hwnd, LVITEMINDEX *plvii, UINT flags) */
-#define HANDLE_LVM_GETNEXTITEMINDEX(hwnd, wParam, lParam, fn) \
-    (BOOL)(fn)((hwnd), (LVITEMINDEX *)(wParam), (UINT)(lParam))
+    /* BOOL ListView_OnGetNextItemIndex(HWND hwnd, LVITEMINDEX *plvii, UINT flags) */
+    #define HANDLE_LVM_GETNEXTITEMINDEX(hwnd, wParam, lParam, fn) \
+        (BOOL)(fn)((hwnd), (LVITEMINDEX *)(wParam), (UINT)(lParam))
+#endif
 
 /* HTREEITEM TreeView_OnInsertItemA(HWND hwnd, LPTV_INSERTSTRUCTA lpis) */
 #define HANDLE_TVM_INSERTITEMA(hwnd, wParam, lParam, fn) \
@@ -1804,17 +1806,19 @@
 #define HANDLE_TVM_EDITLABELW(hwnd, wParam, lParam, fn) \
     (LRESULT)(HWND)(fn)((hwnd), (HTREEITEM)(lParam))
 
-/* DWORD TreeView_OnGetSelectedCount(HWND hwnd) */
-#define HANDLE_TVM_GETSELECTEDCOUNT(hwnd, wParam, lParam, fn) \
-    (DWORD)(fn)((hwnd))
+#if NTDDI_VERSION >= 0x06000000
+    /* DWORD TreeView_OnGetSelectedCount(HWND hwnd) */
+    #define HANDLE_TVM_GETSELECTEDCOUNT(hwnd, wParam, lParam, fn) \
+        (DWORD)(fn)((hwnd))
 
-/* DWORD TreeView_OnShowInfoTip(HWND hwnd, HTREEITEM hitem) */
-#define HANDLE_TVM_SHOWINFOTIP(hwnd, wParam, lParam, fn) \
-    (DWORD)(fn)((hwnd), (HTREEITEM)(lParam))
+    /* DWORD TreeView_OnShowInfoTip(HWND hwnd, HTREEITEM hitem) */
+    #define HANDLE_TVM_SHOWINFOTIP(hwnd, wParam, lParam, fn) \
+        (DWORD)(fn)((hwnd), (HTREEITEM)(lParam))
 
-/* LRESULT TreeView_OnGetItemPartRect(HWND hwnd, WPARAM wParam, LPARAM lParam) */
-#define HANDLE_TVM_GETITEMPARTRECT(hwnd, wParam, lParam, fn) \
-    (LRESULT)(fn)((hwnd), (wParam), (lParam))
+    /* LRESULT TreeView_OnGetItemPartRect(HWND hwnd, WPARAM wParam, LPARAM lParam) */
+    #define HANDLE_TVM_GETITEMPARTRECT(hwnd, wParam, lParam, fn) \
+        (LRESULT)(fn)((hwnd), (wParam), (lParam))
+#endif
 
 #ifdef _UNDOCUSER_H     /* UNDOCUMENTED */
     /* LRESULT Cls_OnDropObject(HWND hwnd, WPARAM wParam, LPARAM lParam) */

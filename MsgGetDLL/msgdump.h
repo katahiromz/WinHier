@@ -5,7 +5,7 @@
  * COPYRIGHT:   Copyright 2018-2019 Katayama Hirofumi MZ (katayama.hirofumi.mz@gmail.com)
  */
 #ifndef _INC_MSGDUMP
-#define _INC_MSGDUMP    9   /* Version 9 */
+#define _INC_MSGDUMP    10   /* Version 10 */
 
 /*
  * NOTE: MD_msgdump function in this file provides Win32API message dump feature.
@@ -3683,53 +3683,55 @@ MD_ListView_OnGetFooterRect(HWND hwnd, RECT *prc)
     return FALSE;
 }
 
-static __inline BOOL MSGDUMP_API
-MD_ListView_OnGetFooterInfo(HWND hwnd, LVFOOTERINFO *plvfi)
-{
-    MSGDUMP_TPRINTF(TEXT("%sLVM_GETFOOTERINFO(hwnd:%p, plvfi:%p)\n"),
-                    MSGDUMP_PREFIX, (void *)hwnd, (void *)plvfi);
-    return FALSE;
-}
+#if NTDDI_VERSION >= 0x06000000
+    static __inline BOOL MSGDUMP_API
+    MD_ListView_OnGetFooterInfo(HWND hwnd, LVFOOTERINFO *plvfi)
+    {
+        MSGDUMP_TPRINTF(TEXT("%sLVM_GETFOOTERINFO(hwnd:%p, plvfi:%p)\n"),
+                        MSGDUMP_PREFIX, (void *)hwnd, (void *)plvfi);
+        return FALSE;
+    }
 
-static __inline BOOL MSGDUMP_API
-MD_ListView_OnGetFooterItemRect(HWND hwnd, INT iItem, RECT *prc)
-{
-    MSGDUMP_TPRINTF(TEXT("%sLVM_GETFOOTERITEMRECT(hwnd:%p, iItem:%d, prc:%p)\n"),
-                    MSGDUMP_PREFIX, (void *)hwnd, iItem, (void *)prc);
-    return FALSE;
-}
+    static __inline BOOL MSGDUMP_API
+    MD_ListView_OnGetFooterItemRect(HWND hwnd, INT iItem, RECT *prc)
+    {
+        MSGDUMP_TPRINTF(TEXT("%sLVM_GETFOOTERITEMRECT(hwnd:%p, iItem:%d, prc:%p)\n"),
+                        MSGDUMP_PREFIX, (void *)hwnd, iItem, (void *)prc);
+        return FALSE;
+    }
 
-static __inline BOOL MSGDUMP_API
-MD_ListView_OnGetFooterItem(HWND hwnd, INT iItem, LVFOOTERITEM *pfi)
-{
-    MSGDUMP_TPRINTF(TEXT("%sLVM_GETFOOTERITEM(hwnd:%p, iItem:%d, pfi:%p)\n"),
-                    MSGDUMP_PREFIX, (void *)hwnd, iItem, (void *)pfi);
-    return FALSE;
-}
+    static __inline BOOL MSGDUMP_API
+    MD_ListView_OnGetFooterItem(HWND hwnd, INT iItem, LVFOOTERITEM *pfi)
+    {
+        MSGDUMP_TPRINTF(TEXT("%sLVM_GETFOOTERITEM(hwnd:%p, iItem:%d, pfi:%p)\n"),
+                        MSGDUMP_PREFIX, (void *)hwnd, iItem, (void *)pfi);
+        return FALSE;
+    }
 
-static __inline BOOL MSGDUMP_API
-MD_ListView_OnGetItemIndexRect(HWND hwnd, const LVITEMINDEX *plvii, RECT *prc)
-{
-    MSGDUMP_TPRINTF(TEXT("%sLVM_GETITEMINDEXRECT(hwnd:%p, plvii:%p, prc:%p)\n"),
-                    MSGDUMP_PREFIX, (void *)hwnd, (void *)plvii, (void *)prc);
-    return FALSE;
-}
+    static __inline BOOL MSGDUMP_API
+    MD_ListView_OnGetItemIndexRect(HWND hwnd, const LVITEMINDEX *plvii, RECT *prc)
+    {
+        MSGDUMP_TPRINTF(TEXT("%sLVM_GETITEMINDEXRECT(hwnd:%p, plvii:%p, prc:%p)\n"),
+                        MSGDUMP_PREFIX, (void *)hwnd, (void *)plvii, (void *)prc);
+        return FALSE;
+    }
 
-static __inline HRESULT MSGDUMP_API
-MD_ListView_OnSetItemIndexState(HWND hwnd, const LVITEMINDEX *plvii, const LV_ITEM *lvi)
-{
-    MSGDUMP_TPRINTF(TEXT("%sLVM_SETITEMINDEXSTATE(hwnd:%p, plvii:%p, lvi:%p)\n"),
-                    MSGDUMP_PREFIX, (void *)hwnd, (const void *)plvii, (const void *)lvi);
-    return 0;
-}
+    static __inline HRESULT MSGDUMP_API
+    MD_ListView_OnSetItemIndexState(HWND hwnd, const LVITEMINDEX *plvii, const LV_ITEM *lvi)
+    {
+        MSGDUMP_TPRINTF(TEXT("%sLVM_SETITEMINDEXSTATE(hwnd:%p, plvii:%p, lvi:%p)\n"),
+                        MSGDUMP_PREFIX, (void *)hwnd, (const void *)plvii, (const void *)lvi);
+        return 0;
+    }
 
-static __inline BOOL MSGDUMP_API
-MD_ListView_OnGetNextItemIndex(HWND hwnd, LVITEMINDEX *plvii, UINT flags)
-{
-    MSGDUMP_TPRINTF(TEXT("%sLVM_GETNEXTITEMINDEX(hwnd:%p, plvii:%p, flags:%u)\n"),
-                    MSGDUMP_PREFIX, (void *)hwnd, (const void *)plvii, flags);
-    return 0;
-}
+    static __inline BOOL MSGDUMP_API
+    MD_ListView_OnGetNextItemIndex(HWND hwnd, LVITEMINDEX *plvii, UINT flags)
+    {
+        MSGDUMP_TPRINTF(TEXT("%sLVM_GETNEXTITEMINDEX(hwnd:%p, plvii:%p, flags:%u)\n"),
+                        MSGDUMP_PREFIX, (void *)hwnd, (const void *)plvii, flags);
+        return 0;
+    }
+#endif
 
 static __inline HTREEITEM MSGDUMP_API
 MD_TreeView_OnInsertItemA(HWND hwnd, LPTV_INSERTSTRUCTA lpis)
@@ -4139,29 +4141,31 @@ MD_TreeView_OnEditLabelW(HWND hwnd, HTREEITEM hitem)
     return NULL;
 }
 
-static __inline DWORD MSGDUMP_API
-MD_TreeView_OnGetSelectedCount(HWND hwnd)
-{
-    MSGDUMP_TPRINTF(TEXT("%sTVM_GETSELECTEDCOUNT(hwnd:%p)\n"),
-                    MSGDUMP_PREFIX, (void *)hwnd);
-    return 0;
-}
+#if NTDDI_VERSION >= 0x06000000
+    static __inline DWORD MSGDUMP_API
+    MD_TreeView_OnGetSelectedCount(HWND hwnd)
+    {
+        MSGDUMP_TPRINTF(TEXT("%sTVM_GETSELECTEDCOUNT(hwnd:%p)\n"),
+                        MSGDUMP_PREFIX, (void *)hwnd);
+        return 0;
+    }
 
-static __inline DWORD MSGDUMP_API
-MD_TreeView_OnShowInfoTip(HWND hwnd, HTREEITEM hitem)
-{
-    MSGDUMP_TPRINTF(TEXT("%sTVM_SHOWINFOTIP(hwnd:%p, hitem:%p)\n"),
-                    MSGDUMP_PREFIX, (void *)hwnd, (void *)hitem);
-    return 0;
-}
+    static __inline DWORD MSGDUMP_API
+    MD_TreeView_OnShowInfoTip(HWND hwnd, HTREEITEM hitem)
+    {
+        MSGDUMP_TPRINTF(TEXT("%sTVM_SHOWINFOTIP(hwnd:%p, hitem:%p)\n"),
+                        MSGDUMP_PREFIX, (void *)hwnd, (void *)hitem);
+        return 0;
+    }
 
-static __inline LRESULT MSGDUMP_API
-MD_TreeView_OnGetItemPartRect(HWND hwnd, WPARAM wParam, LPARAM lParam)
-{
-    MSGDUMP_TPRINTF(TEXT("%sTVM_GETITEMPARTRECT(hwnd:%p, wParam:%p, lParam:%p)\n"),
-                    MSGDUMP_PREFIX, (void *)hwnd, (void *)wParam, (void *)lParam);
-    return 0;
-}
+    static __inline LRESULT MSGDUMP_API
+    MD_TreeView_OnGetItemPartRect(HWND hwnd, WPARAM wParam, LPARAM lParam)
+    {
+        MSGDUMP_TPRINTF(TEXT("%sTVM_GETITEMPARTRECT(hwnd:%p, wParam:%p, lParam:%p)\n"),
+                        MSGDUMP_PREFIX, (void *)hwnd, (void *)wParam, (void *)lParam);
+        return 0;
+    }
+#endif
 
 static __inline LRESULT MSGDUMP_API
 MD_msgdump(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -4462,6 +4466,7 @@ MD_msgdump(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             HANDLE_MSG(hwnd, LVM_MAPINDEXTOID, MD_ListView_OnMapIndexToID);
             HANDLE_MSG(hwnd, LVM_MAPIDTOINDEX, MD_ListView_OnMapIDToIndex);
             HANDLE_MSG(hwnd, LVM_ISITEMVISIBLE, MD_ListView_OnIsItemVisible);
+#if NTDDI_VERSION >= 0x06000000
             HANDLE_MSG(hwnd, LVM_GETEMPTYTEXT, MD_ListView_OnGetEmptyText);
             HANDLE_MSG(hwnd, LVM_GETFOOTERRECT, MD_ListView_OnGetFooterRect);
             HANDLE_MSG(hwnd, LVM_GETFOOTERINFO, MD_ListView_OnGetFooterInfo);
@@ -4470,6 +4475,7 @@ MD_msgdump(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             HANDLE_MSG(hwnd, LVM_GETITEMINDEXRECT, MD_ListView_OnGetItemIndexRect);
             HANDLE_MSG(hwnd, LVM_SETITEMINDEXSTATE, MD_ListView_OnSetItemIndexState);
             HANDLE_MSG(hwnd, LVM_GETNEXTITEMINDEX, MD_ListView_OnGetNextItemIndex);
+#endif
         }
     }
     else if (sz[0] == TEXT('S') && lstrcmpi(szClass, WC_TREEVIEW) == 0)
@@ -4527,9 +4533,11 @@ MD_msgdump(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             HANDLE_MSG(hwnd, TVM_SETITEMW, MD_TreeView_OnSetItemW);
             HANDLE_MSG(hwnd, TVM_GETISEARCHSTRINGW, MD_TreeView_OnGetISearchStringW);
             HANDLE_MSG(hwnd, TVM_EDITLABELW, MD_TreeView_OnEditLabelW);
+#if NTDDI_VERSION >= 0x06000000
             HANDLE_MSG(hwnd, TVM_GETSELECTEDCOUNT, MD_TreeView_OnGetSelectedCount);
             HANDLE_MSG(hwnd, TVM_SHOWINFOTIP, MD_TreeView_OnShowInfoTip);
             HANDLE_MSG(hwnd, TVM_GETITEMPARTRECT, MD_TreeView_OnGetItemPartRect);
+#endif
         }
     }
     switch (uMsg)
@@ -5103,6 +5111,7 @@ MD_msgresult(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam, LRESULT lResult
             DEFINE_RESULT(LVM_MAPINDEXTOID);
             DEFINE_RESULT(LVM_MAPIDTOINDEX);
             DEFINE_RESULT(LVM_ISITEMVISIBLE);
+#if NTDDI_VERSION >= 0x06000000
             DEFINE_RESULT(LVM_GETEMPTYTEXT);
             DEFINE_RESULT(LVM_GETFOOTERRECT);
             DEFINE_RESULT(LVM_GETFOOTERINFO);
@@ -5111,6 +5120,7 @@ MD_msgresult(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam, LRESULT lResult
             DEFINE_RESULT(LVM_GETITEMINDEXRECT);
             DEFINE_RESULT(LVM_SETITEMINDEXSTATE);
             DEFINE_RESULT(LVM_GETNEXTITEMINDEX);
+#endif
         }
     }
     else if (sz[0] == TEXT('S') && lstrcmpi(szClass, WC_TREEVIEW) == 0)
@@ -5168,9 +5178,11 @@ MD_msgresult(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam, LRESULT lResult
             DEFINE_RESULT(TVM_SETITEMW);
             DEFINE_RESULT(TVM_GETISEARCHSTRINGW);
             DEFINE_RESULT(TVM_EDITLABELW);
+#if NTDDI_VERSION >= 0x06000000
             DEFINE_RESULT(TVM_GETSELECTEDCOUNT);
             DEFINE_RESULT(TVM_SHOWINFOTIP);
             DEFINE_RESULT(TVM_GETITEMPARTRECT);
+#endif
         }
     }
     switch (uMsg)
