@@ -5,7 +5,7 @@
  * COPYRIGHT:   Copyright 2018-2019 Katayama Hirofumi MZ (katayama.hirofumi.mz@gmail.com)
  */
 #ifndef _INC_MSGDUMP
-#define _INC_MSGDUMP    8   /* Version 8 */
+#define _INC_MSGDUMP    9   /* Version 9 */
 
 /*
  * NOTE: MD_msgdump function in this file provides Win32API message dump feature.
@@ -3731,6 +3731,438 @@ MD_ListView_OnGetNextItemIndex(HWND hwnd, LVITEMINDEX *plvii, UINT flags)
     return 0;
 }
 
+static __inline HTREEITEM MSGDUMP_API
+MD_TreeView_OnInsertItemA(HWND hwnd, LPTV_INSERTSTRUCTA lpis)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_INSERTITEMA(hwnd:%p, lpis:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)lpis);
+    return NULL;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_TreeView_OnDeleteItem(HWND hwnd, HTREEITEM hitem)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_DELETEITEM(hwnd:%p, hitem:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)hitem);
+    return FALSE;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_TreeView_OnExpand(HWND hwnd, HTREEITEM hitem, UINT code)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_EXPAND(hwnd:%p, hitem:%p, code:%u)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)hitem, code);
+    return FALSE;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_TreeView_OnGetItemRect(HWND hwnd, UINT code, RECT *prc)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_GETITEMRECT(hwnd:%p, code:%u, prc:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, code, (void *)prc);
+    return FALSE;
+}
+
+static __inline UINT MSGDUMP_API
+MD_TreeView_OnGetCount(HWND hwnd)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_GETCOUNT(hwnd:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd);
+    return 0;
+}
+
+static __inline UINT MSGDUMP_API
+MD_TreeView_OnGetIndent(HWND hwnd)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_GETINDENT(hwnd:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd);
+    return 0;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_TreeView_OnSetIndent(HWND hwnd, INT indent)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_SETINDENT(hwnd:%p, indent:%d)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, indent);
+    return FALSE;
+}
+
+static __inline HIMAGELIST MSGDUMP_API
+MD_TreeView_OnGetImageList(HWND hwnd, INT iImage)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_GETIMAGELIST(hwnd:%p, iImage:%d)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, iImage);
+    return NULL;
+}
+
+static __inline HIMAGELIST MSGDUMP_API
+MD_TreeView_OnSetImageList(HWND hwnd, INT iImage, HIMAGELIST himl)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_GETIMAGELIST(hwnd:%p, iImage:%d, himl:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, iImage, (void *)himl);
+    return NULL;
+}
+
+static __inline HTREEITEM MSGDUMP_API
+MD_TreeView_OnGetNextItem(HWND hwnd, HTREEITEM hitem, UINT code)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_GETNEXTITEM(hwnd:%p, hitem:%p, code:%u)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)hitem, code);
+    return NULL;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_TreeView_OnSelectItem(HWND hwnd, UINT code, HTREEITEM hitem)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_SELECTITEM(hwnd:%p, code:%u, hitem:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, code, (void *)hitem);
+    return FALSE;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_TreeView_OnGetItemA(HWND hwnd, TV_ITEMA *pitem)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_GETITEMA(hwnd:%p, pitem:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)pitem);
+    return FALSE;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_TreeView_OnSetItemA(HWND hwnd, const TV_ITEMA *pitem)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_SETITEMA(hwnd:%p, pitem:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (const void *)pitem);
+    return FALSE;
+}
+
+static __inline HWND MSGDUMP_API
+MD_TreeView_OnEditLabelA(HWND hwnd, HTREEITEM hitem)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_EDITLABELA(hwnd:%p, hitem:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)hitem);
+    return NULL;
+}
+
+static __inline HWND MSGDUMP_API
+MD_TreeView_OnGetEditControl(HWND hwnd)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_GETEDITCONTROL(hwnd:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd);
+    return NULL;
+}
+
+static __inline UINT MSGDUMP_API
+MD_TreeView_OnGetVisibleCount(HWND hwnd)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_GETVISIBLECOUNT(hwnd:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd);
+    return 0;
+}
+
+static __inline HTREEITEM MSGDUMP_API
+MD_TreeView_OnHitTest(HWND hwnd, LPTV_HITTESTINFO lpht)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_HITTEST(hwnd:%p, lpht:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)lpht);
+    return NULL;
+}
+
+static __inline HIMAGELIST MSGDUMP_API
+MD_TreeView_OnCreateDragImage(HWND hwnd, HTREEITEM hitem)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_CREATEDRAGIMAGE(hwnd:%p, hitem:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)hitem);
+    return NULL;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_TreeView_OnSortChildren(HWND hwnd, HTREEITEM hitem, BOOL recurse)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_SORTCHILDREN(hwnd:%p, hitem:%p, recurse:%d)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)hitem, recurse);
+    return FALSE;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_TreeView_OnEnsureVisible(HWND hwnd, HTREEITEM hitem)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_ENSUREVISIBLE(hwnd:%p, hitem:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)hitem);
+    return FALSE;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_TreeView_OnSortChildrenCB(HWND hwnd, LPTV_SORTCB psort, BOOL recurse)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_SORTCHILDRENCB(hwnd:%p, psort:%p, recurse:%d)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)psort, recurse);
+    return FALSE;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_TreeView_OnEndEditLabelNow(HWND hwnd, BOOL fCancel)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_ENDEDITLABELNOW(hwnd:%p, fCancel:%d)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, fCancel);
+    return FALSE;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_TreeView_OnGetISearchStringA(HWND hwnd, LPSTR lpsz)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_GETISEARCHSTRINGA(hwnd:%p, lpsz:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)lpsz);
+    return FALSE;
+}
+
+static __inline HWND MSGDUMP_API
+MD_TreeView_OnSetToolTips(HWND hwnd, HWND hwndTT)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_SETTOOLTIPS(hwnd:%p, hwndTT:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)hwndTT);
+    return NULL;
+}
+
+static __inline HWND MSGDUMP_API
+MD_TreeView_OnGetToolTips(HWND hwnd)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_GETTOOLTIPS(hwnd:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd);
+    return NULL;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_TreeView_OnSetInsertMark(HWND hwnd, HTREEITEM hItem, BOOL fAfter)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_SETINSERTMARK(hwnd:%p, hItem:%p, fAfter:%d)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)hItem, fAfter);
+    return FALSE;
+}
+
+static __inline INT MSGDUMP_API
+MD_TreeView_OnSetItemHeight(HWND hwnd, INT iHeight)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_SETITEMHEIGHT(hwnd:%p, iHeight:%d)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, iHeight);
+    return 0;
+}
+
+static __inline INT MSGDUMP_API
+MD_TreeView_OnGetItemHeight(HWND hwnd)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_GETITEMHEIGHT(hwnd:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd);
+    return 0;
+}
+
+static __inline COLORREF MSGDUMP_API
+MD_TreeView_OnSetBkColor(HWND hwnd, COLORREF clr)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_SETBKCOLOR(hwnd:%p, clr:0x%08lX)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, clr);
+    return 0;
+}
+
+static __inline COLORREF MSGDUMP_API
+MD_TreeView_OnSetTextColor(HWND hwnd, COLORREF clr)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_SETTEXTCOLOR(hwnd:%p, clr:0x%08lX)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, clr);
+    return 0;
+}
+
+static __inline COLORREF MSGDUMP_API
+MD_TreeView_OnGetBkColor(HWND hwnd)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_GETBKCOLOR(hwnd:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd);
+    return 0;
+}
+
+static __inline COLORREF MSGDUMP_API
+MD_TreeView_OnGetTextColor(HWND hwnd)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_GETTEXTCOLOR(hwnd:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd);
+    return 0;
+}
+
+static __inline UINT MSGDUMP_API
+MD_TreeView_OnSetScrollTime(HWND hwnd, UINT uTime)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_SETSCROLLTIME(hwnd:%p, uTime:%u)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, uTime);
+    return 0;
+}
+
+static __inline UINT MSGDUMP_API
+MD_TreeView_OnGetScrollTime(HWND hwnd)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_GETSCROLLTIME(hwnd:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd);
+    return 0;
+}
+
+static __inline INT MSGDUMP_API
+MD_TreeView_OnSetBorder(HWND hwnd, DWORD dwFlags, INT xBorder, INT yBorder)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_SETBORDER(hwnd:%p, dwFlags:0x%08lX, xBorder:%d, yBorder:%d)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, dwFlags, xBorder, yBorder);
+    return 0;
+}
+
+static __inline COLORREF MSGDUMP_API
+MD_TreeView_OnSetInsertMarkColor(HWND hwnd, COLORREF clr)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_SETINSERTMARKCOLOR(hwnd:%p, clr:0x%08lX)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, clr);
+    return 0;
+}
+
+static __inline COLORREF MSGDUMP_API
+MD_TreeView_OnGetInsertMarkColor(HWND hwnd)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_GETINSERTMARKCOLOR(hwnd:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd);
+    return 0;
+}
+
+static __inline UINT MSGDUMP_API
+MD_TreeView_OnGetItemState(HWND hwnd, HTREEITEM hti, UINT mask)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_GETITEMSTATE(hwnd:%p, hti:%p, mask:%u)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)hti, mask);
+    return 0;
+}
+
+static __inline COLORREF MSGDUMP_API
+MD_TreeView_OnSetLineColor(HWND hwnd, COLORREF clr)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_SETLINECOLOR(hwnd:%p, clr:0x%08lX)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, clr);
+    return 0;
+}
+
+static __inline COLORREF MSGDUMP_API
+MD_TreeView_OnGetLineColor(HWND hwnd)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_GETLINECOLOR(hwnd:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd);
+    return 0;
+}
+
+static __inline HTREEITEM MSGDUMP_API
+MD_TreeView_OnMapAccIDToHTREEITEM(HWND hwnd, UINT id)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_MAPACCIDTOHTREEITEM(hwnd:%p, id:%u)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, id);
+    return NULL;
+}
+
+static __inline UINT MSGDUMP_API
+MD_TreeView_OnMapHTREEITEMToAccID(HWND hwnd, HTREEITEM htreeitem)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_MAPHTREEITEMTOACCID(hwnd:%p, htreeitem:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)htreeitem);
+    return 0;
+}
+
+static __inline DWORD MSGDUMP_API
+MD_TreeView_OnSetExtendedStyle(HWND hwnd, DWORD dw, DWORD mask)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_SETEXTENDEDSTYLE(hwnd:%p, dw:0x%08lX, mask:0x%08lX)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, dw, mask);
+    return 0;
+}
+
+static __inline DWORD MSGDUMP_API
+MD_TreeView_OnGetExtendedStyle(HWND hwnd)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_GETEXTENDEDSTYLE(hwnd:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd);
+    return 0;
+}
+
+static __inline HTREEITEM MSGDUMP_API
+MD_TreeView_OnInsertItemW(HWND hwnd, LPTV_INSERTSTRUCTW lpis)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_INSERTITEMW(hwnd:%p, lpis:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)lpis);
+    return NULL;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_TreeView_OnSetHot(HWND hwnd, HTREEITEM hitem)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_SETHOT(hwnd:%p, hitem:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)hitem);
+    return FALSE;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_TreeView_OnSetAutoScrollInfo(HWND hwnd, UINT uPixPerSec, UINT uUpdateTime)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_SETAUTOSCROLLINFO(hwnd:%p, uPixPerSec:%u, uUpdateTime:%u)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, uPixPerSec, uUpdateTime);
+    return FALSE;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_TreeView_OnGetItemW(HWND hwnd, TV_ITEMW *pitem)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_GETITEMW(hwnd:%p, pitem:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)pitem);
+    return FALSE;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_TreeView_OnSetItemW(HWND hwnd, const TV_ITEMW *pitem)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_SETITEMW(hwnd:%p, pitem:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (const void *)pitem);
+    return FALSE;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_TreeView_OnGetISearchStringW(HWND hwnd, LPWSTR lpsz)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_GETISEARCHSTRINGW(hwnd:%p, lpsz:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)lpsz);
+    return FALSE;
+}
+
+static __inline HWND MSGDUMP_API
+MD_TreeView_OnEditLabelW(HWND hwnd, HTREEITEM hitem)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_EDITLABELW(hwnd:%p, hitem:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)hitem);
+    return NULL;
+}
+
+static __inline DWORD MSGDUMP_API
+MD_TreeView_OnGetSelectedCount(HWND hwnd)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_GETSELECTEDCOUNT(hwnd:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd);
+    return 0;
+}
+
+static __inline DWORD MSGDUMP_API
+MD_TreeView_OnShowInfoTip(HWND hwnd, HTREEITEM hitem)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_SHOWINFOTIP(hwnd:%p, hitem:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)hitem);
+    return 0;
+}
+
+static __inline LRESULT MSGDUMP_API
+MD_TreeView_OnGetItemPartRect(HWND hwnd, WPARAM wParam, LPARAM lParam)
+{
+    MSGDUMP_TPRINTF(TEXT("%sTVM_GETITEMPARTRECT(hwnd:%p, wParam:%p, lParam:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)wParam, (void *)lParam);
+    return 0;
+}
+
 static __inline LRESULT MSGDUMP_API
 MD_msgdump(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
@@ -4038,6 +4470,66 @@ MD_msgdump(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             HANDLE_MSG(hwnd, LVM_GETITEMINDEXRECT, MD_ListView_OnGetItemIndexRect);
             HANDLE_MSG(hwnd, LVM_SETITEMINDEXSTATE, MD_ListView_OnSetItemIndexState);
             HANDLE_MSG(hwnd, LVM_GETNEXTITEMINDEX, MD_ListView_OnGetNextItemIndex);
+        }
+    }
+    else if (sz[0] == TEXT('S') && lstrcmpi(szClass, WC_TREEVIEW) == 0)
+    {
+        switch (uMsg)
+        {
+            HANDLE_MSG(hwnd, TVM_INSERTITEMA, MD_TreeView_OnInsertItemA);
+            HANDLE_MSG(hwnd, TVM_DELETEITEM, MD_TreeView_OnDeleteItem);
+            HANDLE_MSG(hwnd, TVM_EXPAND, MD_TreeView_OnExpand);
+            HANDLE_MSG(hwnd, TVM_GETITEMRECT, MD_TreeView_OnGetItemRect);
+            HANDLE_MSG(hwnd, TVM_GETCOUNT, MD_TreeView_OnGetCount);
+            HANDLE_MSG(hwnd, TVM_GETINDENT, MD_TreeView_OnGetIndent);
+            HANDLE_MSG(hwnd, TVM_SETINDENT, MD_TreeView_OnSetIndent);
+            HANDLE_MSG(hwnd, TVM_GETIMAGELIST, MD_TreeView_OnGetImageList);
+            HANDLE_MSG(hwnd, TVM_SETIMAGELIST, MD_TreeView_OnSetImageList);
+            HANDLE_MSG(hwnd, TVM_GETNEXTITEM, MD_TreeView_OnGetNextItem);
+            HANDLE_MSG(hwnd, TVM_SELECTITEM, MD_TreeView_OnSelectItem);
+            HANDLE_MSG(hwnd, TVM_GETITEMA, MD_TreeView_OnGetItemA);
+            HANDLE_MSG(hwnd, TVM_SETITEMA, MD_TreeView_OnSetItemA);
+            HANDLE_MSG(hwnd, TVM_EDITLABELA, MD_TreeView_OnEditLabelA);
+            HANDLE_MSG(hwnd, TVM_GETEDITCONTROL, MD_TreeView_OnGetEditControl);
+            HANDLE_MSG(hwnd, TVM_GETVISIBLECOUNT, MD_TreeView_OnGetVisibleCount);
+            HANDLE_MSG(hwnd, TVM_HITTEST, MD_TreeView_OnHitTest);
+            HANDLE_MSG(hwnd, TVM_CREATEDRAGIMAGE, MD_TreeView_OnCreateDragImage);
+            HANDLE_MSG(hwnd, TVM_SORTCHILDREN, MD_TreeView_OnSortChildren);
+            HANDLE_MSG(hwnd, TVM_ENSUREVISIBLE, MD_TreeView_OnEnsureVisible);
+            HANDLE_MSG(hwnd, TVM_SORTCHILDRENCB, MD_TreeView_OnSortChildrenCB);
+            HANDLE_MSG(hwnd, TVM_ENDEDITLABELNOW, MD_TreeView_OnEndEditLabelNow);
+            HANDLE_MSG(hwnd, TVM_GETISEARCHSTRINGA, MD_TreeView_OnGetISearchStringA);
+            HANDLE_MSG(hwnd, TVM_SETTOOLTIPS, MD_TreeView_OnSetToolTips);
+            HANDLE_MSG(hwnd, TVM_GETTOOLTIPS, MD_TreeView_OnGetToolTips);
+            HANDLE_MSG(hwnd, TVM_SETINSERTMARK, MD_TreeView_OnSetInsertMark);
+            HANDLE_MSG(hwnd, TVM_SETITEMHEIGHT, MD_TreeView_OnSetItemHeight);
+            HANDLE_MSG(hwnd, TVM_GETITEMHEIGHT, MD_TreeView_OnGetItemHeight);
+            HANDLE_MSG(hwnd, TVM_SETBKCOLOR, MD_TreeView_OnSetBkColor);
+            HANDLE_MSG(hwnd, TVM_SETTEXTCOLOR, MD_TreeView_OnSetTextColor);
+            HANDLE_MSG(hwnd, TVM_GETBKCOLOR, MD_TreeView_OnGetBkColor);
+            HANDLE_MSG(hwnd, TVM_GETTEXTCOLOR, MD_TreeView_OnGetTextColor);
+            HANDLE_MSG(hwnd, TVM_SETSCROLLTIME, MD_TreeView_OnSetScrollTime);
+            HANDLE_MSG(hwnd, TVM_GETSCROLLTIME, MD_TreeView_OnGetScrollTime);
+            HANDLE_MSG(hwnd, TVM_SETBORDER, MD_TreeView_OnSetBorder);
+            HANDLE_MSG(hwnd, TVM_SETINSERTMARKCOLOR, MD_TreeView_OnSetInsertMarkColor);
+            HANDLE_MSG(hwnd, TVM_GETINSERTMARKCOLOR, MD_TreeView_OnGetInsertMarkColor);
+            HANDLE_MSG(hwnd, TVM_GETITEMSTATE, MD_TreeView_OnGetItemState);
+            HANDLE_MSG(hwnd, TVM_SETLINECOLOR, MD_TreeView_OnSetLineColor);
+            HANDLE_MSG(hwnd, TVM_GETLINECOLOR, MD_TreeView_OnGetLineColor);
+            HANDLE_MSG(hwnd, TVM_MAPACCIDTOHTREEITEM, MD_TreeView_OnMapAccIDToHTREEITEM);
+            HANDLE_MSG(hwnd, TVM_MAPHTREEITEMTOACCID, MD_TreeView_OnMapHTREEITEMToAccID);
+            HANDLE_MSG(hwnd, TVM_SETEXTENDEDSTYLE, MD_TreeView_OnSetExtendedStyle);
+            HANDLE_MSG(hwnd, TVM_GETEXTENDEDSTYLE, MD_TreeView_OnGetExtendedStyle);
+            HANDLE_MSG(hwnd, TVM_INSERTITEMW, MD_TreeView_OnInsertItemW);
+            HANDLE_MSG(hwnd, TVM_SETHOT, MD_TreeView_OnSetHot);
+            HANDLE_MSG(hwnd, TVM_SETAUTOSCROLLINFO, MD_TreeView_OnSetAutoScrollInfo);
+            HANDLE_MSG(hwnd, TVM_GETITEMW, MD_TreeView_OnGetItemW);
+            HANDLE_MSG(hwnd, TVM_SETITEMW, MD_TreeView_OnSetItemW);
+            HANDLE_MSG(hwnd, TVM_GETISEARCHSTRINGW, MD_TreeView_OnGetISearchStringW);
+            HANDLE_MSG(hwnd, TVM_EDITLABELW, MD_TreeView_OnEditLabelW);
+            HANDLE_MSG(hwnd, TVM_GETSELECTEDCOUNT, MD_TreeView_OnGetSelectedCount);
+            HANDLE_MSG(hwnd, TVM_SHOWINFOTIP, MD_TreeView_OnShowInfoTip);
+            HANDLE_MSG(hwnd, TVM_GETITEMPARTRECT, MD_TreeView_OnGetItemPartRect);
         }
     }
     switch (uMsg)
@@ -4619,6 +5111,66 @@ MD_msgresult(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam, LRESULT lResult
             DEFINE_RESULT(LVM_GETITEMINDEXRECT);
             DEFINE_RESULT(LVM_SETITEMINDEXSTATE);
             DEFINE_RESULT(LVM_GETNEXTITEMINDEX);
+        }
+    }
+    else if (sz[0] == TEXT('S') && lstrcmpi(szClass, WC_TREEVIEW) == 0)
+    {
+        switch (uMsg)
+        {
+            DEFINE_RESULT(TVM_INSERTITEMA);
+            DEFINE_RESULT(TVM_DELETEITEM);
+            DEFINE_RESULT(TVM_EXPAND);
+            DEFINE_RESULT(TVM_GETITEMRECT);
+            DEFINE_RESULT(TVM_GETCOUNT);
+            DEFINE_RESULT(TVM_GETINDENT);
+            DEFINE_RESULT(TVM_SETINDENT);
+            DEFINE_RESULT(TVM_GETIMAGELIST);
+            DEFINE_RESULT(TVM_SETIMAGELIST);
+            DEFINE_RESULT(TVM_GETNEXTITEM);
+            DEFINE_RESULT(TVM_SELECTITEM);
+            DEFINE_RESULT(TVM_GETITEMA);
+            DEFINE_RESULT(TVM_SETITEMA);
+            DEFINE_RESULT(TVM_EDITLABELA);
+            DEFINE_RESULT(TVM_GETEDITCONTROL);
+            DEFINE_RESULT(TVM_GETVISIBLECOUNT);
+            DEFINE_RESULT(TVM_HITTEST);
+            DEFINE_RESULT(TVM_CREATEDRAGIMAGE);
+            DEFINE_RESULT(TVM_SORTCHILDREN);
+            DEFINE_RESULT(TVM_ENSUREVISIBLE);
+            DEFINE_RESULT(TVM_SORTCHILDRENCB);
+            DEFINE_RESULT(TVM_ENDEDITLABELNOW);
+            DEFINE_RESULT(TVM_GETISEARCHSTRINGA);
+            DEFINE_RESULT(TVM_SETTOOLTIPS);
+            DEFINE_RESULT(TVM_GETTOOLTIPS);
+            DEFINE_RESULT(TVM_SETINSERTMARK);
+            DEFINE_RESULT(TVM_SETITEMHEIGHT);
+            DEFINE_RESULT(TVM_GETITEMHEIGHT);
+            DEFINE_RESULT(TVM_SETBKCOLOR);
+            DEFINE_RESULT(TVM_SETTEXTCOLOR);
+            DEFINE_RESULT(TVM_GETBKCOLOR);
+            DEFINE_RESULT(TVM_GETTEXTCOLOR);
+            DEFINE_RESULT(TVM_SETSCROLLTIME);
+            DEFINE_RESULT(TVM_GETSCROLLTIME);
+            DEFINE_RESULT(TVM_SETBORDER);
+            DEFINE_RESULT(TVM_SETINSERTMARKCOLOR);
+            DEFINE_RESULT(TVM_GETINSERTMARKCOLOR);
+            DEFINE_RESULT(TVM_GETITEMSTATE);
+            DEFINE_RESULT(TVM_SETLINECOLOR);
+            DEFINE_RESULT(TVM_GETLINECOLOR);
+            DEFINE_RESULT(TVM_MAPACCIDTOHTREEITEM);
+            DEFINE_RESULT(TVM_MAPHTREEITEMTOACCID);
+            DEFINE_RESULT(TVM_SETEXTENDEDSTYLE);
+            DEFINE_RESULT(TVM_GETEXTENDEDSTYLE);
+            DEFINE_RESULT(TVM_INSERTITEMW);
+            DEFINE_RESULT(TVM_SETHOT);
+            DEFINE_RESULT(TVM_SETAUTOSCROLLINFO);
+            DEFINE_RESULT(TVM_GETITEMW);
+            DEFINE_RESULT(TVM_SETITEMW);
+            DEFINE_RESULT(TVM_GETISEARCHSTRINGW);
+            DEFINE_RESULT(TVM_EDITLABELW);
+            DEFINE_RESULT(TVM_GETSELECTEDCOUNT);
+            DEFINE_RESULT(TVM_SHOWINFOTIP);
+            DEFINE_RESULT(TVM_GETITEMPARTRECT);
         }
     }
     switch (uMsg)

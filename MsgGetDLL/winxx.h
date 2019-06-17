@@ -6,7 +6,7 @@
  */
 
 #ifndef _INC_WINXX
-#define _INC_WINXX      3   /* Version 3 */
+#define _INC_WINXX      5   /* Version 5 */
 
 #pragma once
 
@@ -1599,6 +1599,222 @@
 /* BOOL ListView_OnGetNextItemIndex(HWND hwnd, LVITEMINDEX *plvii, UINT flags) */
 #define HANDLE_LVM_GETNEXTITEMINDEX(hwnd, wParam, lParam, fn) \
     (BOOL)(fn)((hwnd), (LVITEMINDEX *)(wParam), (UINT)(lParam))
+
+/* HTREEITEM TreeView_OnInsertItemA(HWND hwnd, LPTV_INSERTSTRUCTA lpis) */
+#define HANDLE_TVM_INSERTITEMA(hwnd, wParam, lParam, fn) \
+    (LRESULT)(HTREEITEM)(fn)((hwnd), (LPTV_INSERTSTRUCTA)(lParam))
+
+/* BOOL TreeView_OnDeleteItem(HWND hwnd, HTREEITEM hitem) */
+#define HANDLE_TVM_DELETEITEM(hwnd, wParam, lParam, fn) \
+    (BOOL)(fn)((hwnd), (HTREEITEM)(lParam))
+
+/* BOOL TreeView_OnExpand(HWND hwnd, HTREEITEM hitem, UINT code) */
+#define HANDLE_TVM_EXPAND(hwnd, wParam, lParam, fn) \
+    (BOOL)(fn)((hwnd), (HTREEITEM)(lParam), (UINT)(wParam))
+
+/* BOOL TreeView_OnGetItemRect(HWND hwnd, UINT code, RECT *prc) */
+#define HANDLE_TVM_GETITEMRECT(hwnd, wParam, lParam, fn) \
+    (BOOL)(fn)((hwnd), (UINT)(wParam), (RECT *)(lParam))
+
+/* UINT TreeView_OnGetCount(HWND hwnd) */
+#define HANDLE_TVM_GETCOUNT(hwnd, wParam, lParam, fn) \
+    (UINT)(fn)((hwnd))
+
+/* UINT TreeView_OnGetIndent(HWND hwnd) */
+#define HANDLE_TVM_GETINDENT(hwnd, wParam, lParam, fn) \
+    (UINT)(fn)((hwnd))
+
+/* BOOL TreeView_OnSetIndent(HWND hwnd, INT indent) */
+#define HANDLE_TVM_SETINDENT(hwnd, wParam, lParam, fn) \
+    (BOOL)(fn)((hwnd), (INT)(wParam))
+
+/* HIMAGELIST TreeView_OnGetImageList(HWND hwnd, INT iImage) */
+#define HANDLE_TVM_GETIMAGELIST(hwnd, wParam, lParam, fn) \
+    (LRESULT)(HIMAGELIST)(fn)((hwnd), (INT)(wParam))
+
+/* HIMAGELIST TreeView_OnSetImageList(HWND hwnd, INT iImage, HIMAGELIST himl) */
+#define HANDLE_TVM_SETIMAGELIST(hwnd, wParam, lParam, fn) \
+    (LRESULT)(HIMAGELIST)(fn)((hwnd), (INT)(wParam), (HIMAGELIST)(lParam))
+
+/* HTREEITEM TreeView_OnGetNextItem(HWND hwnd, HTREEITEM hitem, UINT code) */
+#define HANDLE_TVM_GETNEXTITEM(hwnd, wParam, lParam, fn) \
+    (LRESULT)(HTREEITEM)(fn)((hwnd), (HTREEITEM)(lParam), (UINT)(wParam))
+
+/* BOOL TreeView_OnSelectItem(HWND hwnd, UINT code, HTREEITEM hitem) */
+#define HANDLE_TVM_SELECTITEM(hwnd, wParam, lParam, fn) \
+    (BOOL)(fn)((hwnd), (UINT)(wParam), (HTREEITEM)(lParam))
+
+/* BOOL TreeView_OnGetItemA(HWND hwnd, TV_ITEMA *pitem) */
+#define HANDLE_TVM_GETITEMA(hwnd, wParam, lParam, fn) \
+    (BOOL)(fn)((hwnd), (TV_ITEMA *)(lParam))
+
+/* BOOL TreeView_OnSetItemA(HWND hwnd, const TV_ITEMA *pitem) */
+#define HANDLE_TVM_SETITEMA(hwnd, wParam, lParam, fn) \
+    (BOOL)(fn)((hwnd), (const TV_ITEMA *)(lParam))
+
+/* HWND TreeView_OnEditLabelA(HWND hwnd, HTREEITEM hitem) */
+#define HANDLE_TVM_EDITLABELA(hwnd, wParam, lParam, fn) \
+    (LRESULT)(HWND)(fn)((hwnd), (HTREEITEM)(lParam))
+
+/* HWND TreeView_OnGetEditControl(HWND hwnd) */
+#define HANDLE_TVM_GETEDITCONTROL(hwnd, wParam, lParam, fn) \
+    (LRESULT)(HWND)(fn)((hwnd))
+
+/* UINT TreeView_OnGetVisibleCount(HWND hwnd) */
+#define HANDLE_TVM_GETVISIBLECOUNT(hwnd, wParam, lParam, fn) \
+    (UINT)(fn)((hwnd))
+
+/* HTREEITEM TreeView_OnHitTest(HWND hwnd, LPTV_HITTESTINFO lpht) */
+#define HANDLE_TVM_HITTEST(hwnd, wParam, lParam, fn) \
+    (LRESULT)(HTREEITEM)(fn)((hwnd), (LPTV_HITTESTINFO)(lParam))
+
+/* HIMAGELIST TreeView_OnCreateDragImage(HWND hwnd, HTREEITEM hitem) */
+#define HANDLE_TVM_CREATEDRAGIMAGE(hwnd, wParam, lParam, fn) \
+    (LRESULT)(HIMAGELIST)(fn)((hwnd), (HTREEITEM)(lParam))
+
+/* BOOL TreeView_OnSortChildren(HWND hwnd, HTREEITEM hitem, BOOL recurse) */
+#define HANDLE_TVM_SORTCHILDREN(hwnd, wParam, lParam, fn) \
+    (BOOL)(fn)((hwnd), (HTREEITEM)(lParam), (BOOL)(wParam))
+
+/* BOOL TreeView_OnEnsureVisible(HWND hwnd, HTREEITEM hitem) */
+#define HANDLE_TVM_ENSUREVISIBLE(hwnd, wParam, lParam, fn) \
+    (BOOL)(fn)((hwnd), (HTREEITEM)(lParam))
+
+/* BOOL TreeView_OnSortChildrenCB(HWND hwnd, LPTV_SORTCB psort, BOOL recurse) */
+#define HANDLE_TVM_SORTCHILDRENCB(hwnd, wParam, lParam, fn) \
+    (BOOL)(fn)((hwnd), (LPTV_SORTCB)(lParam), (BOOL)(wParam))
+
+/* BOOL TreeView_OnEndEditLabelNow(HWND hwnd, BOOL fCancel) */
+#define HANDLE_TVM_ENDEDITLABELNOW(hwnd, wParam, lParam, fn) \
+    (BOOL)(fn)((hwnd), (BOOL)(wParam))
+
+/* BOOL TreeView_OnGetISearchStringA(HWND hwnd, LPSTR lpsz) */
+#define HANDLE_TVM_GETISEARCHSTRINGA(hwnd, wParam, lParam, fn) \
+    (BOOL)(fn)((hwnd), (LPSTR)(lParam))
+
+/* HWND TreeView_OnSetToolTips(HWND hwnd, HWND hwndTT) */
+#define HANDLE_TVM_SETTOOLTIPS(hwnd, wParam, lParam, fn) \
+    (LRESULT)(HWND)(fn)((hwnd), (HWND)(wParam))
+
+/* HWND TreeView_OnGetToolTips(HWND hwnd) */
+#define HANDLE_TVM_GETTOOLTIPS(hwnd, wParam, lParam, fn) \
+    (LRESULT)(HWND)(fn)((hwnd))
+
+/* BOOL TreeView_OnSetInsertMark(HWND hwnd, HTREEITEM hItem, BOOL fAfter) */
+#define HANDLE_TVM_SETINSERTMARK(hwnd, wParam, lParam, fn) \
+    (BOOL)(fn)((hwnd), (HTREEITEM)(lParam), (BOOL)(wParam))
+
+/* INT TreeView_OnSetItemHeight(HWND hwnd, INT iHeight) */
+#define HANDLE_TVM_SETITEMHEIGHT(hwnd, wParam, lParam, fn) \
+    (INT)(fn)((hwnd), (INT)(wParam))
+
+/* INT TreeView_OnGetItemHeight(HWND hwnd) */
+#define HANDLE_TVM_GETITEMHEIGHT(hwnd, wParam, lParam, fn) \
+    (INT)(fn)((hwnd))
+
+/* COLORREF TreeView_OnSetBkColor(HWND hwnd, COLORREF clr) */
+#define HANDLE_TVM_SETBKCOLOR(hwnd, wParam, lParam, fn) \
+    (COLORREF)(fn)((hwnd), (COLORREF)(lParam))
+
+/* COLORREF TreeView_OnSetTextColor(HWND hwnd, COLORREF clr) */
+#define HANDLE_TVM_SETTEXTCOLOR(hwnd, wParam, lParam, fn) \
+    (COLORREF)(fn)((hwnd), (COLORREF)(lParam))
+
+/* COLORREF TreeView_OnGetBkColor(HWND hwnd) */
+#define HANDLE_TVM_GETBKCOLOR(hwnd, wParam, lParam, fn) \
+    (COLORREF)(fn)((hwnd))
+
+/* COLORREF TreeView_OnGetTextColor(HWND hwnd) */
+#define HANDLE_TVM_GETTEXTCOLOR(hwnd, wParam, lParam, fn) \
+    (COLORREF)(fn)((hwnd))
+
+/* UINT TreeView_OnSetScrollTime(HWND hwnd, UINT uTime) */
+#define HANDLE_TVM_SETSCROLLTIME(hwnd, wParam, lParam, fn) \
+    (UINT)(fn)((hwnd), (UINT)(wParam))
+
+/* UINT TreeView_OnGetScrollTime(HWND hwnd) */
+#define HANDLE_TVM_GETSCROLLTIME(hwnd, wParam, lParam, fn) \
+    (UINT)(fn)((hwnd))
+
+/* INT TreeView_OnSetBorder(HWND hwnd, DWORD dwFlags, INT xBorder, INT yBorder) */
+#define HANDLE_TVM_SETBORDER(hwnd, wParam, lParam, fn) \
+    (INT)(fn)((hwnd), (DWORD)(wParam), (SHORT)LOWORD(lParam), (SHORT)HIWORD(lParam))
+
+/* COLORREF TreeView_OnSetInsertMarkColor(HWND hwnd, COLORREF clr) */
+#define HANDLE_TVM_SETINSERTMARKCOLOR(hwnd, wParam, lParam, fn) \
+    (COLORREF)(fn)((hwnd), (COLORREF)(lParam))
+
+/* COLORREF TreeView_OnGetInsertMarkColor(HWND hwnd) */
+#define HANDLE_TVM_GETINSERTMARKCOLOR(hwnd, wParam, lParam, fn) \
+    (COLORREF)(fn)((hwnd))
+
+/* UINT TreeView_OnGetItemState(HWND hwnd, HTREEITEM hti, UINT mask) */
+#define HANDLE_TVM_GETITEMSTATE(hwnd, wParam, lParam, fn) \
+    (UINT)(fn)((hwnd), (HTREEITEM)(wParam), (UINT)(lParam))
+
+/* COLORREF TreeView_OnSetLineColor(HWND hwnd, COLORREF clr) */
+#define HANDLE_TVM_SETLINECOLOR(hwnd, wParam, lParam, fn) \
+    (COLORREF)(fn)((hwnd), (COLORREF)(lParam))
+
+/* COLORREF TreeView_OnGetLineColor(HWND hwnd) */
+#define HANDLE_TVM_GETLINECOLOR(hwnd, wParam, lParam, fn) \
+    (COLORREF)(fn)((hwnd))
+
+/* HTREEITEM TreeView_OnMapAccIDToHTREEITEM(HWND hwnd, UINT id) */
+#define HANDLE_TVM_MAPACCIDTOHTREEITEM(hwnd, wParam, lParam, fn) \
+    (LRESULT)(HTREEITEM)(fn)((hwnd), (UINT)(wParam))
+
+/* UINT TreeView_OnMapHTREEITEMToAccID(HWND hwnd, HTREEITEM htreeitem) */
+#define HANDLE_TVM_MAPHTREEITEMTOACCID(hwnd, wParam, lParam, fn) \
+    (UINT)(fn)((hwnd), (HTREEITEM)(wParam))
+
+/* DWORD TreeView_OnSetExtendedStyle(HWND hwnd, DWORD dw, DWORD mask) */
+#define HANDLE_TVM_SETEXTENDEDSTYLE(hwnd, wParam, lParam, fn) \
+    (DWORD)(fn)((hwnd), (DWORD)(wParam), (DWORD)(lParam))
+
+/* DWORD TreeView_OnGetExtendedStyle(HWND hwnd) */
+#define HANDLE_TVM_GETEXTENDEDSTYLE(hwnd, wParam, lParam, fn) \
+    (DWORD)(fn)((hwnd))
+
+/* HTREEITEM TreeView_OnInsertItemW(HWND hwnd, LPTV_INSERTSTRUCTW lpis) */
+#define HANDLE_TVM_INSERTITEMW(hwnd, wParam, lParam, fn) \
+    (LRESULT)(HTREEITEM)(fn)((hwnd), (LPTV_INSERTSTRUCTW)(lParam))
+
+/* BOOL TreeView_OnSetHot(HWND hwnd, HTREEITEM hitem) */
+#define HANDLE_TVM_SETHOT(hwnd, wParam, lParam, fn) \
+    (BOOL)(fn)((hwnd), (HTREEITEM)(lParam))
+
+/* BOOL TreeView_OnSetAutoScrollInfo(HWND hwnd, UINT uPixPerSec, UINT uUpdateTime) */
+#define HANDLE_TVM_SETAUTOSCROLLINFO(hwnd, wParam, lParam, fn) \
+    (BOOL)(fn)((hwnd), (UINT)(wParam), (UINT)(lParam))
+
+/* BOOL TreeView_OnGetItemW(HWND hwnd, TV_ITEMW *pitem) */
+#define HANDLE_TVM_GETITEMW(hwnd, wParam, lParam, fn) \
+    (BOOL)(fn)((hwnd), (TV_ITEMW *)(lParam))
+
+/* BOOL TreeView_OnSetItemW(HWND hwnd, const TV_ITEMW *pitem) */
+#define HANDLE_TVM_SETITEMW(hwnd, wParam, lParam, fn) \
+    (BOOL)(fn)((hwnd), (const TV_ITEMW *)(lParam))
+
+/* BOOL TreeView_OnGetISearchStringW(HWND hwnd, LPWSTR lpsz) */
+#define HANDLE_TVM_GETISEARCHSTRINGW(hwnd, wParam, lParam, fn) \
+    (BOOL)(fn)((hwnd), (LPWSTR)(lParam))
+
+/* HWND TreeView_OnEditLabelW(HWND hwnd, HTREEITEM hitem) */
+#define HANDLE_TVM_EDITLABELW(hwnd, wParam, lParam, fn) \
+    (LRESULT)(HWND)(fn)((hwnd), (HTREEITEM)(lParam))
+
+/* DWORD TreeView_OnGetSelectedCount(HWND hwnd) */
+#define HANDLE_TVM_GETSELECTEDCOUNT(hwnd, wParam, lParam, fn) \
+    (DWORD)(fn)((hwnd))
+
+/* DWORD TreeView_OnShowInfoTip(HWND hwnd, HTREEITEM hitem) */
+#define HANDLE_TVM_SHOWINFOTIP(hwnd, wParam, lParam, fn) \
+    (DWORD)(fn)((hwnd), (HTREEITEM)(lParam))
+
+/* LRESULT TreeView_OnGetItemPartRect(HWND hwnd, WPARAM wParam, LPARAM lParam) */
+#define HANDLE_TVM_GETITEMPARTRECT(hwnd, wParam, lParam, fn) \
+    (LRESULT)(fn)((hwnd), (wParam), (lParam))
 
 #ifdef _UNDOCUSER_H     /* UNDOCUMENTED */
     /* LRESULT Cls_OnDropObject(HWND hwnd, WPARAM wParam, LPARAM lParam) */
