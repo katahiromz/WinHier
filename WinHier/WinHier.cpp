@@ -26,7 +26,6 @@ BOOL NormalizeNTPath(WCHAR *pszDest, size_t cchDestMax, LPCWSTR pszSrc)
 {
     StringCbCopyW(pszDest, cchDestMax, pszSrc);
 
-    size_t cchSrc = wcslen(pszSrc);
     WCHAR szNTPath[MAX_PATH], szDrive[MAX_PATH] = L"A:";
     for (WCHAR cDrive = L'A'; cDrive <= L'Z'; ++cDrive)
     {

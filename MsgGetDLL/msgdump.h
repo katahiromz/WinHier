@@ -5,7 +5,7 @@
  * COPYRIGHT:   Copyright 2018-2019 Katayama Hirofumi MZ (katayama.hirofumi.mz@gmail.com)
  */
 #ifndef _INC_MSGDUMP
-#define _INC_MSGDUMP    6   /* Version 6 */
+#define _INC_MSGDUMP    8   /* Version 8 */
 
 /*
  * NOTE: MD_msgdump function in this file provides Win32API message dump feature.
@@ -1809,7 +1809,7 @@ static __inline void MSGDUMP_API
 MD_Edit_OnSetWordBreakProc(HWND hwnd, EDITWORDBREAKPROC ewbprc)
 {
     MSGDUMP_TPRINTF(TEXT("%sEM_SETWORDBREAKPROC(hwnd:%p, ewbprc:%p)\n"),
-                    MSGDUMP_PREFIX, (void *)hwnd, (void *)ewbprc);
+                    MSGDUMP_PREFIX, (void *)hwnd, *(void **)&ewbprc);
 }
 
 static __inline EDITWORDBREAKPROC MSGDUMP_API
@@ -2630,13 +2630,1117 @@ MD_ScrollBar_OnGetScrollBarInfo(HWND hwnd, LPSCROLLBARINFO lpsbi)
     return FALSE;
 }
 
+static __inline COLORREF MSGDUMP_API
+MD_ListView_OnGetBkColor(HWND hwnd)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETBKCOLOR(hwnd:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd);
+    return 0;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnSetBkColor(HWND hwnd, COLORREF clrBk)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SETBKCOLOR(hwnd:%p, clrBk:0x%08lX)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, clrBk);
+    return FALSE;
+}
+
+static __inline HIMAGELIST MSGDUMP_API
+MD_ListView_OnGetImageList(HWND hwnd, INT iImageList)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETIMAGELIST(hwnd:%p, iImageList:%d)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, iImageList);
+    return NULL;
+}
+
+static __inline HIMAGELIST MSGDUMP_API
+MD_ListView_OnSetImageList(HWND hwnd, INT iImageList, HIMAGELIST himl)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SETIMAGELIST(hwnd:%p, iImageList:%d, himl:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, iImageList, (void *)himl);
+    return NULL;
+}
+
+static __inline INT MSGDUMP_API
+MD_ListView_OnGetItemCount(HWND hwnd)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETITEMCOUNT(hwnd:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd);
+    return 0;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnGetItemA(HWND hwnd, LV_ITEMA *pitem)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETITEMA(hwnd:%p, pitem:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)pitem);
+    return FALSE;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnSetItemA(HWND hwnd, const LV_ITEMA *pitem)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SETITEMA(hwnd:%p, pitem:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)pitem);
+    return FALSE;
+}
+
+static __inline INT MSGDUMP_API
+MD_ListView_OnInsertItemA(HWND hwnd, const LV_ITEMA *pitem)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_INSERTITEMA(hwnd:%p, pitem:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)pitem);
+    return 0;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnDeleteItem(HWND hwnd, INT i)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_DELETEITEM(hwnd:%p, i:%d)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, i);
+    return FALSE;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnDeleteAllItems(HWND hwnd)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_DELETEALLITEMS(hwnd:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd);
+    return FALSE;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnGetCallbackMask(HWND hwnd)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETCALLBACKMASK(hwnd:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd);
+    return FALSE;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnSetCallbackMask(HWND hwnd, UINT mask)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SETCALLBACKMASK(hwnd:%p, mask:%u)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, mask);
+    return FALSE;
+}
+
+static __inline INT MSGDUMP_API
+MD_ListView_OnGetNextItem(HWND hwnd, INT i, UINT flags)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETNEXTITEM(hwnd:%p, i:%d, flags:%u)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, i, flags);
+    return 0;
+}
+
+static __inline INT MSGDUMP_API
+MD_ListView_OnFindItemA(HWND hwnd, INT iStart, const LV_FINDINFOA *plvfi)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_FINDITEMA(hwnd:%p, iStart:%d, plvfi:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, iStart, (void *)plvfi);
+    return 0;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnGetItemRect(HWND hwnd, INT i, RECT *prc)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETITEMRECT(hwnd:%p, i:%d, prc:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, i, (void *)prc);
+    return FALSE;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnSetItemPosition(HWND hwnd, INT i, INT x, INT y)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SETITEMPOSITION(hwnd:%p, i:%d, x:%d, y:%d)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, i, x, y);
+    return FALSE;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnGetItemPosition(HWND hwnd, INT i, POINT *ppt)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETITEMPOSITION(hwnd:%p, i:%d, ppt:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, i, (void *)ppt);
+    return FALSE;
+}
+
+static __inline INT MSGDUMP_API
+MD_ListView_OnGetStringWidthA(HWND hwnd, LPCSTR psz)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETSTRINGWIDTHA(hwnd:%p, psz:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)psz);
+    return 0;
+}
+
+static __inline INT MSGDUMP_API
+MD_ListView_OnHitTest(HWND hwnd, LV_HITTESTINFO *pinfo)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_HITTEST(hwnd:%p, pinfo:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)pinfo);
+    return 0;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnEnsureVisible(HWND hwnd, INT i, BOOL fPartialOK)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_ENSUREVISIBLE(hwnd:%p, i:%d, fPartialOK:%d)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, i, fPartialOK);
+    return FALSE;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnScroll(HWND hwnd, INT dx, INT dy)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SCROLL(hwnd:%p, dx:%d, dy:%d)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, dx, dy);
+    return FALSE;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnRedrawItems(HWND hwnd, INT iFirst, INT iLast)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_REDRAWITEMS(hwnd:%p, iFirst:%d, iLast:%d)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, iFirst, iLast);
+    return FALSE;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnArrange(HWND hwnd, UINT code)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_ARRANGE(hwnd:%p, code:%u)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, code);
+    return FALSE;
+}
+
+static __inline HWND MSGDUMP_API
+MD_ListView_OnEditLabelA(HWND hwnd, INT i)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_EDITLABELA(hwnd:%p, i:%d)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, i);
+    return NULL;
+}
+
+static __inline HWND MSGDUMP_API
+MD_ListView_OnGetEditControl(HWND hwnd)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETEDITCONTROL(hwnd:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd);
+    return NULL;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnGetColumnA(HWND hwnd, INT iCol, LV_COLUMNA *pcol)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETCOLUMNA(hwnd:%p, iCol:%d, pcol:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, iCol, (void *)pcol);
+    return FALSE;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnSetColumnA(HWND hwnd, INT iCol, const LV_COLUMNA *pcol)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SETCOLUMNA(hwnd:%p, iCol:%d, pcol:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, iCol, (const void *)pcol);
+    return FALSE;
+}
+
+static __inline INT MSGDUMP_API
+MD_ListView_OnInsertColumnA(HWND hwnd, INT iCol, const LV_COLUMNA *pcol)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_INSERTCOLUMNA(hwnd:%p, iCol:%d, pcol:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, iCol, (const void *)pcol);
+    return 0;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnDeleteColumn(HWND hwnd, INT iCol)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_DELETECOLUMN(hwnd:%p, iCol:%d)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, iCol);
+    return FALSE;
+}
+
+static __inline INT MSGDUMP_API
+MD_ListView_OnGetColumnWidth(HWND hwnd, INT iCol)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETCOLUMNWIDTH(hwnd:%p, iCol:%d)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, iCol);
+    return 0;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnSetColumnWidth(HWND hwnd, INT iCol, INT cx)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SETCOLUMNWIDTH(hwnd:%p, iCol:%d, cx:%d)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, iCol, cx);
+    return FALSE;
+}
+
+static __inline HWND MSGDUMP_API
+MD_ListView_OnGetHeader(HWND hwnd)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETHEADER(hwnd:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd);
+    return NULL;
+}
+
+static __inline HIMAGELIST MSGDUMP_API
+MD_ListView_OnCreateDragImage(HWND hwnd, INT i, LPPOINT lpptUpLeft)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_CREATEDRAGIMAGE(hwnd:%p, i:%d, lpptUpLeft:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, i, (void *)lpptUpLeft);
+    return NULL;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnGetViewRect(HWND hwnd, RECT *prc)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETVIEWRECT(hwnd:%p, prc:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)prc);
+    return FALSE;
+}
+
+static __inline COLORREF MSGDUMP_API
+MD_ListView_OnGetTextColor(HWND hwnd)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETTEXTCOLOR(hwnd:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd);
+    return 0;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnSetTextColor(HWND hwnd, COLORREF clrText)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SETTEXTCOLOR(hwnd:%p, clrText:0x%08lX)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, clrText);
+    return FALSE;
+}
+
+static __inline COLORREF MSGDUMP_API
+MD_ListView_OnGetTextBkColor(HWND hwnd)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETTEXTBKCOLOR(hwnd:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd);
+    return 0;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnSetTextBkColor(HWND hwnd, COLORREF clrTextBk)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SETTEXTBKCOLOR(hwnd:%p, clrTextBk:0x%08lX)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, clrTextBk);
+    return FALSE;
+}
+
+static __inline INT MSGDUMP_API
+MD_ListView_OnGetTopIndex(HWND hwnd)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETTOPINDEX(hwnd:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd);
+    return 0;
+}
+
+static __inline INT MSGDUMP_API
+MD_ListView_OnGetCountPerPage(HWND hwnd)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETCOUNTPERPAGE(hwnd:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd);
+    return 0;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnGetOrigin(HWND hwnd, POINT *ppt)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETORIGIN(hwnd:%p, ppt:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)ppt);
+    return FALSE;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnUpdate(HWND hwnd, INT i)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_UPDATE(hwnd:%p, i:%d)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, i);
+    return FALSE;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnSetItemState(HWND hwnd, INT i, LV_ITEM *lvi)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SETITEMSTATE(hwnd:%p, i:%d, lvi:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, i, (void *)lvi);
+    return FALSE;
+}
+
+static __inline UINT MSGDUMP_API
+MD_ListView_OnGetItemState(HWND hwnd, INT i, UINT mask)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETITEMSTATE(hwnd:%p, i:%d, mask:%u)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, i, mask);
+    return 0;
+}
+
+static __inline INT MSGDUMP_API
+MD_ListView_OnGetItemTextA(HWND hwnd, INT i, LV_ITEMA *lvi)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETITEMTEXTA(hwnd:%p, i:%d, lvi:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, i, (void *)lvi);
+    return 0;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnSetItemTextA(HWND hwnd, INT i, const LV_ITEMA *lvi)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SETITEMTEXTA(hwnd:%p, i:%d, lvi:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, i, (const void *)lvi);
+    return FALSE;
+}
+
+static __inline void MSGDUMP_API
+MD_ListView_OnSetItemCount(HWND hwnd, INT cItems)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SETITEMCOUNT(hwnd:%p, cItems:%d)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, cItems);
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnSortItems(HWND hwnd, LPARAM lPrm, PFNLVCOMPARE pfnCompare)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SORTITEMS(hwnd:%p, lPrm:%p, pfnCompare:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)lPrm, *(void **)&pfnCompare);
+    return FALSE;
+}
+
+static __inline void MSGDUMP_API
+MD_ListView_OnSetItemPosition32(HWND hwnd, INT i, const POINT *ppt)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SETITEMPOSITION32(hwnd:%p, i:%d, ppt:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, i, (void *)ppt);
+}
+
+static __inline UINT MSGDUMP_API
+MD_ListView_OnGetSelectedCount(HWND hwnd)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETSELECTEDCOUNT(hwnd:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd);
+    return 0;
+}
+
+static __inline DWORD MSGDUMP_API
+MD_ListView_OnGetItemSpacing(HWND hwnd, BOOL fSmall)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETITEMSPACING(hwnd:%p, fSmall:%d)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, fSmall);
+    return 0;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnGetISearchStringA(HWND hwnd, LPSTR lpsz)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETISEARCHSTRINGA(hwnd:%p, lpsz:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)lpsz);
+    return FALSE;
+}
+
+static __inline DWORD MSGDUMP_API
+MD_ListView_OnSetIconSpacing(HWND hwnd, INT cx, INT cy)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SETICONSPACING(hwnd:%p, cx:%d, cy:%d)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, cx, cy);
+    return 0;
+}
+
+static __inline DWORD MSGDUMP_API
+MD_ListView_OnSetExtendedListViewStyle(HWND hwnd, DWORD dwMask, DWORD dw)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SETEXTENDEDLISTVIEWSTYLE(hwnd:%p, dwMask:0x%08lX, dw:0x%08lX)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, dwMask, dw);
+    return 0;
+}
+
+static __inline DWORD MSGDUMP_API
+MD_ListView_OnGetExtendedListViewStyle(HWND hwnd)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETEXTENDEDLISTVIEWSTYLE(hwnd:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd);
+    return 0;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnGetSubItemRect(HWND hwnd, INT iItem, RECT *prc)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETSUBITEMRECT(hwnd:%p, iItem:%d, prc:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, iItem, (void *)prc);
+    return FALSE;
+}
+
+static __inline INT MSGDUMP_API
+MD_ListView_OnSubItemHitTest(HWND hwnd, WPARAM wParam, LPLVHITTESTINFO plvhti)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SUBITEMHITTEST(hwnd:%p, wParam:%p, plvhti:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)wParam, (void *)plvhti);
+    return 0;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnSetColumnOrderArray(HWND hwnd, INT iCount, LPINT pi)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SETCOLUMNORDERARRAY(hwnd:%p, iCount:%d, pi:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, iCount, (void *)pi);
+    return FALSE;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnGetColumnOrderArray(HWND hwnd, INT iCount, LPINT pi)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETCOLUMNORDERARRAY(hwnd:%p, iCount:%d, pi:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, iCount, (void *)pi);
+    return FALSE;
+}
+
+static __inline INT MSGDUMP_API
+MD_ListView_OnSetHotItem(HWND hwnd, INT i)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SETHOTITEM(hwnd:%p, i:%d)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, i);
+    return 0;
+}
+
+static __inline INT MSGDUMP_API
+MD_ListView_OnGetHotItem(HWND hwnd)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETHOTITEM(hwnd:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd);
+    return 0;
+}
+
+static __inline HCURSOR MSGDUMP_API
+MD_ListView_OnSetHotCursor(HWND hwnd, HCURSOR hcur)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SETHOTCURSOR(hwnd:%p, hcur:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)hcur);
+    return NULL;
+}
+
+static __inline HCURSOR MSGDUMP_API
+MD_ListView_OnGetHotCursor(HWND hwnd)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETHOTCURSOR(hwnd:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd);
+    return NULL;
+}
+
+static __inline DWORD MSGDUMP_API
+MD_ListView_OnApproximateViewRect(HWND hwnd, INT iWidth, INT iHeight, INT iCount)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_APPROXIMATEVIEWRECT(hwnd:%p, iWidth:%d, iHeight:%d, iCount:%d)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, iWidth, iHeight, iCount);
+    return 0;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnSetWorkAreas(HWND hwnd, INT nWorkAreas, const RECT *prc)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SETWORKAREAS(hwnd:%p, nWorkAreas:%d, prc:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, nWorkAreas, (void *)prc);
+    return FALSE;
+}
+
+static __inline INT MSGDUMP_API
+MD_ListView_OnGetSelectionMark(HWND hwnd)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETSELECTIONMARK(hwnd:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd);
+    return 0;
+}
+
+static __inline INT MSGDUMP_API
+MD_ListView_OnSetSelectionMark(HWND hwnd, INT i)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SETSELECTIONMARK(hwnd:%p, i:%d)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, i);
+    return 0;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnSetBkImageA(HWND hwnd, const LVBKIMAGEA *plvbki)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SETBKIMAGEA(hwnd:%p, plvbki:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (const void *)plvbki);
+    return FALSE;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnGetBkImageA(HWND hwnd, LVBKIMAGEA *plvbki)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETBKIMAGEA(hwnd:%p, plvbki:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)plvbki);
+    return FALSE;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnGetWorkAreas(HWND hwnd, INT nWorkAreas, RECT *prc)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETWORKAREAS(hwnd:%p, nWorkAreas:%d, prc:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, nWorkAreas, (void *)prc);
+    return FALSE;
+}
+
+static __inline DWORD MSGDUMP_API
+MD_ListView_OnSetHoverTime(HWND hwnd, DWORD dwHoverTimeMs)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SETHOVERTIME(hwnd:%p, dwHoverTimeMs:0x%08lX)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, dwHoverTimeMs);
+    return 0;
+}
+
+static __inline DWORD MSGDUMP_API
+MD_ListView_OnGetHoverTime(HWND hwnd)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETHOVERTIME(hwnd:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd);
+    return 0;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnGetNumberOfWorkAreas(HWND hwnd, UINT *pnWorkAreas)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETNUMBEROFWORKAREAS(hwnd:%p, pnWorkAreas:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)pnWorkAreas);
+    return FALSE;
+}
+
+static __inline HWND MSGDUMP_API
+MD_ListView_OnSetToolTips(HWND hwnd, HWND hwndNewHwnd)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SETTOOLTIPS(hwnd:%p, hwndNewHwnd:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)hwndNewHwnd);
+    return NULL;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnGetItemW(HWND hwnd, LV_ITEMW *pitem)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETITEMW(hwnd:%p, pitem:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)pitem);
+    return FALSE;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnSetItemW(HWND hwnd, const LV_ITEMW *pitem)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SETITEMW(hwnd:%p, pitem:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (const void *)pitem);
+    return FALSE;
+}
+
+static __inline INT MSGDUMP_API
+MD_ListView_OnInsertItemW(HWND hwnd, const LV_ITEMW *pitem)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_INSERTITEMW(hwnd:%p, pitem:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (const void *)pitem);
+    return 0;
+}
+
+static __inline HWND MSGDUMP_API
+MD_ListView_OnGetToolTips(HWND hwnd)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETTOOLTIPS(hwnd:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd);
+    return NULL;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnSortItemsEx(HWND hwnd, PFNLVCOMPARE pfnCompare, LPARAM lPrm)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SORTITEMSEX(hwnd:%p, pfnCompare:%p, lPrm:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, *(void **)&pfnCompare, (void *)lPrm);
+    return FALSE;
+}
+
+static __inline INT MSGDUMP_API
+MD_ListView_OnFindItemW(HWND hwnd, INT iStart, const LV_FINDINFOW *plvfi)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_FINDITEMW(hwnd:%p, iStart:%d, plvfi:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, iStart, (void *)plvfi);
+    return 0;
+}
+
+static __inline INT MSGDUMP_API
+MD_ListView_OnGetStringWidthW(HWND hwnd, LPCWSTR psz)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETSTRINGWIDTHW(hwnd:%p, psz:%ls)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, psz);
+    return 0;
+}
+
+static __inline UINT MSGDUMP_API
+MD_ListView_OnGetGroupState(HWND hwnd, DWORD dwGroupId, DWORD dwMask)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETGROUPSTATE(hwnd:%p, dwGroupId:0x%08lX, dwMask:0x%08lX)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, dwGroupId, dwMask);
+    return 0;
+}
+
+static __inline INT MSGDUMP_API
+MD_ListView_OnGetFocusedGroup(HWND hwnd)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETFOCUSEDGROUP(hwnd:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd);
+    return 0;
+}
+
+static __inline INT MSGDUMP_API
+MD_ListView_OnGetColumnW(HWND hwnd, INT iCol)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETCOLUMNW(hwnd:%p, iCol:%d)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, iCol);
+    return 0;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnSetColumnW(HWND hwnd, INT iCol, INT cx)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SETCOLUMNW(hwnd:%p, iCol:%d, cx:%d)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, iCol, cx);
+    return 0;
+}
+
+static __inline INT MSGDUMP_API
+MD_ListView_OnInsertColumnW(HWND hwnd, INT iCol, const LV_COLUMNW *pcol)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_INSERTCOLUMNW(hwnd:%p, iCol:%d, pcol:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, iCol, (const void *)pcol);
+    return 0;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnGetGroupRect(HWND hwnd, INT iGroupId, RECT *prc)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETGROUPRECT(hwnd:%p, iGroupId:%d, prc:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, iGroupId, (void *)prc);
+    return FALSE;
+}
+
+static __inline INT MSGDUMP_API
+MD_ListView_OnGetItemTextW(HWND hwnd, INT i, LV_ITEMW *pitem)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETITEMTEXTW(hwnd:%p, i:%d, pitem:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, i, (void *)pitem);
+    return 0;
+}
+
+static __inline INT MSGDUMP_API
+MD_ListView_OnSetItemTextW(HWND hwnd, INT i, const LV_ITEMW *pitem)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SETITEMTEXTW(hwnd:%p, i:%d, pitem:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, i, (const void *)pitem);
+    return 0;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnGetISearchStringW(HWND hwnd, LPWSTR lpsz)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETISEARCHSTRINGW(hwnd:%p, lpsz:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)lpsz);
+    return FALSE;
+}
+
+static __inline HWND MSGDUMP_API
+MD_ListView_OnEditLabelW(HWND hwnd, INT i)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_EDITLABELW(hwnd:%p, i:%d)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, i);
+    return NULL;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnSetBkImageW(HWND hwnd, const LVBKIMAGEW *plvbki)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SETBKIMAGEW(hwnd:%p, plvbki:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (const void *)plvbki);
+    return FALSE;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnGetBkImageW(HWND hwnd, LVBKIMAGEW *plvbki)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETBKIMAGEW(hwnd:%p, plvbki:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)plvbki);
+    return FALSE;
+}
+
+static __inline void MSGDUMP_API
+MD_ListView_OnSetSelectedColumn(HWND hwnd, INT iCol)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SETSELECTEDCOLUMN(hwnd:%p, iCol:%d)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, iCol);
+}
+
+static __inline LRESULT MSGDUMP_API
+MD_ListView_OnSetTileWidth(HWND hwnd, WPARAM wParam, LPARAM lParam)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SETTILEWIDTH(hwnd:%p, wParam:%p, lParam:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)wParam, (void *)lParam);
+    return 0;
+}
+
+static __inline DWORD MSGDUMP_API
+MD_ListView_OnSetView(HWND hwnd, DWORD iView)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SETVIEW(hwnd:%p, iView:0x%08lX)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, iView);
+    return 0;
+}
+
+static __inline DWORD MSGDUMP_API
+MD_ListView_OnGetView(HWND hwnd)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETVIEW(hwnd:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd);
+    return 0;
+}
+
+static __inline INT MSGDUMP_API
+MD_ListView_OnInsertGroup(HWND hwnd, INT iGroupId, const LVGROUP *pGroup)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_INSERTGROUP(hwnd:%p, iGroupId:%d, pGroup:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, iGroupId, (const void *)pGroup);
+    return 0;
+}
+
+static __inline INT MSGDUMP_API
+MD_ListView_OnSetGroupInfo(HWND hwnd, INT iGroupId, const LVGROUP *pGroup)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SETGROUPINFO(hwnd:%p, iGroupId:%d, pGroup:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, iGroupId, (const void *)pGroup);
+    return 0;
+}
+
+static __inline INT MSGDUMP_API
+MD_ListView_OnGetGroupInfo(HWND hwnd, INT iGroupId, LVGROUP *pGroup)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETGROUPINFO(hwnd:%p, iGroupId:%d, pGroup:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, iGroupId, (void *)pGroup);
+    return 0;
+}
+
+static __inline INT MSGDUMP_API
+MD_ListView_OnRemoveGroup(HWND hwnd, INT iGroupId)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_REMOVEGROUP(hwnd:%p, iGroupId:%d)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, iGroupId);
+    return 0;
+}
+
+static __inline LRESULT MSGDUMP_API
+MD_ListView_OnMoveGroup(HWND hwnd, WPARAM wParam, LPARAM lParam)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_MOVEGROUP(hwnd:%p, wParam:%p, lParam:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, wParam, lParam);
+    return 0;
+}
+
+static __inline INT MSGDUMP_API
+MD_ListView_OnGetGroupCount(HWND hwnd)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETGROUPCOUNT(hwnd:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd);
+    return 0;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnGetGroupInfoByIndex(HWND hwnd, INT iIndex, LVGROUP *pgrp)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETGROUPINFOBYINDEX(hwnd:%p, iIndex:%d, pgrp:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, iIndex, (void *)pgrp);
+    return FALSE;
+}
+
+static __inline LRESULT MSGDUMP_API
+MD_ListView_OnMoveItemToGroup(HWND hwnd, WPARAM wParam, LPARAM lParam)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_MOVEITEMTOGROUP(hwnd:%p, wParam:%p, lParam:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)wParam, (void *)lParam);
+    return 0;
+}
+
+static __inline void MSGDUMP_API
+MD_ListView_OnSetGroupMetrics(HWND hwnd, const LVGROUPMETRICS *pGroupMetrics)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SETGROUPMETRICS(hwnd:%p, pGroupMetrics:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (const void *)pGroupMetrics);
+}
+
+static __inline void MSGDUMP_API
+MD_ListView_OnGetGroupMetrics(HWND hwnd, LVGROUPMETRICS *pGroupMetrics)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETGROUPMETRICS(hwnd:%p, pGroupMetrics:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)pGroupMetrics);
+}
+
+static __inline INT MSGDUMP_API
+MD_ListView_OnEnableGroupView(HWND hwnd, BOOL fEnable)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_ENABLEGROUPVIEW(hwnd:%p, fEnable:%d)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, fEnable);
+    return 0;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnSortGroups(HWND hwnd, PFNLVGROUPCOMPARE pfnGroupCompate, void *plv)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SORTGROUPS(hwnd:%p, pfnGroupCompate:%p, plv:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, *(void **)&pfnGroupCompate, plv);
+    return FALSE;
+}
+
+static __inline void MSGDUMP_API
+MD_ListView_OnInsertGroupSorted(HWND hwnd, const LVINSERTGROUPSORTED *structInsert)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_INSERTGROUPSORTED(hwnd:%p, structInsert:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)structInsert);
+}
+
+static __inline void MSGDUMP_API
+MD_ListView_OnRemoveAllGroups(HWND hwnd)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_REMOVEALLGROUPS(hwnd:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd);
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnHasGroup(HWND hwnd, DWORD dwGroupId)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_HASGROUP(hwnd:%p, dwGroupId:0x%08lX)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, dwGroupId);
+    return FALSE;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnSetTileViewInfo(HWND hwnd, const LVTILEVIEWINFO *ptvi)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SETTILEVIEWINFO(hwnd:%p, ptvi:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (const void *)ptvi);
+    return FALSE;
+}
+
+static __inline void MSGDUMP_API
+MD_ListView_OnGetTileViewInfo(HWND hwnd, LVTILEVIEWINFO *ptvi)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETTILEVIEWINFO(hwnd:%p, ptvi:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)ptvi);
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnSetTileInfo(HWND hwnd, const LVTILEINFO *pti)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SETTILEINFO(hwnd:%p, pti:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (const void *)pti);
+    return FALSE;
+}
+
+static __inline void MSGDUMP_API
+MD_ListView_OnGetTileInfo(HWND hwnd, LVTILEINFO *pti)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETTILEINFO(hwnd:%p, pti:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)pti);
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnSetInsertMark(HWND hwnd, const LVINSERTMARK *lvim)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SETINSERTMARK(hwnd:%p, lvim:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (const void *)lvim);
+    return FALSE;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnGetInsertMark(HWND hwnd, LVINSERTMARK *lvim)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETINSERTMARK(hwnd:%p, lvim:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)lvim);
+    return FALSE;
+}
+
+static __inline INT MSGDUMP_API
+MD_ListView_OnInsertMarkHitTest(HWND hwnd, LPPOINT point, LPLVINSERTMARK lvim)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_INSERTMARKHITTEST(hwnd:%p, point:%p, lvim:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)point, (void *)lvim);
+    return 0;
+}
+
+static __inline INT MSGDUMP_API
+MD_ListView_OnGetInsertMarkRect(HWND hwnd, LPRECT rc)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETINSERTMARKRECT(hwnd:%p, rc:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)rc);
+    return 0;
+}
+
+static __inline COLORREF MSGDUMP_API
+MD_ListView_OnSetInsertMarkColor(HWND hwnd, COLORREF color)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SETINSERTMARKCOLOR(hwnd:%p, color:0x%08lX)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, color);
+    return 0;
+}
+
+static __inline COLORREF MSGDUMP_API
+MD_ListView_OnGetInsertMarkColor(HWND hwnd)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETINSERTMARKCOLOR(hwnd:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd);
+    return 0;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnSetInfoTip(HWND hwnd, const LVSETINFOTIP *plvInfoTip)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SETINFOTIP(hwnd:%p, plvInfoTip:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (const void *)plvInfoTip);
+    return FALSE;
+}
+
+static __inline UINT MSGDUMP_API
+MD_ListView_OnGetSelectedColumn(HWND hwnd)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETSELECTEDCOLUMN(hwnd:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd);
+    return 0;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnIsGroupViewEnabled(HWND hwnd)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_ISGROUPVIEWENABLED(hwnd:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd);
+    return FALSE;
+}
+
+static __inline COLORREF MSGDUMP_API
+MD_ListView_OnGetOutlineColor(HWND hwnd)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETOUTLINECOLOR(hwnd:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd);
+    return 0;
+}
+
+static __inline COLORREF MSGDUMP_API
+MD_ListView_OnSetOutlineColor(HWND hwnd, COLORREF color)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SETOUTLINECOLOR(hwnd:%p, color:0x%08lX)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, color);
+    return 0;
+}
+
+static __inline void MSGDUMP_API
+MD_ListView_OnCancelEditLabel(HWND hwnd)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_CANCELEDITLABEL(hwnd:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd);
+}
+
+static __inline UINT MSGDUMP_API
+MD_ListView_OnMapIndexToID(HWND hwnd, UINT index)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_MAPINDEXTOID(hwnd:%p, index:%u)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, index);
+    return 0;
+}
+
+static __inline UINT MSGDUMP_API
+MD_ListView_OnMapIDToIndex(HWND hwnd, UINT id)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_MAPIDTOINDEX(hwnd:%p, id:%u)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, id);
+    return 0;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnIsItemVisible(HWND hwnd, UINT index)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_ISITEMVISIBLE(hwnd:%p, index:%u)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, index);
+    return FALSE;
+}
+
+static __inline void MSGDUMP_API
+MD_ListView_OnGetEmptyText(HWND hwnd, PWSTR pszText, UINT cchText)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETEMPTYTEXT(hwnd:%p, pszText:%p, cchText:%u)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)pszText, cchText);
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnGetFooterRect(HWND hwnd, RECT *prc)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETFOOTERRECT(hwnd:%p, prc:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)prc);
+    return FALSE;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnGetFooterInfo(HWND hwnd, LVFOOTERINFO *plvfi)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETFOOTERINFO(hwnd:%p, plvfi:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)plvfi);
+    return FALSE;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnGetFooterItemRect(HWND hwnd, INT iItem, RECT *prc)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETFOOTERITEMRECT(hwnd:%p, iItem:%d, prc:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, iItem, (void *)prc);
+    return FALSE;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnGetFooterItem(HWND hwnd, INT iItem, LVFOOTERITEM *pfi)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETFOOTERITEM(hwnd:%p, iItem:%d, pfi:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, iItem, (void *)pfi);
+    return FALSE;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnGetItemIndexRect(HWND hwnd, const LVITEMINDEX *plvii, RECT *prc)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETITEMINDEXRECT(hwnd:%p, plvii:%p, prc:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (void *)plvii, (void *)prc);
+    return FALSE;
+}
+
+static __inline HRESULT MSGDUMP_API
+MD_ListView_OnSetItemIndexState(HWND hwnd, const LVITEMINDEX *plvii, const LV_ITEM *lvi)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_SETITEMINDEXSTATE(hwnd:%p, plvii:%p, lvi:%p)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (const void *)plvii, (const void *)lvi);
+    return 0;
+}
+
+static __inline BOOL MSGDUMP_API
+MD_ListView_OnGetNextItemIndex(HWND hwnd, LVITEMINDEX *plvii, UINT flags)
+{
+    MSGDUMP_TPRINTF(TEXT("%sLVM_GETNEXTITEMINDEX(hwnd:%p, plvii:%p, flags:%u)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, (const void *)plvii, flags);
+    return 0;
+}
+
 static __inline LRESULT MSGDUMP_API
 MD_msgdump(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-    TCHAR szClass[32];
+    TCHAR szClass[24], sz[2];
     szClass[0] = 0;
     GetClassName(hwnd, szClass, ARRAYSIZE(szClass));
-    if (lstrcmpi(szClass, TEXT("EDIT")) == 0)
+    sz[0] = szClass[0];
+    sz[1] = 0;
+    CharUpper(sz);
+    if (sz[0] == TEXT('E') && lstrcmpi(szClass, TEXT("EDIT")) == 0)
     {
         switch (uMsg)
         {
@@ -2680,7 +3784,7 @@ MD_msgdump(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             HANDLE_MSG(hwnd, EM_GETIMESTATUS, MD_Edit_OnGetIMEStatus);
         }
     }
-    else if (lstrcmpi(szClass, TEXT("STATIC")) == 0)
+    else if (sz[0] == TEXT('S') && lstrcmpi(szClass, TEXT("STATIC")) == 0)
     {
         switch (uMsg)
         {
@@ -2690,7 +3794,7 @@ MD_msgdump(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             HANDLE_MSG(hwnd, STM_GETIMAGE, MD_Static_OnGetImage);
         }
     }
-    else if (lstrcmpi(szClass, TEXT("LISTBOX")) == 0)
+    else if (sz[0] == TEXT('L') && lstrcmpi(szClass, TEXT("LISTBOX")) == 0)
     {
         switch (uMsg)
         {
@@ -2736,7 +3840,7 @@ MD_msgdump(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             HANDLE_MSG(hwnd, LB_ITEMFROMPOINT, MD_ListBox_OnItemFromPoint);
         }
     }
-    else if (lstrcmpi(szClass, TEXT("COMBOBOX")) == 0)
+    else if (sz[0] == TEXT('C') && lstrcmpi(szClass, TEXT("COMBOBOX")) == 0)
     {
         switch (uMsg)
         {
@@ -2776,7 +3880,7 @@ MD_msgdump(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             HANDLE_MSG(hwnd, CB_INITSTORAGE, MD_ComboBox_OnInitStorage);
         }
     }
-    else if (lstrcmpi(szClass, TEXT("SCROLLBAR")) == 0)
+    else if (sz[0] == TEXT('S') && lstrcmpi(szClass, TEXT("SCROLLBAR")) == 0)
     {
         switch (uMsg)
         {
@@ -2789,6 +3893,151 @@ MD_msgdump(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             HANDLE_MSG(hwnd, SBM_SETSCROLLINFO, MD_ScrollBar_OnSetScrollInfo);
             HANDLE_MSG(hwnd, SBM_GETSCROLLINFO, MD_ScrollBar_OnGetScrollInfo);
             HANDLE_MSG(hwnd, SBM_GETSCROLLBARINFO, MD_ScrollBar_OnGetScrollBarInfo);
+        }
+    }
+    else if (sz[0] == TEXT('S') && lstrcmpi(szClass, WC_LISTVIEW) == 0)
+    {
+        switch (uMsg)
+        {
+            HANDLE_MSG(hwnd, LVM_GETBKCOLOR, MD_ListView_OnGetBkColor);
+            HANDLE_MSG(hwnd, LVM_SETBKCOLOR, MD_ListView_OnSetBkColor);
+            HANDLE_MSG(hwnd, LVM_GETIMAGELIST, MD_ListView_OnGetImageList);
+            HANDLE_MSG(hwnd, LVM_SETIMAGELIST, MD_ListView_OnSetImageList);
+            HANDLE_MSG(hwnd, LVM_GETITEMCOUNT, MD_ListView_OnGetItemCount);
+            HANDLE_MSG(hwnd, LVM_GETITEMA, MD_ListView_OnGetItemA);
+            HANDLE_MSG(hwnd, LVM_SETITEMA, MD_ListView_OnSetItemA);
+            HANDLE_MSG(hwnd, LVM_INSERTITEMA, MD_ListView_OnInsertItemA);
+            HANDLE_MSG(hwnd, LVM_DELETEITEM, MD_ListView_OnDeleteItem);
+            HANDLE_MSG(hwnd, LVM_DELETEALLITEMS, MD_ListView_OnDeleteAllItems);
+            HANDLE_MSG(hwnd, LVM_GETCALLBACKMASK, MD_ListView_OnGetCallbackMask);
+            HANDLE_MSG(hwnd, LVM_SETCALLBACKMASK, MD_ListView_OnSetCallbackMask);
+            HANDLE_MSG(hwnd, LVM_GETNEXTITEM, MD_ListView_OnGetNextItem);
+            HANDLE_MSG(hwnd, LVM_FINDITEMA, MD_ListView_OnFindItemA);
+            HANDLE_MSG(hwnd, LVM_GETITEMRECT, MD_ListView_OnGetItemRect);
+            HANDLE_MSG(hwnd, LVM_SETITEMPOSITION, MD_ListView_OnSetItemPosition);
+            HANDLE_MSG(hwnd, LVM_GETITEMPOSITION, MD_ListView_OnGetItemPosition);
+            HANDLE_MSG(hwnd, LVM_GETSTRINGWIDTHA, MD_ListView_OnGetStringWidthA);
+            HANDLE_MSG(hwnd, LVM_HITTEST, MD_ListView_OnHitTest);
+            HANDLE_MSG(hwnd, LVM_ENSUREVISIBLE, MD_ListView_OnEnsureVisible);
+            HANDLE_MSG(hwnd, LVM_SCROLL, MD_ListView_OnScroll);
+            HANDLE_MSG(hwnd, LVM_REDRAWITEMS, MD_ListView_OnRedrawItems);
+            HANDLE_MSG(hwnd, LVM_ARRANGE, MD_ListView_OnArrange);
+            HANDLE_MSG(hwnd, LVM_EDITLABELA, MD_ListView_OnEditLabelA);
+            HANDLE_MSG(hwnd, LVM_GETEDITCONTROL, MD_ListView_OnGetEditControl);
+            HANDLE_MSG(hwnd, LVM_GETCOLUMNA, MD_ListView_OnGetColumnA);
+            HANDLE_MSG(hwnd, LVM_SETCOLUMNA, MD_ListView_OnSetColumnA);
+            HANDLE_MSG(hwnd, LVM_INSERTCOLUMNA, MD_ListView_OnInsertColumnA);
+            HANDLE_MSG(hwnd, LVM_DELETECOLUMN, MD_ListView_OnDeleteColumn);
+            HANDLE_MSG(hwnd, LVM_GETCOLUMNWIDTH, MD_ListView_OnGetColumnWidth);
+            HANDLE_MSG(hwnd, LVM_SETCOLUMNWIDTH, MD_ListView_OnSetColumnWidth);
+            HANDLE_MSG(hwnd, LVM_GETHEADER, MD_ListView_OnGetHeader);
+            HANDLE_MSG(hwnd, LVM_CREATEDRAGIMAGE, MD_ListView_OnCreateDragImage);
+            HANDLE_MSG(hwnd, LVM_GETVIEWRECT, MD_ListView_OnGetViewRect);
+            HANDLE_MSG(hwnd, LVM_GETTEXTCOLOR, MD_ListView_OnGetTextColor);
+            HANDLE_MSG(hwnd, LVM_SETTEXTCOLOR, MD_ListView_OnSetTextColor);
+            HANDLE_MSG(hwnd, LVM_GETTEXTBKCOLOR, MD_ListView_OnGetTextBkColor);
+            HANDLE_MSG(hwnd, LVM_SETTEXTBKCOLOR, MD_ListView_OnSetTextBkColor);
+            HANDLE_MSG(hwnd, LVM_GETTOPINDEX, MD_ListView_OnGetTopIndex);
+            HANDLE_MSG(hwnd, LVM_GETCOUNTPERPAGE, MD_ListView_OnGetCountPerPage);
+            HANDLE_MSG(hwnd, LVM_GETORIGIN, MD_ListView_OnGetOrigin);
+            HANDLE_MSG(hwnd, LVM_UPDATE, MD_ListView_OnUpdate);
+            HANDLE_MSG(hwnd, LVM_SETITEMSTATE, MD_ListView_OnSetItemState);
+            HANDLE_MSG(hwnd, LVM_GETITEMSTATE, MD_ListView_OnGetItemState);
+            HANDLE_MSG(hwnd, LVM_GETITEMTEXTA, MD_ListView_OnGetItemTextA);
+            HANDLE_MSG(hwnd, LVM_SETITEMTEXTA, MD_ListView_OnSetItemTextA);
+            HANDLE_MSG(hwnd, LVM_SETITEMCOUNT, MD_ListView_OnSetItemCount);
+            HANDLE_MSG(hwnd, LVM_SORTITEMS, MD_ListView_OnSortItems);
+            HANDLE_MSG(hwnd, LVM_SETITEMPOSITION32, MD_ListView_OnSetItemPosition32);
+            HANDLE_MSG(hwnd, LVM_GETSELECTEDCOUNT, MD_ListView_OnGetSelectedCount);
+            HANDLE_MSG(hwnd, LVM_GETITEMSPACING, MD_ListView_OnGetItemSpacing);
+            HANDLE_MSG(hwnd, LVM_GETISEARCHSTRINGA, MD_ListView_OnGetISearchStringA);
+            HANDLE_MSG(hwnd, LVM_SETICONSPACING, MD_ListView_OnSetIconSpacing);
+            HANDLE_MSG(hwnd, LVM_SETEXTENDEDLISTVIEWSTYLE, MD_ListView_OnSetExtendedListViewStyle);
+            HANDLE_MSG(hwnd, LVM_GETEXTENDEDLISTVIEWSTYLE, MD_ListView_OnGetExtendedListViewStyle);
+            HANDLE_MSG(hwnd, LVM_GETSUBITEMRECT, MD_ListView_OnGetSubItemRect);
+            HANDLE_MSG(hwnd, LVM_SUBITEMHITTEST, MD_ListView_OnSubItemHitTest);
+            HANDLE_MSG(hwnd, LVM_SETCOLUMNORDERARRAY, MD_ListView_OnSetColumnOrderArray);
+            HANDLE_MSG(hwnd, LVM_GETCOLUMNORDERARRAY, MD_ListView_OnGetColumnOrderArray);
+            HANDLE_MSG(hwnd, LVM_SETHOTITEM, MD_ListView_OnSetHotItem);
+            HANDLE_MSG(hwnd, LVM_GETHOTITEM, MD_ListView_OnGetHotItem);
+            HANDLE_MSG(hwnd, LVM_SETHOTCURSOR, MD_ListView_OnSetHotCursor);
+            HANDLE_MSG(hwnd, LVM_GETHOTCURSOR, MD_ListView_OnGetHotCursor);
+            HANDLE_MSG(hwnd, LVM_APPROXIMATEVIEWRECT, MD_ListView_OnApproximateViewRect);
+            HANDLE_MSG(hwnd, LVM_SETWORKAREAS, MD_ListView_OnSetWorkAreas);
+            HANDLE_MSG(hwnd, LVM_GETSELECTIONMARK, MD_ListView_OnGetSelectionMark);
+            HANDLE_MSG(hwnd, LVM_SETSELECTIONMARK, MD_ListView_OnSetSelectionMark);
+            HANDLE_MSG(hwnd, LVM_SETBKIMAGEA, MD_ListView_OnSetBkImageA);
+            HANDLE_MSG(hwnd, LVM_GETBKIMAGEA, MD_ListView_OnGetBkImageA);
+            HANDLE_MSG(hwnd, LVM_GETWORKAREAS, MD_ListView_OnGetWorkAreas);
+            HANDLE_MSG(hwnd, LVM_SETHOVERTIME, MD_ListView_OnSetHoverTime);
+            HANDLE_MSG(hwnd, LVM_GETHOVERTIME, MD_ListView_OnGetHoverTime);
+            HANDLE_MSG(hwnd, LVM_GETNUMBEROFWORKAREAS, MD_ListView_OnGetNumberOfWorkAreas);
+            HANDLE_MSG(hwnd, LVM_SETTOOLTIPS, MD_ListView_OnSetToolTips);
+            HANDLE_MSG(hwnd, LVM_GETITEMW, MD_ListView_OnGetItemW);
+            HANDLE_MSG(hwnd, LVM_SETITEMW, MD_ListView_OnSetItemW);
+            HANDLE_MSG(hwnd, LVM_INSERTITEMW, MD_ListView_OnInsertItemW);
+            HANDLE_MSG(hwnd, LVM_GETTOOLTIPS, MD_ListView_OnGetToolTips);
+            HANDLE_MSG(hwnd, LVM_SORTITEMSEX, MD_ListView_OnSortItemsEx);
+            HANDLE_MSG(hwnd, LVM_FINDITEMW, MD_ListView_OnFindItemW);
+            HANDLE_MSG(hwnd, LVM_GETSTRINGWIDTHW, MD_ListView_OnGetStringWidthW);
+            HANDLE_MSG(hwnd, LVM_GETGROUPSTATE, MD_ListView_OnGetGroupState);
+            HANDLE_MSG(hwnd, LVM_GETFOCUSEDGROUP, MD_ListView_OnGetFocusedGroup);
+            HANDLE_MSG(hwnd, LVM_GETCOLUMNW, MD_ListView_OnGetColumnW);
+            HANDLE_MSG(hwnd, LVM_SETCOLUMNW, MD_ListView_OnSetColumnW);
+            HANDLE_MSG(hwnd, LVM_INSERTCOLUMNW, MD_ListView_OnInsertColumnW);
+            HANDLE_MSG(hwnd, LVM_GETGROUPRECT, MD_ListView_OnGetGroupRect);
+            HANDLE_MSG(hwnd, LVM_GETITEMTEXTW, MD_ListView_OnGetItemTextW);
+            HANDLE_MSG(hwnd, LVM_SETITEMTEXTW, MD_ListView_OnSetItemTextW);
+            HANDLE_MSG(hwnd, LVM_GETISEARCHSTRINGW, MD_ListView_OnGetISearchStringW);
+            HANDLE_MSG(hwnd, LVM_EDITLABELW, MD_ListView_OnEditLabelW);
+            HANDLE_MSG(hwnd, LVM_SETBKIMAGEW, MD_ListView_OnSetBkImageW);
+            HANDLE_MSG(hwnd, LVM_GETBKIMAGEW, MD_ListView_OnGetBkImageW);
+            HANDLE_MSG(hwnd, LVM_SETSELECTEDCOLUMN, MD_ListView_OnSetSelectedColumn);
+            HANDLE_MSG(hwnd, LVM_SETTILEWIDTH, MD_ListView_OnSetTileWidth);
+            HANDLE_MSG(hwnd, LVM_SETVIEW, MD_ListView_OnSetView);
+            HANDLE_MSG(hwnd, LVM_GETVIEW, MD_ListView_OnGetView);
+            HANDLE_MSG(hwnd, LVM_INSERTGROUP, MD_ListView_OnInsertGroup);
+            HANDLE_MSG(hwnd, LVM_SETGROUPINFO, MD_ListView_OnSetGroupInfo);
+            HANDLE_MSG(hwnd, LVM_GETGROUPINFO, MD_ListView_OnGetGroupInfo);
+            HANDLE_MSG(hwnd, LVM_REMOVEGROUP, MD_ListView_OnRemoveGroup);
+            HANDLE_MSG(hwnd, LVM_MOVEGROUP, MD_ListView_OnMoveGroup);
+            HANDLE_MSG(hwnd, LVM_GETGROUPCOUNT, MD_ListView_OnGetGroupCount);
+            HANDLE_MSG(hwnd, LVM_GETGROUPINFOBYINDEX, MD_ListView_OnGetGroupInfoByIndex);
+            HANDLE_MSG(hwnd, LVM_MOVEITEMTOGROUP, MD_ListView_OnMoveItemToGroup);
+            HANDLE_MSG(hwnd, LVM_SETGROUPMETRICS, MD_ListView_OnSetGroupMetrics);
+            HANDLE_MSG(hwnd, LVM_GETGROUPMETRICS, MD_ListView_OnGetGroupMetrics);
+            HANDLE_MSG(hwnd, LVM_ENABLEGROUPVIEW, MD_ListView_OnEnableGroupView);
+            HANDLE_MSG(hwnd, LVM_SORTGROUPS, MD_ListView_OnSortGroups);
+            HANDLE_MSG(hwnd, LVM_INSERTGROUPSORTED, MD_ListView_OnInsertGroupSorted);
+            HANDLE_MSG(hwnd, LVM_REMOVEALLGROUPS, MD_ListView_OnRemoveAllGroups);
+            HANDLE_MSG(hwnd, LVM_HASGROUP, MD_ListView_OnHasGroup);
+            HANDLE_MSG(hwnd, LVM_SETTILEVIEWINFO, MD_ListView_OnSetTileViewInfo);
+            HANDLE_MSG(hwnd, LVM_GETTILEVIEWINFO, MD_ListView_OnGetTileViewInfo);
+            HANDLE_MSG(hwnd, LVM_SETTILEINFO, MD_ListView_OnSetTileInfo);
+            HANDLE_MSG(hwnd, LVM_GETTILEINFO, MD_ListView_OnGetTileInfo);
+            HANDLE_MSG(hwnd, LVM_SETINSERTMARK, MD_ListView_OnSetInsertMark);
+            HANDLE_MSG(hwnd, LVM_GETINSERTMARK, MD_ListView_OnGetInsertMark);
+            HANDLE_MSG(hwnd, LVM_INSERTMARKHITTEST, MD_ListView_OnInsertMarkHitTest);
+            HANDLE_MSG(hwnd, LVM_GETINSERTMARKRECT, MD_ListView_OnGetInsertMarkRect);
+            HANDLE_MSG(hwnd, LVM_SETINSERTMARKCOLOR, MD_ListView_OnSetInsertMarkColor);
+            HANDLE_MSG(hwnd, LVM_GETINSERTMARKCOLOR, MD_ListView_OnGetInsertMarkColor);
+            HANDLE_MSG(hwnd, LVM_SETINFOTIP, MD_ListView_OnSetInfoTip);
+            HANDLE_MSG(hwnd, LVM_GETSELECTEDCOLUMN, MD_ListView_OnGetSelectedColumn);
+            HANDLE_MSG(hwnd, LVM_ISGROUPVIEWENABLED, MD_ListView_OnIsGroupViewEnabled);
+            HANDLE_MSG(hwnd, LVM_GETOUTLINECOLOR, MD_ListView_OnGetOutlineColor);
+            HANDLE_MSG(hwnd, LVM_SETOUTLINECOLOR, MD_ListView_OnSetOutlineColor);
+            HANDLE_MSG(hwnd, LVM_CANCELEDITLABEL, MD_ListView_OnCancelEditLabel);
+            HANDLE_MSG(hwnd, LVM_MAPINDEXTOID, MD_ListView_OnMapIndexToID);
+            HANDLE_MSG(hwnd, LVM_MAPIDTOINDEX, MD_ListView_OnMapIDToIndex);
+            HANDLE_MSG(hwnd, LVM_ISITEMVISIBLE, MD_ListView_OnIsItemVisible);
+            HANDLE_MSG(hwnd, LVM_GETEMPTYTEXT, MD_ListView_OnGetEmptyText);
+            HANDLE_MSG(hwnd, LVM_GETFOOTERRECT, MD_ListView_OnGetFooterRect);
+            HANDLE_MSG(hwnd, LVM_GETFOOTERINFO, MD_ListView_OnGetFooterInfo);
+            HANDLE_MSG(hwnd, LVM_GETFOOTERITEMRECT, MD_ListView_OnGetFooterItemRect);
+            HANDLE_MSG(hwnd, LVM_GETFOOTERITEM, MD_ListView_OnGetFooterItem);
+            HANDLE_MSG(hwnd, LVM_GETITEMINDEXRECT, MD_ListView_OnGetItemIndexRect);
+            HANDLE_MSG(hwnd, LVM_SETITEMINDEXSTATE, MD_ListView_OnSetItemIndexState);
+            HANDLE_MSG(hwnd, LVM_GETNEXTITEMINDEX, MD_ListView_OnGetNextItemIndex);
         }
     }
     switch (uMsg)
@@ -3066,10 +4315,13 @@ MD_msgresult(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam, LRESULT lResult
 {
 #define DEFINE_RESULT(WM_) case WM_: MSGDUMP_TPRINTF(TEXT("%s") TEXT(#WM_) TEXT(": hwnd:%p, lResult:%p\n"), \
                                                      MSGDUMP_PREFIX, (void *)hwnd, lResult); break
-    TCHAR szClass[32];
+    TCHAR szClass[24], sz[2];
     szClass[0] = 0;
     GetClassName(hwnd, szClass, ARRAYSIZE(szClass));
-    if (lstrcmpi(szClass, TEXT("EDIT")) == 0)
+    sz[0] = szClass[0];
+    sz[1] = 0;
+    CharUpper(sz);
+    if (sz[0] == TEXT('E') && lstrcmpi(szClass, TEXT("EDIT")) == 0)
     {
         switch (uMsg)
         {
@@ -3113,7 +4365,7 @@ MD_msgresult(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam, LRESULT lResult
             DEFINE_RESULT(EM_GETIMESTATUS);
         }
     }
-    else if (lstrcmpi(szClass, TEXT("STATIC")) == 0)
+    else if (sz[0] == TEXT('S') && lstrcmpi(szClass, TEXT("STATIC")) == 0)
     {
         switch (uMsg)
         {
@@ -3123,7 +4375,7 @@ MD_msgresult(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam, LRESULT lResult
             DEFINE_RESULT(STM_GETIMAGE);
         }
     }
-    else if (lstrcmpi(szClass, TEXT("LISTBOX")) == 0)
+    else if (sz[0] == TEXT('L') && lstrcmpi(szClass, TEXT("LISTBOX")) == 0)
     {
         switch (uMsg)
         {
@@ -3169,7 +4421,7 @@ MD_msgresult(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam, LRESULT lResult
             DEFINE_RESULT(LB_ITEMFROMPOINT);
         }
     }
-    else if (lstrcmpi(szClass, TEXT("COMBOBOX")) == 0)
+    else if (sz[0] == TEXT('C') && lstrcmpi(szClass, TEXT("COMBOBOX")) == 0)
     {
         switch (uMsg)
         {
@@ -3209,7 +4461,7 @@ MD_msgresult(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam, LRESULT lResult
             DEFINE_RESULT(CB_INITSTORAGE);
         }
     }
-    else if (lstrcmpi(szClass, TEXT("SCROLLBAR")) == 0)
+    else if (sz[0] == TEXT('S') && lstrcmpi(szClass, TEXT("SCROLLBAR")) == 0)
     {
         switch (uMsg)
         {
@@ -3222,6 +4474,151 @@ MD_msgresult(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam, LRESULT lResult
             DEFINE_RESULT(SBM_SETSCROLLINFO);
             DEFINE_RESULT(SBM_GETSCROLLINFO);
             DEFINE_RESULT(SBM_GETSCROLLBARINFO);
+        }
+    }
+    else if (sz[0] == TEXT('S') && lstrcmpi(szClass, WC_LISTVIEW) == 0)
+    {
+        switch (uMsg)
+        {
+            DEFINE_RESULT(LVM_GETBKCOLOR);
+            DEFINE_RESULT(LVM_SETBKCOLOR);
+            DEFINE_RESULT(LVM_GETIMAGELIST);
+            DEFINE_RESULT(LVM_SETIMAGELIST);
+            DEFINE_RESULT(LVM_GETITEMCOUNT);
+            DEFINE_RESULT(LVM_GETITEMA);
+            DEFINE_RESULT(LVM_SETITEMA);
+            DEFINE_RESULT(LVM_INSERTITEMA);
+            DEFINE_RESULT(LVM_DELETEITEM);
+            DEFINE_RESULT(LVM_DELETEALLITEMS);
+            DEFINE_RESULT(LVM_GETCALLBACKMASK);
+            DEFINE_RESULT(LVM_SETCALLBACKMASK);
+            DEFINE_RESULT(LVM_GETNEXTITEM);
+            DEFINE_RESULT(LVM_FINDITEMA);
+            DEFINE_RESULT(LVM_GETITEMRECT);
+            DEFINE_RESULT(LVM_SETITEMPOSITION);
+            DEFINE_RESULT(LVM_GETITEMPOSITION);
+            DEFINE_RESULT(LVM_GETSTRINGWIDTHA);
+            DEFINE_RESULT(LVM_HITTEST);
+            DEFINE_RESULT(LVM_ENSUREVISIBLE);
+            DEFINE_RESULT(LVM_SCROLL);
+            DEFINE_RESULT(LVM_REDRAWITEMS);
+            DEFINE_RESULT(LVM_ARRANGE);
+            DEFINE_RESULT(LVM_EDITLABELA);
+            DEFINE_RESULT(LVM_GETEDITCONTROL);
+            DEFINE_RESULT(LVM_GETCOLUMNA);
+            DEFINE_RESULT(LVM_SETCOLUMNA);
+            DEFINE_RESULT(LVM_INSERTCOLUMNA);
+            DEFINE_RESULT(LVM_DELETECOLUMN);
+            DEFINE_RESULT(LVM_GETCOLUMNWIDTH);
+            DEFINE_RESULT(LVM_SETCOLUMNWIDTH);
+            DEFINE_RESULT(LVM_GETHEADER);
+            DEFINE_RESULT(LVM_CREATEDRAGIMAGE);
+            DEFINE_RESULT(LVM_GETVIEWRECT);
+            DEFINE_RESULT(LVM_GETTEXTCOLOR);
+            DEFINE_RESULT(LVM_SETTEXTCOLOR);
+            DEFINE_RESULT(LVM_GETTEXTBKCOLOR);
+            DEFINE_RESULT(LVM_SETTEXTBKCOLOR);
+            DEFINE_RESULT(LVM_GETTOPINDEX);
+            DEFINE_RESULT(LVM_GETCOUNTPERPAGE);
+            DEFINE_RESULT(LVM_GETORIGIN);
+            DEFINE_RESULT(LVM_UPDATE);
+            DEFINE_RESULT(LVM_SETITEMSTATE);
+            DEFINE_RESULT(LVM_GETITEMSTATE);
+            DEFINE_RESULT(LVM_GETITEMTEXTA);
+            DEFINE_RESULT(LVM_SETITEMTEXTA);
+            DEFINE_RESULT(LVM_SETITEMCOUNT);
+            DEFINE_RESULT(LVM_SORTITEMS);
+            DEFINE_RESULT(LVM_SETITEMPOSITION32);
+            DEFINE_RESULT(LVM_GETSELECTEDCOUNT);
+            DEFINE_RESULT(LVM_GETITEMSPACING);
+            DEFINE_RESULT(LVM_GETISEARCHSTRINGA);
+            DEFINE_RESULT(LVM_SETICONSPACING);
+            DEFINE_RESULT(LVM_SETEXTENDEDLISTVIEWSTYLE);
+            DEFINE_RESULT(LVM_GETEXTENDEDLISTVIEWSTYLE);
+            DEFINE_RESULT(LVM_GETSUBITEMRECT);
+            DEFINE_RESULT(LVM_SUBITEMHITTEST);
+            DEFINE_RESULT(LVM_SETCOLUMNORDERARRAY);
+            DEFINE_RESULT(LVM_GETCOLUMNORDERARRAY);
+            DEFINE_RESULT(LVM_SETHOTITEM);
+            DEFINE_RESULT(LVM_GETHOTITEM);
+            DEFINE_RESULT(LVM_SETHOTCURSOR);
+            DEFINE_RESULT(LVM_GETHOTCURSOR);
+            DEFINE_RESULT(LVM_APPROXIMATEVIEWRECT);
+            DEFINE_RESULT(LVM_SETWORKAREAS);
+            DEFINE_RESULT(LVM_GETSELECTIONMARK);
+            DEFINE_RESULT(LVM_SETSELECTIONMARK);
+            DEFINE_RESULT(LVM_SETBKIMAGEA);
+            DEFINE_RESULT(LVM_GETBKIMAGEA);
+            DEFINE_RESULT(LVM_GETWORKAREAS);
+            DEFINE_RESULT(LVM_SETHOVERTIME);
+            DEFINE_RESULT(LVM_GETHOVERTIME);
+            DEFINE_RESULT(LVM_GETNUMBEROFWORKAREAS);
+            DEFINE_RESULT(LVM_SETTOOLTIPS);
+            DEFINE_RESULT(LVM_GETITEMW);
+            DEFINE_RESULT(LVM_SETITEMW);
+            DEFINE_RESULT(LVM_INSERTITEMW);
+            DEFINE_RESULT(LVM_GETTOOLTIPS);
+            DEFINE_RESULT(LVM_SORTITEMSEX);
+            DEFINE_RESULT(LVM_FINDITEMW);
+            DEFINE_RESULT(LVM_GETSTRINGWIDTHW);
+            DEFINE_RESULT(LVM_GETGROUPSTATE);
+            DEFINE_RESULT(LVM_GETFOCUSEDGROUP);
+            DEFINE_RESULT(LVM_GETCOLUMNW);
+            DEFINE_RESULT(LVM_SETCOLUMNW);
+            DEFINE_RESULT(LVM_INSERTCOLUMNW);
+            DEFINE_RESULT(LVM_GETGROUPRECT);
+            DEFINE_RESULT(LVM_GETITEMTEXTW);
+            DEFINE_RESULT(LVM_SETITEMTEXTW);
+            DEFINE_RESULT(LVM_GETISEARCHSTRINGW);
+            DEFINE_RESULT(LVM_EDITLABELW);
+            DEFINE_RESULT(LVM_SETBKIMAGEW);
+            DEFINE_RESULT(LVM_GETBKIMAGEW);
+            DEFINE_RESULT(LVM_SETSELECTEDCOLUMN);
+            DEFINE_RESULT(LVM_SETTILEWIDTH);
+            DEFINE_RESULT(LVM_SETVIEW);
+            DEFINE_RESULT(LVM_GETVIEW);
+            DEFINE_RESULT(LVM_INSERTGROUP);
+            DEFINE_RESULT(LVM_SETGROUPINFO);
+            DEFINE_RESULT(LVM_GETGROUPINFO);
+            DEFINE_RESULT(LVM_REMOVEGROUP);
+            DEFINE_RESULT(LVM_MOVEGROUP);
+            DEFINE_RESULT(LVM_GETGROUPCOUNT);
+            DEFINE_RESULT(LVM_GETGROUPINFOBYINDEX);
+            DEFINE_RESULT(LVM_MOVEITEMTOGROUP);
+            DEFINE_RESULT(LVM_SETGROUPMETRICS);
+            DEFINE_RESULT(LVM_GETGROUPMETRICS);
+            DEFINE_RESULT(LVM_ENABLEGROUPVIEW);
+            DEFINE_RESULT(LVM_SORTGROUPS);
+            DEFINE_RESULT(LVM_INSERTGROUPSORTED);
+            DEFINE_RESULT(LVM_REMOVEALLGROUPS);
+            DEFINE_RESULT(LVM_HASGROUP);
+            DEFINE_RESULT(LVM_SETTILEVIEWINFO);
+            DEFINE_RESULT(LVM_GETTILEVIEWINFO);
+            DEFINE_RESULT(LVM_SETTILEINFO);
+            DEFINE_RESULT(LVM_GETTILEINFO);
+            DEFINE_RESULT(LVM_SETINSERTMARK);
+            DEFINE_RESULT(LVM_GETINSERTMARK);
+            DEFINE_RESULT(LVM_INSERTMARKHITTEST);
+            DEFINE_RESULT(LVM_GETINSERTMARKRECT);
+            DEFINE_RESULT(LVM_SETINSERTMARKCOLOR);
+            DEFINE_RESULT(LVM_GETINSERTMARKCOLOR);
+            DEFINE_RESULT(LVM_SETINFOTIP);
+            DEFINE_RESULT(LVM_GETSELECTEDCOLUMN);
+            DEFINE_RESULT(LVM_ISGROUPVIEWENABLED);
+            DEFINE_RESULT(LVM_GETOUTLINECOLOR);
+            DEFINE_RESULT(LVM_SETOUTLINECOLOR);
+            DEFINE_RESULT(LVM_CANCELEDITLABEL);
+            DEFINE_RESULT(LVM_MAPINDEXTOID);
+            DEFINE_RESULT(LVM_MAPIDTOINDEX);
+            DEFINE_RESULT(LVM_ISITEMVISIBLE);
+            DEFINE_RESULT(LVM_GETEMPTYTEXT);
+            DEFINE_RESULT(LVM_GETFOOTERRECT);
+            DEFINE_RESULT(LVM_GETFOOTERINFO);
+            DEFINE_RESULT(LVM_GETFOOTERITEMRECT);
+            DEFINE_RESULT(LVM_GETFOOTERITEM);
+            DEFINE_RESULT(LVM_GETITEMINDEXRECT);
+            DEFINE_RESULT(LVM_SETITEMINDEXSTATE);
+            DEFINE_RESULT(LVM_GETNEXTITEMINDEX);
         }
     }
     switch (uMsg)

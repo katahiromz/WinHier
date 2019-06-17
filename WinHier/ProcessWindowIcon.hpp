@@ -151,7 +151,6 @@ inline BOOL IsProcessWow64Dx(HANDLE hProcess)
     BOOL bIsWow64 = FALSE;
     if (pIsWow64Process)
     {
-        const DWORD dwAccess = PROCESS_QUERY_INFORMATION | PROCESS_VM_READ;
         (*pIsWow64Process)(hProcess, &bIsWow64);
     }
 

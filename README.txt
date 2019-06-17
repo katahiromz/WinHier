@@ -38,6 +38,7 @@ please right-click the treeview item and choose the appropriate menu item.
 - 2019.XX.YY ver.1.7
     - Support of registered window messages.
     - Able to copy a node as text.
+    - Supported ListView messages.
 
 ## Contact Us
 

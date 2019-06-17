@@ -116,6 +116,8 @@ public:
         case IDTYPE_RESOURCE:
         case IDTYPE_RCDATA:
             return true;
+        default:
+            break;
         }
         return false;
     }
