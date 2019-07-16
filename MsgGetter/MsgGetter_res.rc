@@ -59,8 +59,8 @@ FONT 8, "Arial"
 // RT_VERSION
 
 1 VERSIONINFO
-FILEVERSION     1, 7, 0, 0
-PRODUCTVERSION  1, 7, 0, 0
+FILEVERSION     1, 8, 0, 0
+PRODUCTVERSION  1, 8, 0, 0
 FILEOS          0x40004
 FILETYPE        0x1
 {
@@ -70,10 +70,10 @@ FILETYPE        0x1
         {
             VALUE "CompanyName", "Katayama Hirofumi MZ\0"
             VALUE "FileDescription", "Message Getter\0"
-            VALUE "FileVersion", "1.7\0"
+            VALUE "FileVersion", "1.8\0"
             VALUE "LegalCopyright", "Copyright (C) 2019 Katayama Hirofumi MZ.\0"
             VALUE "ProductName", "WinHier\0"
-            VALUE "ProductVersion", "1.7\0"
+            VALUE "ProductVersion", "1.8\0"
         }
     }
     BLOCK "VarFileInfo"

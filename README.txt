@@ -40,6 +40,7 @@ please right-click the treeview item and choose the appropriate menu item.
     - Able to copy a node as text.
     - Supported ListView messages.
     - Supported TreeView messages.
+- 2019.XX.YY ver.1.8
 
 ## Contact Us
 
