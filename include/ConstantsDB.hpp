@@ -117,9 +117,8 @@ public:
         case IDTYPE_RCDATA:
             return true;
         default:
-            break;
+            return false;
         }
-        return false;
     }
 
     ConstantsDB()
@@ -384,6 +383,8 @@ public:
                 mask = ParseBitField(category, mask_str);
             }
 
+            mstr_replace_all(name, L"|", L" | ");
+
             EntryType entry(name, value, mask);
             m_map[category].push_back(entry);
         }
@@ -445,7 +446,7 @@ public:
     StringType DumpBitField(CategoryType cat1, CategoryType cat2,
                             ValueType& value, ValueType default_value = 0) const
     {
-        StringType ret, str1, str2, str3;
+        StringType ret, str1, str2, str3, str4;
 
         ValueType def = default_value;
         default_value &= ~value;
@@ -481,11 +482,16 @@ public:
         if (default_value)
         {
             str3 = _dumpBitField(cat1, default_value, true);
+            if (!cat2.empty())
+                str4 = _dumpBitField(cat2, default_value, true);
             if (ret == L"0")
                 ret.clear();
             else if (!ret.empty() && !str3.empty())
                 ret += L" | ";
             ret += str3;
+            if (!ret.empty() && !str4.empty())
+                ret += L" | ";
+            ret += str4;
         }
 
         return ret;
