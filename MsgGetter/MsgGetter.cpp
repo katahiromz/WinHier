@@ -394,17 +394,23 @@ void OnCopy(HWND hwnd)
     tstring str;
 
     nCount = ListBox_GetSelCount(g_hLst1);
-    if (nCount <= 0)
-        return;
-
-    items.resize(nCount);
-    ListBox_GetSelItems(g_hLst1, nCount, &items[0]);
-
-    for (i = 0; i < nCount; ++i)
+    if (nCount > 0)
     {
-        ListBox_GetText(g_hLst1, items[i], szText);
-        str += szText;
-        str += TEXT("\r\n");
+        items.resize(nCount);
+        ListBox_GetSelItems(g_hLst1, nCount, &items[0]);
+
+        for (i = 0; i < nCount; ++i)
+        {
+            ListBox_GetText(g_hLst1, items[i], szText);
+            str += szText;
+            str += TEXT("\r\n");
+        }
+    }
+    else
+    {
+        INT i = ListBox_GetCurSel(g_hLst1);
+        ListBox_GetText(g_hLst1, i, szText);
+        str = szText;
     }
 
     if (OpenClipboard(hwnd))
