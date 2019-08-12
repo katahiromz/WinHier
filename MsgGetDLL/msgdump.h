@@ -4714,7 +4714,7 @@ MD_msgdump(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         }
     }
 
-    if ((sz[0] == TEXT('E') && lstrcmpi(szClass, TEXT("EDIT")) == 0) || 
+    if ((sz[0] == TEXT('E') && lstrcmpi(szClass, TEXT("EDIT")) == 0) ||
         (sz[0] == TEXT('R') && lstrcmpi(szClass, RICHEDIT_CLASS) == 0))
     {
         switch (uMsg)
