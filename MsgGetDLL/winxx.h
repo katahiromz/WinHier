@@ -1888,122 +1888,161 @@
 /* LRESULT RichEdit_OnCanPaste(HWND hwnd, UINT uFormat) */
 #define HANDLE_EM_CANPASTE(hwnd, wParam, lParam, fn) \
     (LRESULT)(fn)((hwnd), (UINT)(wParam))
+
 /* BOOL RichEdit_OnDisplayBand(HWND hwnd, LPRECT lprc) */
 #define HANDLE_EM_DISPLAYBAND(hwnd, wParam, lParam, fn) \
     (BOOL)(fn)((hwnd), (LPRECT)(lParam))
+
 /* void RichEdit_OnExGetSel(HWND hwnd, CHARRANGE *lpchr) */
 #define HANDLE_EM_EXGETSEL(hwnd, wParam, lParam, fn) \
     ((fn)((hwnd), (CHARRANGE *)(lParam)), 0L)
+
 /* void RichEdit_OnExLimitText(HWND hwnd, DWORD cchTextMax) */
 #define HANDLE_EM_EXLIMITTEXT(hwnd, wParam, lParam, fn) \
     ((fn)((hwnd), (DWORD)(lParam)), 0L)
+
 /* INT RichEdit_OnExLineFromChar(HWND hwnd, DWORD ichCharPos) */
 #define HANDLE_EM_EXLINEFROMCHAR(hwnd, wParam, lParam, fn) \
-    (INT)(LRESULT)(fn)((hwnd), (DWORD)(wParam))
+    (INT)(fn)((hwnd), (DWORD)(wParam))
+
 /* INT RichEdit_OnExSetSel(HWND hwnd, INT ichChar) */
 #define HANDLE_EM_EXSETSEL(hwnd, wParam, lParam, fn) \
-    (INT)(LRESULT)(fn)((hwnd), (INT)(INT_PTR)(lParam))
+    (INT)(fn)((hwnd), (INT)(INT_PTR)(lParam))
+
 /* INT RichEdit_OnFindText(HWND hwnd, UINT fuFlags, FINDTEXT *lpFindText) */
 #define HANDLE_EM_FINDTEXT(hwnd, wParam, lParam, fn) \
-    (INT)(LRESULT)(fn)((hwnd), (UINT)(wParam), (FINDTEXT *)(lParam))
+    (INT)(fn)((hwnd), (UINT)(wParam), (FINDTEXT *)(lParam))
+
 /* INT RichEdit_OnFormatRange(HWND hwnd, BOOL fRender, FORMATRANGE *lpFmt) */
 #define HANDLE_EM_FORMATRANGE(hwnd, wParam, lParam, fn) \
-    (INT)(LRESULT)(fn)((hwnd), (BOOL)(wParam), (FORMATRANGE *)(lParam))
+    (INT)(fn)((hwnd), (BOOL)(wParam), (FORMATRANGE *)(lParam))
+
 /* DWORD RichEdit_OnGetCharFormat(HWND hwnd, BOOL fSelection, CHARFORMAT *lpFmt) */
 #define HANDLE_EM_GETCHARFORMAT(hwnd, wParam, lParam, fn) \
-    (DWORD)(LRESULT)(fn)((hwnd), (BOOL)(wParam), (CHARFORMAT *)(lParam))
+    (DWORD)(fn)((hwnd), (BOOL)(wParam), (CHARFORMAT *)(lParam))
+
 /* DWORD RichEdit_OnGetEventMask(HWND hwnd) */
 #define HANDLE_EM_GETEVENTMASK(hwnd, wParam, lParam, fn) \
-    (DWORD)(LRESULT)(fn)((hwnd))
+    (DWORD)(fn)((hwnd))
+
 /* BOOL RichEdit_OnOleInterface(HWND hwnd, LPVOID *ppObject) */
 #define HANDLE_EM_GETOLEINTERFACE(hwnd, wParam, lParam, fn) \
-    (BOOL)(LRESULT)(fn)((hwnd), (LPVOID *)(lParam))
+    (BOOL)(fn)((hwnd), (LPVOID *)(lParam))
+
 /* DWORD RichEdit_OnGetParaFormat(HWND hwnd, PARAFORMAT *lpFmt) */
 #define HANDLE_EM_GETPARAFORMAT(hwnd, wParam, lParam, fn) \
-    (DWORD)(LRESULT)(fn)((hwnd), (PARAFORMAT *)(lParam))
+    (DWORD)(fn)((hwnd), (PARAFORMAT *)(lParam))
+
 /* INT RichEdit_OnGetSelText(HWND hwnd, LPTSTR lpBuf) */
 #define HANDLE_EM_GETSELTEXT(hwnd, wParam, lParam, fn) \
-    (INT)(LRESULT)(fn)((hwnd), (LPTSTR)(lParam))
+    (INT)(fn)((hwnd), (LPTSTR)(lParam))
+
 /* void RichEdit_OnHideSelection(HWND hwnd, BOOL fHide, BOOL fChangeStyle) */
 #define HANDLE_EM_HIDESELECTION(hwnd, wParam, lParam, fn) \
     ((fn)((hwnd), (BOOL)(wParam), (BOOL)(lParam)), 0L)
+
 /* void RichEdit_OnPasteSpecial(HWND hwnd, UINT uFormat, REPASTESPECIAL *lpRePasteSpecial) */
 #define HANDLE_EM_PASTESPECIAL(hwnd, wParam, lParam, fn) \
     ((fn)((hwnd), (UINT)(wParam), (REPASTESPECIAL *)(lParam)), 0L)
+
 /* void RichEdit_OnRequestResize(HWND hwnd) */
 #define HANDLE_EM_REQUESTRESIZE(hwnd, wParam, lParam, fn) \
     ((fn)((hwnd)), 0L)
+
 /* DWORD RichEdit_OnSelectionType(HWND hwnd) */
 #define HANDLE_EM_SELECTIONTYPE(hwnd, wParam, lParam, fn) \
-    (DWORD)(LRESULT)(fn)((hwnd))
+    (DWORD)(fn)((hwnd))
+
 /* COLORREF RichEdit_OnSetBkgndColor(HWND hwnd, BOOL fUseSysColor, COLORREF clr) */
 #define HANDLE_EM_SETBKGNDCOLOR(hwnd, wParam, lParam, fn) \
-    (DWORD)(LRESULT)(fn)((hwnd), (BOOL)(wParam), (COLORREF)(lParam))
+    (DWORD)(fn)((hwnd), (BOOL)(wParam), (COLORREF)(lParam))
+
 /* BOOL RichEdit_OnSetCharFormat(HWND hwnd, UINT uFlags, CHARFORMAT *lpFmt) */
 #define HANDLE_EM_SETCHARFORMAT(hwnd, wParam, lParam, fn) \
-    (BOOL)(LRESULT)(fn)((hwnd), (UINT)(wParam), (CHARFORMAT *)(lParam))
+    (BOOL)(fn)((hwnd), (UINT)(wParam), (CHARFORMAT *)(lParam))
+
 /* DWORD RichEdit_OnSetEventMask(HWND hwnd, DWORD dwMask) */
 #define HANDLE_EM_SETEVENTMASK(hwnd, wParam, lParam, fn) \
-    (DWORD)(LRESULT)(fn)((hwnd), (DWORD)(lParam))
+    (DWORD)(fn)((hwnd), (DWORD)(lParam))
+
 /* BOOL RichEdit_OnSetOleCallback(HWND hwnd, void *pCallback) */
 #define HANDLE_EM_SETOLECALLBACK(hwnd, wParam, lParam, fn) \
-    (BOOL)(LRESULT)(fn)((hwnd), (void *)(lParam))
+    (BOOL)(fn)((hwnd), (void *)(lParam))
+
 /* BOOL RichEdit_OnSetParaFormat(HWND hwnd, PARAFORMAT *lpFmt) */
 #define HANDLE_EM_SETPARAFORMAT(hwnd, wParam, lParam, fn) \
-    (BOOL)(LRESULT)(fn)((hwnd), (PARAFORMAT *)(lParam))
+    (BOOL)(fn)((hwnd), (PARAFORMAT *)(lParam))
+
 /* BOOL RichEdit_OnSetTargetDevice(HWND hwnd, HDC hdcTarget, INT cxLineWidth) */
 #define HANDLE_EM_SETTARGETDEVICE(hwnd, wParam, lParam, fn) \
-    (BOOL)(LRESULT)(fn)((hwnd), (HDC)(wParam), (INT)(lParam))
+    (BOOL)(fn)((hwnd), (HDC)(wParam), (INT)(lParam))
+
 /* DWORD RichEdit_OnStreamIn(HWND hwnd, UINT uFormat, EDITSTREAM *lpStream) */
 #define HANDLE_EM_STREAMIN(hwnd, wParam, lParam, fn) \
-    (DWORD)(LRESULT)(fn)((hwnd), (UINT)(wParam), (EDITSTREAM *)(lParam))
+    (DWORD)(fn)((hwnd), (UINT)(wParam), (EDITSTREAM *)(lParam))
+
 /* DWORD RichEdit_OnStreamOut(HWND hwnd, UINT uFormat, EDITSTREAM *lpStream) */
 #define HANDLE_EM_STREAMOUT(hwnd, wParam, lParam, fn) \
-    (DWORD)(LRESULT)(fn)((hwnd), (UINT)(wParam), (EDITSTREAM *)(lParam))
+    (DWORD)(fn)((hwnd), (UINT)(wParam), (EDITSTREAM *)(lParam))
+
 /* DWORD RichEdit_OnGetTextRange(HWND hwnd, TEXTRANGE *lpRange) */
 #define HANDLE_EM_GETTEXTRANGE(hwnd, wParam, lParam, fn) \
-    (DWORD)(LRESULT)(fn)((hwnd), (TEXTRANGE *)(lParam))
+    (DWORD)(fn)((hwnd), (TEXTRANGE *)(lParam))
+
 /* DWORD RichEdit_OnFindWordBreak(HWND hwnd, UINT code, DWORD ichStart) */
 #define HANDLE_EM_FINDWORDBREAK(hwnd, wParam, lParam, fn) \
-    (DWORD)(LRESULT)(fn)((hwnd), (UINT)(wParam), (DWORD)(lParam))
+    (DWORD)(fn)((hwnd), (UINT)(wParam), (DWORD)(lParam))
+
 /* UINT RichEdit_OnSetOptions(HWND hwnd, UINT fOperation, UINT fOptions) */
 #define HANDLE_EM_SETOPTIONS(hwnd, wParam, lParam, fn) \
-    (UINT)(LRESULT)(fn)((hwnd), (UINT)(wParam), (UINT)(lParam))
+    (UINT)(fn)((hwnd), (UINT)(wParam), (UINT)(lParam))
+
 /* UINT RichEdit_OnGetOptions(HWND hwnd) */
 #define HANDLE_EM_GETOPTIONS(hwnd, wParam, lParam, fn) \
-    (UINT)(LRESULT)(fn)((hwnd))
+    (UINT)(fn)((hwnd))
+
 /* INT RichEdit_OnFindTextEx(HWND hwnd, UINT fuFlags, FINDTEXTEX *lpFindText) */
 #define HANDLE_EM_FINDTEXTEX(hwnd, wParam, lParam, fn) \
-    (INT)(LRESULT)(fn)((hwnd), (UINT)(wParam), (FINDTEXTEX *)(lParam))
+    (INT)(fn)((hwnd), (UINT)(wParam), (FINDTEXTEX *)(lParam))
+
 /* void *RichEdit_OnGetWordBreakProcEx(HWND hwnd) */
 #define HANDLE_EM_GETWORDBREAKPROCEX(hwnd, wParam, lParam, fn) \
     (LRESULT)(void *)(fn)((hwnd))
+
 /* void *RichEdit_OnSetWordBreakProcEx(HWND hwnd, void *pfn) */
 #define HANDLE_EM_SETWORDBREAKPROCEX(hwnd, wParam, lParam, fn) \
     (LRESULT)(void *)(fn)((hwnd), (void *)(lParam))
+
 /* DWORD RichEdit_OnSetUndoLimit(HWND hwnd, DWORD dwMaxUndo) */
 #define HANDLE_EM_SETUNDOLIMIT(hwnd, wParam, lParam, fn) \
-    (DWORD)(LRESULT)(fn)((hwnd), (DWORD)(wParam))
+    (DWORD)(fn)((hwnd), (DWORD)(wParam))
+
 /* BOOL RichEdit_OnRedo(HWND hwnd) */
 #define HANDLE_EM_REDO(hwnd, wParam, lParam, fn) \
-    (BOOL)(LRESULT)(fn)((hwnd))
+    (BOOL)(fn)((hwnd))
+
 /* BOOL RichEdit_OnCanRedo(HWND hwnd) */
 #define HANDLE_EM_CANREDO(hwnd, wParam, lParam, fn) \
-    (BOOL)(LRESULT)(fn)((hwnd))
+    (BOOL)(fn)((hwnd))
+
 /* INT RichEdit_OnGetUndoName(HWND hwnd) */
 #define HANDLE_EM_GETUNDONAME(hwnd, wParam, lParam, fn) \
-   (INT)(LRESULT)(fn)((hwnd))
+    (INT)(fn)((hwnd))
+
 /* INT RichEdit_OnGetRedoName(HWND hwnd) */
 #define HANDLE_EM_GETREDONAME(hwnd, wParam, lParam, fn) \
-   (INT)(LRESULT)(fn)((hwnd))
+    (INT)(fn)((hwnd))
+
 /* void RichEdit_OnStopGroupTyping(HWND hwnd) */
 #define HANDLE_EM_STOPGROUPTYPING(hwnd, wParam, lParam, fn) \
-   ((fn)((hwnd)), 0L)
+    ((fn)((hwnd)), 0L)
+
 /* BOOL RichEdit_OnSetTextMode(HWND hwnd, DWORD dwTextMode) */
 #define HANDLE_EM_SETTEXTMODE(hwnd, wParam, lParam, fn) \
-    (BOOL)(LRESULT)(fn)((hwnd), (DWORD)(wParam))
+    (BOOL)(fn)((hwnd), (DWORD)(wParam))
+
 /* DWORD RichEdit_OnGetTextMode(HWND hwnd) */
 #define HANDLE_EM_GETTEXTMODE(hwnd, wParam, lParam, fn) \
-    (DWORD)(LRESULT)(fn)((hwnd))
+    (DWORD)(fn)((hwnd))
 
 #endif
