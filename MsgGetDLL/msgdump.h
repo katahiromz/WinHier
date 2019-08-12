@@ -5,7 +5,7 @@
  * COPYRIGHT:   Copyright 2018-2019 Katayama Hirofumi MZ (katayama.hirofumi.mz@gmail.com)
  */
 #ifndef _INC_MSGDUMP
-#define _INC_MSGDUMP    11   /* Version 11 */
+#define _INC_MSGDUMP    12   /* Version 12 */
 
 /*
  * NOTE: MD_msgdump function in this file provides Win32API message dump feature.
@@ -490,11 +490,142 @@ MD_OnCopyData(HWND hwnd, HWND hwndFrom, PCOPYDATASTRUCT pcds)
     return FALSE;
 }
 
+static __inline LPCTSTR MSGDUMP_API
+MD_GetNotifyCode(HWND hwndFrom, UINT code)
+{
+    TCHAR szClass[24], sz[2];
+    static TCHAR s_szText[64];
+
+    switch (code)
+    {
+        case NM_OUTOFMEMORY: return TEXT("NM_OUTOFMEMORY");
+        case NM_CLICK: return TEXT("NM_CLICK");
+        case NM_DBLCLK: return TEXT("NM_DBLCLK");
+        case NM_RETURN: return TEXT("NM_RETURN");
+        case NM_RCLICK: return TEXT("NM_RCLICK");
+        case NM_RDBLCLK: return TEXT("NM_RDBLCLK");
+        case NM_SETFOCUS: return TEXT("NM_SETFOCUS");
+        case NM_KILLFOCUS: return TEXT("NM_KILLFOCUS");
+#if (_WIN32_IE >= 0x0300)
+        case NM_CUSTOMDRAW: return TEXT("NM_CUSTOMDRAW");
+        case NM_HOVER: return TEXT("NM_HOVER");
+#endif
+#if (_WIN32_IE >= 0x0400)
+        case NM_NCHITTEST: return TEXT("NM_NCHITTEST");
+        case NM_KEYDOWN: return TEXT("NM_KEYDOWN");
+        case NM_RELEASEDCAPTURE: return TEXT("NM_RELEASEDCAPTURE");
+        case NM_SETCURSOR: return TEXT("NM_SETCURSOR");
+        case NM_CHAR: return TEXT("NM_CHAR");
+#endif
+#if (_WIN32_IE >= 0x0401)
+        case NM_TOOLTIPSCREATED: return TEXT("NM_TOOLTIPSCREATED");
+#endif
+#if (_WIN32_IE >= 0x0500)
+        case NM_LDOWN: return TEXT("NM_LDOWN");
+        case NM_RDOWN: return TEXT("NM_RDOWN");
+#endif
+    }
+
+    szClass[0] = 0;
+    GetClassName(hwndFrom, szClass, ARRAYSIZE(szClass));
+    sz[0] = szClass[0];
+    sz[1] = 0;
+    CharUpper(sz);
+    if (sz[0] == TEXT('S') && lstrcmpi(szClass, WC_LISTVIEW) == 0)
+    {
+        switch (code)
+        {
+            case LVN_ITEMCHANGING: return TEXT("LVN_ITEMCHANGING");
+            case LVN_ITEMCHANGED: return TEXT("LVN_ITEMCHANGED");
+            case LVN_INSERTITEM: return TEXT("LVN_INSERTITEM");
+            case LVN_DELETEITEM: return TEXT("LVN_DELETEITEM");
+            case LVN_DELETEALLITEMS: return TEXT("LVN_DELETEALLITEMS");
+            case LVN_BEGINLABELEDITA: return TEXT("LVN_BEGINLABELEDITA");
+            case LVN_BEGINLABELEDITW: return TEXT("LVN_BEGINLABELEDITW");
+            case LVN_ENDLABELEDITA: return TEXT("LVN_ENDLABELEDITA");
+            case LVN_ENDLABELEDITW: return TEXT("LVN_ENDLABELEDITW");
+            case LVN_COLUMNCLICK: return TEXT("LVN_COLUMNCLICK");
+            case LVN_BEGINDRAG: return TEXT("LVN_BEGINDRAG");
+            case LVN_BEGINRDRAG: return TEXT("LVN_BEGINRDRAG");
+            case LVN_ODCACHEHINT: return TEXT("LVN_ODCACHEHINT");
+            case LVN_ODFINDITEMA: return TEXT("LVN_ODFINDITEMA");
+            case LVN_ODFINDITEMW: return TEXT("LVN_ODFINDITEMW");
+            case LVN_ITEMACTIVATE: return TEXT("LVN_ITEMACTIVATE");
+            case LVN_ODSTATECHANGED: return TEXT("LVN_ODSTATECHANGED");
+            case LVN_HOTTRACK: return TEXT("LVN_HOTTRACK");
+            case LVN_GETDISPINFOA: return TEXT("LVN_GETDISPINFOA");
+            case LVN_GETDISPINFOW: return TEXT("LVN_GETDISPINFOW");
+            case LVN_SETDISPINFOA: return TEXT("LVN_SETDISPINFOA");
+            case LVN_SETDISPINFOW: return TEXT("LVN_SETDISPINFOW");
+            case LVN_KEYDOWN: return TEXT("LVN_KEYDOWN");
+            case LVN_MARQUEEBEGIN: return TEXT("LVN_MARQUEEBEGIN");
+            case LVN_GETINFOTIPA: return TEXT("LVN_GETINFOTIPA");
+            case LVN_GETINFOTIPW: return TEXT("LVN_GETINFOTIPW");
+            case LVN_INCREMENTALSEARCHA: return TEXT("LVN_INCREMENTALSEARCHA");
+            case LVN_INCREMENTALSEARCHW: return TEXT("LVN_INCREMENTALSEARCHW");
+#if NTDDI_VERSION >= 0x06000000
+            case LVN_COLUMNDROPDOWN: return TEXT("LVN_COLUMNDROPDOWN");
+            case LVN_COLUMNOVERFLOWCLICK: return TEXT("LVN_COLUMNOVERFLOWCLICK");
+#endif
+            case LVN_BEGINSCROLL: return TEXT("LVN_BEGINSCROLL");
+            case LVN_ENDSCROLL: return TEXT("LVN_ENDSCROLL");
+#if NTDDI_VERSION >= 0x06000000
+            case LVN_LINKCLICK: return TEXT("LVN_LINKCLICK");
+            case LVN_GETEMPTYMARKUP: return TEXT("LVN_GETEMPTYMARKUP");
+#endif
+        }
+    }
+    else if (sz[0] == TEXT('S') && lstrcmpi(szClass, WC_TREEVIEW) == 0)
+    {
+        switch (code)
+        {
+            case TVN_SELCHANGINGA: return TEXT("TVN_SELCHANGINGA");
+            case TVN_SELCHANGINGW: return TEXT("TVN_SELCHANGINGW");
+            case TVN_SELCHANGEDA: return TEXT("TVN_SELCHANGEDA");
+            case TVN_SELCHANGEDW: return TEXT("TVN_SELCHANGEDW");
+            case TVN_GETDISPINFOA: return TEXT("TVN_GETDISPINFOA");
+            case TVN_GETDISPINFOW: return TEXT("TVN_GETDISPINFOW");
+            case TVN_SETDISPINFOA: return TEXT("TVN_SETDISPINFOA");
+            case TVN_SETDISPINFOW: return TEXT("TVN_SETDISPINFOW");
+            case TVN_ITEMEXPANDINGA: return TEXT("TVN_ITEMEXPANDINGA");
+            case TVN_ITEMEXPANDINGW: return TEXT("TVN_ITEMEXPANDINGW");
+            case TVN_ITEMEXPANDEDA: return TEXT("TVN_ITEMEXPANDEDA");
+            case TVN_ITEMEXPANDEDW: return TEXT("TVN_ITEMEXPANDEDW");
+            case TVN_BEGINDRAGA: return TEXT("TVN_BEGINDRAGA");
+            case TVN_BEGINDRAGW: return TEXT("TVN_BEGINDRAGW");
+            case TVN_BEGINRDRAGA: return TEXT("TVN_BEGINRDRAGA");
+            case TVN_BEGINRDRAGW: return TEXT("TVN_BEGINRDRAGW");
+            case TVN_DELETEITEMA: return TEXT("TVN_DELETEITEMA");
+            case TVN_DELETEITEMW: return TEXT("TVN_DELETEITEMW");
+            case TVN_BEGINLABELEDITA: return TEXT("TVN_BEGINLABELEDITA");
+            case TVN_BEGINLABELEDITW: return TEXT("TVN_BEGINLABELEDITW");
+            case TVN_ENDLABELEDITA: return TEXT("TVN_ENDLABELEDITA");
+            case TVN_ENDLABELEDITW: return TEXT("TVN_ENDLABELEDITW");
+            case TVN_KEYDOWN: return TEXT("TVN_KEYDOWN");
+            case TVN_GETINFOTIPA: return TEXT("TVN_GETINFOTIPA");
+            case TVN_GETINFOTIPW: return TEXT("TVN_GETINFOTIPW");
+            case TVN_SINGLEEXPAND: return TEXT("TVN_SINGLEEXPAND");
+#if _WIN32_IE >= 0x0600
+            case TVN_ITEMCHANGINGA: return TEXT("TVN_ITEMCHANGINGA");
+            case TVN_ITEMCHANGINGW: return TEXT("TVN_ITEMCHANGINGW");
+            case TVN_ITEMCHANGEDA: return TEXT("TVN_ITEMCHANGEDA");
+            case TVN_ITEMCHANGEDW: return TEXT("TVN_ITEMCHANGEDW");
+            case TVN_ASYNCDRAW: return TEXT("TVN_ASYNCDRAW");
+#endif
+        }
+    }
+
+    StringCbPrintf(s_szText, sizeof(s_szText), TEXT("%u"), code);
+    return s_szText;
+}
+
 static __inline LRESULT MSGDUMP_API
 MD_OnNotify(HWND hwnd, int idFrom, LPNMHDR pnmhdr)
 {
-    MSGDUMP_TPRINTF(TEXT("%sWM_NOTIFY(hwnd:%p, idFrom:%d, pnmhdr:%p)\n"),
-                    MSGDUMP_PREFIX, (void *)hwnd, idFrom, (void *)pnmhdr);
+    MSGDUMP_TPRINTF(TEXT("%sWM_NOTIFY(hwnd:%p, idFrom:%d, pnmhdr:%p, hwndFrom:%p, pnmhdr->idFrom:%d, code:%s)\n"),
+                    MSGDUMP_PREFIX, (void *)hwnd, idFrom, (void *)pnmhdr,
+                    pnmhdr->hwndFrom, pnmhdr->idFrom,
+                    MD_GetNotifyCode(pnmhdr->hwndFrom, pnmhdr->code));
     return 0;
 }
 

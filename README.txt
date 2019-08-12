@@ -42,6 +42,7 @@ please right-click the treeview item and choose the appropriate menu item.
     - Supported TreeView messages.
 - 2019.XX.YY ver.1.8
     - Correctly treat DIALOG STYLE.
+    - Power to WM_NOTIFY.
 
 ## Contact Us
 

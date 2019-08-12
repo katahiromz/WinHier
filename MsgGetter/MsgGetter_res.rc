@@ -14,6 +14,33 @@
 LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
 
 //////////////////////////////////////////////////////////////////////////////
+// RT_VERSION
+
+1 VERSIONINFO
+FILEVERSION     1, 8, 0, 0
+PRODUCTVERSION  1, 8, 0, 0
+FILEOS          0x40004
+FILETYPE        0x1
+{
+    BLOCK "StringFileInfo"
+    {
+        BLOCK "040904E4"
+        {
+            VALUE "CompanyName", "Katayama Hirofumi MZ\0"
+            VALUE "FileDescription", "Message Getter\0"
+            VALUE "FileVersion", "1.8\0"
+            VALUE "LegalCopyright", "Copyright (C) 2019 Katayama Hirofumi MZ.\0"
+            VALUE "ProductName", "WinHier\0"
+            VALUE "ProductVersion", "1.8\0"
+        }
+    }
+    BLOCK "VarFileInfo"
+    {
+        VALUE "Translation", 0x0409, 0x04E4
+    }
+}
+
+//////////////////////////////////////////////////////////////////////////////
 // RT_GROUP_ICON
 
 1 ICON "res/Icon_1.ico"
@@ -53,33 +80,6 @@ FONT 8, "Arial"
     PUSHBUTTON "&Restart", psh3, 135, 182, 60, 14
     PUSHBUTTON "Save &As...", psh4, 200, 182, 60, 14
     PUSHBUTTON "C&lear", psh5, 265, 182, 60, 14
-}
-
-//////////////////////////////////////////////////////////////////////////////
-// RT_VERSION
-
-1 VERSIONINFO
-FILEVERSION     1, 8, 0, 0
-PRODUCTVERSION  1, 8, 0, 0
-FILEOS          0x40004
-FILETYPE        0x1
-{
-    BLOCK "StringFileInfo"
-    {
-        BLOCK "040904E4"
-        {
-            VALUE "CompanyName", "Katayama Hirofumi MZ\0"
-            VALUE "FileDescription", "Message Getter\0"
-            VALUE "FileVersion", "1.8\0"
-            VALUE "LegalCopyright", "Copyright (C) 2019 Katayama Hirofumi MZ.\0"
-            VALUE "ProductName", "WinHier\0"
-            VALUE "ProductVersion", "1.8\0"
-        }
-    }
-    BLOCK "VarFileInfo"
-    {
-        VALUE "Translation", 0x0409, 0x04E4
-    }
 }
 
 //////////////////////////////////////////////////////////////////////////////
