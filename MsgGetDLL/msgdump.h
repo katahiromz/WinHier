@@ -5,7 +5,7 @@
  * COPYRIGHT:   Copyright 2018-2019 Katayama Hirofumi MZ (katayama.hirofumi.mz@gmail.com)
  */
 #ifndef _INC_MSGDUMP
-#define _INC_MSGDUMP    14   /* Version 14 */
+#define _INC_MSGDUMP    15   /* Version 15 */
 
 /*
  * NOTE: MD_msgdump function in this file provides Win32API message dump feature.
@@ -635,7 +635,7 @@ MD_GetNotifyCode(HWND hwndFrom, UINT code)
             case TVN_GETINFOTIPA: return TEXT("TVN_GETINFOTIPA");
             case TVN_GETINFOTIPW: return TEXT("TVN_GETINFOTIPW");
             case TVN_SINGLEEXPAND: return TEXT("TVN_SINGLEEXPAND");
-#if _WIN32_IE >= 0x0600
+#ifdef TVN_ITEMCHANGINGA
             case TVN_ITEMCHANGINGA: return TEXT("TVN_ITEMCHANGINGA");
             case TVN_ITEMCHANGINGW: return TEXT("TVN_ITEMCHANGINGW");
             case TVN_ITEMCHANGEDA: return TEXT("TVN_ITEMCHANGEDA");
