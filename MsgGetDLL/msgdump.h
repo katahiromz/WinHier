@@ -5,7 +5,7 @@
  * COPYRIGHT:   Copyright 2018-2019 Katayama Hirofumi MZ (katayama.hirofumi.mz@gmail.com)
  */
 #ifndef _INC_MSGDUMP
-#define _INC_MSGDUMP    12   /* Version 12 */
+#define _INC_MSGDUMP    13   /* Version 13 */
 
 /*
  * NOTE: MD_msgdump function in this file provides Win32API message dump feature.
@@ -19,6 +19,9 @@
 #endif
 #ifndef _INC_SHELLAPI
     #include <shellapi.h>
+#endif
+#ifndef _RICHEDIT_
+    #include <richedit.h>
 #endif
 #include <strsafe.h>
 
@@ -531,7 +534,37 @@ MD_GetNotifyCode(HWND hwndFrom, UINT code)
     sz[0] = szClass[0];
     sz[1] = 0;
     CharUpper(sz);
-    if (sz[0] == TEXT('S') && lstrcmpi(szClass, WC_LISTVIEW) == 0)
+
+    if (sz[0] == TEXT('R') && lstrcmpi(szClass, RICHEDIT_CLASS) == 0)
+    {
+        switch (code)
+        {
+            case EN_MSGFILTER: return TEXT("EN_MSGFILTER");
+            case EN_REQUESTRESIZE: return TEXT("EN_REQUESTRESIZE");
+            case EN_SELCHANGE: return TEXT("EN_SELCHANGE");
+            case EN_DROPFILES: return TEXT("EN_DROPFILES");
+            case EN_PROTECTED: return TEXT("EN_PROTECTED");
+            case EN_CORRECTTEXT: return TEXT("EN_CORRECTTEXT");
+            case EN_STOPNOUNDO: return TEXT("EN_STOPNOUNDO");
+            case EN_IMECHANGE: return TEXT("EN_IMECHANGE");
+            case EN_SAVECLIPBOARD: return TEXT("EN_SAVECLIPBOARD");
+            case EN_OLEOPFAILED: return TEXT("EN_OLEOPFAILED");
+            case EN_OBJECTPOSITIONS: return TEXT("EN_OBJECTPOSITIONS");
+            case EN_LINK: return TEXT("EN_LINK");
+            case EN_DRAGDROPDONE: return TEXT("EN_DRAGDROPDONE");
+            case EN_PARAGRAPHEXPANDED: return TEXT("EN_PARAGRAPHEXPANDED");
+            case EN_PAGECHANGE: return TEXT("EN_PAGECHANGE");
+            case EN_LOWFIRTF: return TEXT("EN_LOWFIRTF");
+            case EN_ALIGNLTR: return TEXT("EN_ALIGNLTR");
+            case EN_ALIGNRTL: return TEXT("EN_ALIGNRTL");
+#if _RICHEDIT_VER >= 0x0800
+            case EN_CLIPFORMAT: return TEXT("EN_CLIPFORMAT");
+            case EN_STARTCOMPOSITION: return TEXT("EN_STARTCOMPOSITION");
+            case EN_ENDCOMPOSITION: return TEXT("EN_ENDCOMPOSITION");
+#endif
+        }
+    }
+    else if (sz[0] == TEXT('S') && lstrcmpi(szClass, WC_LISTVIEW) == 0)
     {
         switch (code)
         {
