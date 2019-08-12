@@ -44,6 +44,7 @@ please right-click the treeview item and choose the appropriate menu item.
     - Correctly treat DIALOG STYLE.
     - Power to WM_NOTIFY.
     - Power to RichEdit.
+    - Fixed "Copy Lines".
 
 ## Contact Us
 
