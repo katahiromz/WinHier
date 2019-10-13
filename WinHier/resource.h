@@ -25,12 +25,15 @@
 #define ID_COPYHWND                         104
 #define ID_COPYTEXT                         105
 #define ID_COPYCLASSNAME                    106
+#define ID_SHOW                             107
+#define ID_HIDE                             108
+#define ID_DESTROY                          109
 
 #ifdef APSTUDIO_INVOKED
     #ifndef APSTUDIO_READONLY_SYMBOLS
         #define _APS_NO_MFC                 1
         #define _APS_NEXT_RESOURCE_VALUE    100
-        #define _APS_NEXT_COMMAND_VALUE     107
+        #define _APS_NEXT_COMMAND_VALUE     110
         #define _APS_NEXT_CONTROL_VALUE     1000
         #define _APS_NEXT_SYMED_VALUE       300
     #endif

@@ -777,6 +777,15 @@ public:
         case ID_COPYCLASSNAME:
             OnCopyClassName(hwnd);
             break;
+        case ID_SHOW:
+            OnShow(hwnd);
+            break;
+        case ID_HIDE:
+            OnHide(hwnd);
+            break;
+        case ID_DESTROY:
+            OnDestroy(hwnd);
+            break;
         }
     }
 
@@ -812,6 +821,43 @@ public:
         PostMessage(hwnd, WM_COMMAND, nCmd, 0);
     }
 
+    void OnShow(HWND hwnd)
+    {
+        HTREEITEM hItem = TreeView_GetSelection(m_ctl1);
+        HWND hwndTarget = m_ctl1.WindowFromItem(hItem);
+        ShowWindow(hwndTarget, SW_SHOWNOACTIVATE);
+    }
+
+    void OnHide(HWND hwnd)
+    {
+        HTREEITEM hItem = TreeView_GetSelection(m_ctl1);
+        HWND hwndTarget = m_ctl1.WindowFromItem(hItem);
+        ShowWindow(hwndTarget, SW_HIDE);
+    }
+
+    void OnDestroy(HWND hwnd)
+    {
+        HTREEITEM hItem = TreeView_GetSelection(m_ctl1);
+        HWND hwndTarget = m_ctl1.WindowFromItem(hItem);
+        PostMessage(hwndTarget, WM_CLOSE, 0, 0);
+    }
+
+    void OnInitMenuPopup(HWND hwnd, HMENU hMenu, UINT item, BOOL fSystemMenu)
+    {
+        HTREEITEM hItem = TreeView_GetSelection(m_ctl1);
+        HWND hwndTarget = m_ctl1.WindowFromItem(hItem);
+        if (IsWindowVisible(hwndTarget))
+        {
+            EnableMenuItem(hMenu, ID_SHOW, MF_BYCOMMAND | MF_GRAYED);
+            EnableMenuItem(hMenu, ID_HIDE, MF_BYCOMMAND | MF_ENABLED);
+        }
+        else
+        {
+            EnableMenuItem(hMenu, ID_SHOW, MF_BYCOMMAND | MF_ENABLED);
+            EnableMenuItem(hMenu, ID_HIDE, MF_BYCOMMAND | MF_GRAYED);
+        }
+    }
+
     virtual INT_PTR CALLBACK
     DialogProcDx(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     {
@@ -822,6 +868,7 @@ public:
         HANDLE_MSG(hwnd, WM_SIZE, OnSize);
         HANDLE_MSG(hwnd, WM_TIMER, OnTimer);
         HANDLE_MSG(hwnd, WM_CONTEXTMENU, OnContextMenu);
+        HANDLE_MSG(hwnd, WM_INITMENUPOPUP, OnInitMenuPopup);
         default:
             return DefaultProcDx();
         }

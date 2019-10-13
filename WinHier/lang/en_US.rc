@@ -17,6 +17,10 @@ LANGUAGE LANG_ENGLISH, SUBLANG_DEFAULT
         MENUITEM "Copy class &name", ID_COPYCLASSNAME
         MENUITEM "&Copy info", ID_COPYASTEXT
         MENUITEM SEPARATOR
+        MENUITEM "Forcibly &show", ID_SHOW
+        MENUITEM "Forcibly hid&e", ID_HIDE
+        MENUITEM "Forcibly &destroy", ID_DESTROY
+        MENUITEM SEPARATOR
         MENUITEM "&Messages...", ID_MESSAGES
         MENUITEM SEPARATOR
         MENUITEM "&Properties...", ID_PROP
