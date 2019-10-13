@@ -611,6 +611,64 @@ public:
         }
     }
 
+    BOOL CopyTextToClipboard(HWND hwnd, const MStringW& text)
+    {
+        if (::OpenClipboard(hwnd))
+        {
+            ::EmptyClipboard();
+
+            size_t cb = (text.size() + 1) * sizeof(WCHAR);
+            if (HGLOBAL hGlobal = GlobalAlloc(GHND | GMEM_SHARE, cb))
+            {
+                if (LPWSTR psz = (LPWSTR)GlobalLock(hGlobal))
+                {
+                    CopyMemory(psz, text.c_str(), cb);
+                    GlobalUnlock(hGlobal);
+                }
+
+                ::SetClipboardData(CF_UNICODETEXT, hGlobal);
+            }
+
+            ::CloseClipboard();
+        }
+        return TRUE;
+    }
+
+    void OnCopyHWND(HWND hwnd)
+    {
+        HTREEITEM hItem = TreeView_GetSelection(m_ctl1);
+        MWindowTreeView::node_type *node = m_ctl1.NodeFromItem(hItem);
+        if (node)
+        {
+            WCHAR szText[16];
+            StringCbPrintfW(szText, sizeof(szText), L"%08X",
+                (DWORD)(DWORD_PTR)node->m_hwndTarget);
+            CopyTextToClipboard(hwnd, szText);
+        }
+    }
+
+    void OnCopyText(HWND hwnd)
+    {
+        HTREEITEM hItem = TreeView_GetSelection(m_ctl1);
+        MWindowTreeView::node_type *node = m_ctl1.NodeFromItem(hItem);
+        if (node)
+        {
+            MString text = node->m_szText;
+            CopyTextToClipboard(hwnd, text);
+        }
+    }
+
+    void OnCopyClassName(HWND hwnd)
+    {
+        HTREEITEM hItem = TreeView_GetSelection(m_ctl1);
+        MWindowTreeView::node_type *node = m_ctl1.NodeFromItem(hItem);
+        if (node)
+        {
+            MString text = node->m_szClass;
+            CopyTextToClipboard(hwnd, text);
+        }
+    }
+
     void OnCopyAsText(HWND hwnd)
     {
         HTREEITEM hItem = TreeView_GetSelection(m_ctl1);
@@ -618,24 +676,7 @@ public:
         if (node)
         {
             MString text = m_ctl1.text_from_node(node);
-            if (::OpenClipboard(hwnd))
-            {
-                ::EmptyClipboard();
-
-                size_t cb = (text.size() + 1) * sizeof(WCHAR);
-                if (HGLOBAL hGlobal = GlobalAlloc(GHND | GMEM_SHARE, cb))
-                {
-                    if (LPWSTR psz = (LPWSTR)GlobalLock(hGlobal))
-                    {
-                        CopyMemory(psz, text.c_str(), cb);
-                        GlobalUnlock(hGlobal);
-                    }
-
-                    ::SetClipboardData(CF_UNICODETEXT, hGlobal);
-                }
-
-                ::CloseClipboard();
-            }
+            CopyTextToClipboard(hwnd, text);
         }
     }
 
@@ -726,6 +767,15 @@ public:
             break;
         case ID_COPYASTEXT:
             OnCopyAsText(hwnd);
+            break;
+        case ID_COPYHWND:
+            OnCopyHWND(hwnd);
+            break;
+        case ID_COPYTEXT:
+            OnCopyText(hwnd);
+            break;
+        case ID_COPYCLASSNAME:
+            OnCopyClassName(hwnd);
             break;
         }
     }

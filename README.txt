@@ -45,6 +45,8 @@ please right-click the treeview item and choose the appropriate menu item.
     - Power to WM_NOTIFY.
     - Power to RichEdit.
     - Fixed "Copy Lines".
+- 2019.10.13 ver.1.9
+    - Add "Copy HWND", "Copy &text" and "Copy class &name" items to the context menu.
 
 ## Contact Us
 

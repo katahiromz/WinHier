@@ -33,3 +33,4 @@ lib*.a
 MsgGetter*.exe
 WinHier*.exe
 MsgGet*.dll
+WinHier-*
