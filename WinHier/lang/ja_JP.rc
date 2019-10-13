@@ -17,6 +17,8 @@ LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
         MENUITEM "クラス名をコピー(&N)", ID_COPYCLASSNAME
         MENUITEM "情報をコピー(&C)", ID_COPYASTEXT
         MENUITEM SEPARATOR
+        MENUITEM "点滅する(&B)", ID_BLINK
+        MENUITEM SEPARATOR
         MENUITEM "強制的に表示させる(&S)", ID_SHOW
         MENUITEM "強制的に非表示にする(&E)", ID_HIDE
         MENUITEM "強制的に破棄する(&D)", ID_DESTROY

@@ -487,7 +487,15 @@ public:
     void OnTimer(HWND hwnd, UINT id)
     {
         KillTimer(hwnd, id);
-        m_ctl1.refresh();
+        switch (id)
+        {
+        case 888:
+            InvalidateRect(GetDesktopWindow(), NULL, TRUE);
+            break;
+        case 999:
+            m_ctl1.refresh();
+            break;
+        }
     }
 
     void OnPsh1(HWND hwnd)
@@ -786,6 +794,9 @@ public:
         case ID_DESTROY:
             OnDestroy(hwnd);
             break;
+        case ID_BLINK:
+            OnBlink(hwnd);
+            break;
         }
     }
 
@@ -840,6 +851,36 @@ public:
         HTREEITEM hItem = TreeView_GetSelection(m_ctl1);
         HWND hwndTarget = m_ctl1.WindowFromItem(hItem);
         PostMessage(hwndTarget, WM_CLOSE, 0, 0);
+    }
+
+    void OnBlink(HWND hwnd)
+    {
+        HTREEITEM hItem = TreeView_GetSelection(m_ctl1);
+        HWND hwndTarget = m_ctl1.WindowFromItem(hItem);
+
+        for (int i = 0; i < 4; ++i)
+        {
+            if (HDC hdc = CreateDC(TEXT("DISPLAY"), NULL, NULL, NULL))
+            {
+                const INT PEN_WIDTH = 5;
+                if (HPEN hPen = CreatePen(PS_SOLID, PEN_WIDTH, RGB(0, 255, 255)))
+                {
+                    SetROP2(hdc, R2_XORPEN);
+                    SelectObject(hdc, hPen);
+                    SelectObject(hdc, GetStockObject(NULL_BRUSH));
+
+                    RECT rc;
+                    GetWindowRect(hwndTarget, &rc);
+                    InflateRect(&rc, -PEN_WIDTH, -PEN_WIDTH);
+                    Rectangle(hdc, rc.left, rc.top, rc.right, rc.bottom);
+
+                    DeleteObject(hPen);
+                }
+                DeleteDC(hdc);
+            }
+            Sleep(200);
+        }
+        SetTimer(hwnd, 888, 500, NULL);
     }
 
     void OnInitMenuPopup(HWND hwnd, HMENU hMenu, UINT item, BOOL fSystemMenu)

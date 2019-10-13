@@ -215,8 +215,7 @@ public:
 
         if (m_hwndOverOld != m_hwndOver)
         {
-            HWND hwndDesktop = GetDesktopWindow();
-            if (HDC hdc = GetWindowDC(hwndDesktop))
+            if (HDC hdc = CreateDC(TEXT("DISPLAY"), NULL, NULL, NULL))
             {
                 SetROP2(hdc, R2_XORPEN);
                 SelectObject(hdc, m_hPen);
@@ -234,7 +233,7 @@ public:
                     DrawBox(hdc, m_hwndOver);
                 }
 
-                ReleaseDC(hwndDesktop, hdc);
+                DeleteDC(hdc);
             }
         }
 
