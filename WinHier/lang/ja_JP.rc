@@ -13,8 +13,8 @@ LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
     POPUP "Popup #1"
     {
         MENUITEM "&HWNDをコピー", ID_COPYHWND
-        MENUITEM "テキストをコピー(&T)", ID_COPYTEXT
-        MENUITEM "クラス名をコピー(&N)", ID_COPYCLASSNAME
+        MENUITEM "ウィンドウ テキストをコピー(&T)", ID_COPYTEXT
+        MENUITEM "ウィンドウ クラス名をコピー(&N)", ID_COPYCLASSNAME
         MENUITEM "情報をコピー(&C)", ID_COPYASTEXT
         MENUITEM SEPARATOR
         MENUITEM "点滅する(&B)", ID_BLINK
@@ -33,7 +33,7 @@ LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
 // RT_DIALOG
 
 IDD_MAIN DIALOG 0, 0, 282, 225
-CAPTION "WinHier ver.1.8 by 片山博文MZ"
+CAPTION "WinHier ver.1.9 by 片山博文MZ"
 STYLE DS_CENTER | WS_OVERLAPPEDWINDOW
 FONT 9, "MS UI Gothic"
 {

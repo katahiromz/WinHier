@@ -13,8 +13,8 @@ LANGUAGE LANG_ENGLISH, SUBLANG_DEFAULT
     POPUP "Popup #1"
     {
         MENUITEM "Copy &HWND", ID_COPYHWND
-        MENUITEM "Copy &text", ID_COPYTEXT
-        MENUITEM "Copy class &name", ID_COPYCLASSNAME
+        MENUITEM "Copy window &text", ID_COPYTEXT
+        MENUITEM "Copy window class &name", ID_COPYCLASSNAME
         MENUITEM "&Copy info", ID_COPYASTEXT
         MENUITEM SEPARATOR
         MENUITEM "&Blink", ID_BLINK
@@ -33,7 +33,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_DEFAULT
 // RT_DIALOG
 
 IDD_MAIN DIALOG 0, 0, 282, 225
-CAPTION "WinHier ver.1.8 by katahiromz"
+CAPTION "WinHier ver.1.9 by katahiromz"
 STYLE DS_CENTER | WS_OVERLAPPEDWINDOW
 FONT 8, "Arial"
 {
