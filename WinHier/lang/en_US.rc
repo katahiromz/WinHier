@@ -23,6 +23,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_DEFAULT
         MENUITEM "Forcibly hid&e", ID_HIDE
         MENUITEM "Forcibly &destroy", ID_DESTROY
         MENUITEM "&Restore maximized/minimized", ID_RESTORE
+        MENUITEM "Bring to &top", ID_BRINGTOTOP
         MENUITEM SEPARATOR
         MENUITEM "&Messages...", ID_MESSAGES
         MENUITEM SEPARATOR

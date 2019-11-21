@@ -800,6 +800,9 @@ public:
         case ID_RESTORE:
             OnRestore(hwnd);
             break;
+        case ID_BRINGTOTOP:
+            OnBringToTop(hwnd);
+            break;
         }
     }
 
@@ -891,6 +894,13 @@ public:
         HTREEITEM hItem = TreeView_GetSelection(m_ctl1);
         HWND hwndTarget = m_ctl1.WindowFromItem(hItem);
         ShowWindow(hwndTarget, SW_RESTORE);
+    }
+
+    void OnBringToTop(HWND hwnd)
+    {
+        HTREEITEM hItem = TreeView_GetSelection(m_ctl1);
+        HWND hwndTarget = m_ctl1.WindowFromItem(hItem);
+        BringWindowToTop(hwndTarget);
     }
 
     void OnInitMenuPopup(HWND hwnd, HMENU hMenu, UINT item, BOOL fSystemMenu)
