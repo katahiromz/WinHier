@@ -51,6 +51,7 @@ please right-click the treeview item and choose the appropriate menu item.
     - Add "Blink" item to the context menu.
 - 2019.XX.YY ver.2.0
     - Add "Restore maximized/minimized" item to the context menu.
+    - Add "Bring to top" item to the context menu.
     - Support WM_SETTINGCHANGE message.
 
 ## Contact Us
