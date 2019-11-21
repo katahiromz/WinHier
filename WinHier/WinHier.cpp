@@ -797,6 +797,9 @@ public:
         case ID_BLINK:
             OnBlink(hwnd);
             break;
+        case ID_RESTORE:
+            OnRestore(hwnd);
+            break;
         }
     }
 
@@ -881,6 +884,13 @@ public:
             Sleep(200);
         }
         SetTimer(hwnd, 888, 500, NULL);
+    }
+
+    void OnRestore(HWND hwnd)
+    {
+        HTREEITEM hItem = TreeView_GetSelection(m_ctl1);
+        HWND hwndTarget = m_ctl1.WindowFromItem(hItem);
+        ShowWindow(hwndTarget, SW_RESTORE);
     }
 
     void OnInitMenuPopup(HWND hwnd, HMENU hMenu, UINT item, BOOL fSystemMenu)

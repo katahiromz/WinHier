@@ -29,6 +29,7 @@
 #define ID_HIDE                             108
 #define ID_DESTROY                          109
 #define ID_BLINK                            110
+#define ID_RESTORE                          111
 
 #ifdef APSTUDIO_INVOKED
     #ifndef APSTUDIO_READONLY_SYMBOLS

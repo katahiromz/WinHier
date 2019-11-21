@@ -22,6 +22,7 @@ LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
         MENUITEM "強制的に表示させる(&S)", ID_SHOW
         MENUITEM "強制的に非表示にする(&E)", ID_HIDE
         MENUITEM "強制的に破棄する(&D)", ID_DESTROY
+        MENUITEM "最大化・最小化を元に戻す(&R)", ID_RESTORE
         MENUITEM SEPARATOR
         MENUITEM "メッセージ(&M)...", ID_MESSAGES
         MENUITEM SEPARATOR
