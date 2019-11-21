@@ -49,7 +49,7 @@ please right-click the treeview item and choose the appropriate menu item.
     - Add "Copy HWND", "Copy window &text" and "Copy window class &name" items to the context menu.
     - Add "Forcibly show", "Forcibly hide" and "Forcibly &destroy" items to the context menu.
     - Add "Blink" item to the context menu.
-- 2019.XX.YY ver.2.0
+- 2019.11.22 ver.2.0
     - Add "Restore maximized/minimized" item to the context menu.
     - Add "Bring to top" item to the context menu.
     - Support WM_SETTINGCHANGE message.
