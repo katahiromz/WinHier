@@ -53,6 +53,8 @@ please right-click the treeview item and choose the appropriate menu item.
     - Add "Restore maximized/minimized" item to the context menu.
     - Add "Bring to top" item to the context menu.
     - Support WM_SETTINGCHANGE message.
+- 2020.03.13 ver.2.1
+    - XP support.
 
 ## Contact Us
 
