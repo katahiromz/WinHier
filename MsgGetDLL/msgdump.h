@@ -4654,7 +4654,7 @@ MD_RichEdit_OnGetTextMode(HWND hwnd)
 static __inline LRESULT MSGDUMP_API
 MD_msgdump(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-    TCHAR szClass[24], sz[2];
+    TCHAR szClass[24], sz[2], szMsg[64];
     szClass[0] = 0;
     GetClassName(hwnd, szClass, ARRAYSIZE(szClass));
     sz[0] = szClass[0];
@@ -5341,15 +5341,24 @@ MD_msgdump(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 #endif
         default:
         {
-            if (WM_USER <= uMsg && uMsg <= 0x7FFF)
+            if (WM_USER <= uMsg && uMsg < WM_APP)
             {
                 return MD_OnUser(hwnd, uMsg, wParam, lParam);
             }
-            if (WM_APP <= uMsg && uMsg <= 0xBFFF)
+            if (WM_APP <= uMsg && uMsg < MAXINTATOM)
             {
                 return MD_OnApp(hwnd, uMsg, wParam, lParam);
             }
-            return MD_OnUnknown(hwnd, uMsg, wParam, lParam);
+            else if (MAXINTATOM <= uMsg && uMsg <= MAXWORD &&
+                     GetClipboardFormatName(uMsg, szMsg, _countof(szMsg)))
+            {
+                MSGDUMP_TPRINTF(TEXT("%sWM_%u[\"%s\"](hwnd:%p, wParam:%p, lParam:%p)\n"),
+                                MSGDUMP_PREFIX, uMsg, szMsg, (void *)hwnd, wParam, lParam);
+            }
+            else
+            {
+                return MD_OnUnknown(hwnd, uMsg, wParam, lParam);
+            }
         }
     }
     return 0;
