@@ -55,6 +55,8 @@ please right-click the treeview item and choose the appropriate menu item.
     - Support WM_SETTINGCHANGE message.
 - 2020.03.13 ver.2.1
     - XP support.
+- 2021.03.18 ver.2.2
+    - RegisterWindowMessage support.
 
 ## Contact Us
 

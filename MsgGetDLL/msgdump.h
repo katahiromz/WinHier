@@ -2,10 +2,10 @@
  * PROJECT:     ReactOS header files
  * LICENSE:     CC-BY-4.0 (https://spdx.org/licenses/CC-BY-4.0.html)
  * PURPOSE:     Win32API message dumping
- * COPYRIGHT:   Copyright 2018-2019 Katayama Hirofumi MZ (katayama.hirofumi.mz@gmail.com)
+ * COPYRIGHT:   Copyright 2018-2021 Katayama Hirofumi MZ (katayama.hirofumi.mz@gmail.com)
  */
 #ifndef _INC_MSGDUMP
-#define _INC_MSGDUMP    17   /* Version 17 */
+#define _INC_MSGDUMP    18   /* Version 18 */
 
 /*
  * NOTE: MD_msgdump function in this file provides Win32API message dump feature.
@@ -5360,7 +5360,7 @@ MD_msgresult(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam, LRESULT lResult
 {
 #define DEFINE_RESULT(WM_) case WM_: MSGDUMP_TPRINTF(TEXT("%s") TEXT(#WM_) TEXT(": hwnd:%p, lResult:%p\n"), \
                                                      MSGDUMP_PREFIX, (void *)hwnd, lResult); break
-    TCHAR szClass[24], sz[2];
+    TCHAR szClass[24], sz[2], szMsg[64];
     szClass[0] = 0;
     GetClassName(hwnd, szClass, ARRAYSIZE(szClass));
     sz[0] = szClass[0];
@@ -6060,15 +6060,21 @@ MD_msgresult(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam, LRESULT lResult
     DEFINE_RESULT(WM_GETTITLEBARINFOEX);
 #endif
     default:
-        if (WM_USER <= uMsg && uMsg <= 0x7FFF)
+        if (WM_USER <= uMsg && uMsg < WM_APP)
         {
             MSGDUMP_TPRINTF(TEXT("%sWM_USER+%u(hwnd:%p, lResult:%p)\n"),
                             MSGDUMP_PREFIX, uMsg - WM_USER, (void *)hwnd, (void *)lResult);
         }
-        else if (WM_APP <= uMsg && uMsg <= 0xBFFF)
+        else if (WM_APP <= uMsg && uMsg < MAXINTATOM)
         {
             MSGDUMP_TPRINTF(TEXT("%sWM_APP+%u(hwnd:%p, lResult:%p)\n"),
                             MSGDUMP_PREFIX, uMsg - WM_APP, (void *)hwnd, (void *)lResult);
+        }
+        else if (MAXINTATOM <= uMsg && uMsg <= MAXWORD &&
+                 GetClipboardFormatName(uMsg, szMsg, _countof(szMsg)))
+        {
+            MSGDUMP_TPRINTF(TEXT("%sWM_%u[\"%s\"](hwnd:%p, lResult:%p)\n"),
+                            MSGDUMP_PREFIX, uMsg, szMsg, (void *)hwnd, (void *)lResult);
         }
         else
         {

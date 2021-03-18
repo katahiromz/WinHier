@@ -62,6 +62,8 @@ WinHier (ウィンハイエル) はウィンドウの構造やプロパティや
     - WM_SETTINGCHANGE メッセージのサポート。
 - 2020.03.13 ver.2.1
     - XPサポート。
+- 2021.03.18 ver.2.2
+    - RegisterWindowMessage サポート。
 
 ## 連絡先
 
