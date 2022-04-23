@@ -178,7 +178,10 @@ void MWindowTreeNode::SetHWND(HWND hwnd)
     m_style = GetWindowStyle(hwnd);
     m_exstyle = GetWindowExStyle(hwnd);
     m_hwndOwner = GetWindow(hwnd, GW_OWNER);
-    m_hwndParent = GetParent(hwnd);
+    if ((GetWindowStyle(hwnd) & (WS_POPUP | WS_CHILD)) == WS_CHILD)
+        m_hwndParent = GetParent(hwnd);
+    else
+        m_hwndParent = NULL;
     m_hwndFirstChild = GetWindow(hwnd, GW_CHILD);
     m_hwndLastChild = GetWindow(m_hwndFirstChild, GW_HWNDLAST);
     m_wClassAtom = GetClassWord(hwnd, GCW_ATOM);
