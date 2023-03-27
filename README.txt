@@ -59,6 +59,8 @@ please right-click the treeview item and choose the appropriate menu item.
     - RegisterWindowMessage support.
 - 2022-04-23 ver.2.3
     - Fixed parent handle against WS_POPUP and WS_CHILD.
+- 2023-03-27 ver.2.4
+    - Fixed a bug that caused abnormal termination when searching for a specific string.
 
 ## Contact Us
 

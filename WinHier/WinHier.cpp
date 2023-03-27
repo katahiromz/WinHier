@@ -550,6 +550,9 @@ public:
         if (hThisOne == NULL)
             hThisOne = found[found.size() - 1];
 
+        if (hThisOne == TVI_ROOT)
+            hThisOne = m_ctl1.GetRootItem();
+
         m_ctl1.SelectItem(hThisOne);
         SetFocus(m_ctl1);
     }
@@ -582,6 +585,9 @@ public:
 
         if (hThisOne == NULL)
             hThisOne = found[0];
+        
+        if (hThisOne == TVI_ROOT)
+            hThisOne = m_ctl1.GetRootItem();
 
         m_ctl1.SelectItem(hThisOne);
         SetFocus(m_ctl1);
