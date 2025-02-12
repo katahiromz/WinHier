@@ -30,6 +30,8 @@ x64
 *-old
 *.skrold
 lib*.a
+.ninja*
+*.ninja
 MsgGetter*.exe
 WinHier*.exe
 MsgGet*.dll

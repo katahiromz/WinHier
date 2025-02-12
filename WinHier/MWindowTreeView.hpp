@@ -723,8 +723,13 @@ MWindowTreeView::find_text(std::vector<HTREEITEM>& found,
         return;
 
     HTREEITEM hSelected = GetSelectedItem();
-    MString node_text = text_from_node(node);
-    if (node_text.find(text) != MString::npos)
+    auto node_text = text_from_node(node), text_copy = text;
+
+    // Make two strings uppercase for case-insensitivity
+    _wcsupr(&node_text[0]);
+    _wcsupr(&text_copy[0]);
+
+    if (node_text.find(text_copy) != MString::npos)
     {
         found.push_back(hParent);
     }
