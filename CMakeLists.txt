@@ -7,7 +7,7 @@
 cmake_minimum_required(VERSION 3.0)
 
 # project name and language
-project(WinHier C CXX)
+project(WinHier VERSION 2.5 LANGUAGES C CXX RC)
 
 # check build type
 if (NOT CMAKE_BUILD_TYPE)

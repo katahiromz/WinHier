@@ -61,6 +61,7 @@ please right-click the treeview item and choose the appropriate menu item.
     - Fixed parent handle against WS_POPUP and WS_CHILD.
 - 2023-03-27 ver.2.4
     - Fixed a bug that caused abnormal termination when searching for a specific string.
+- 2025-XX-YY ver.2.5
 
 ## Contact Us
 
