@@ -73,11 +73,14 @@ inline BOOL GetFileNameFromProcess(LPWSTR pszPath, DWORD cchPath, HANDLE hProces
     {
         pszPath[0] = 0;
         HANDLE hSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, pid);
-        MODULEENTRY32 me = { sizeof(me) };
-        if (Module32First(hSnapshot, &me))
+        if (hSnapshot != INVALID_HANDLE_VALUE)
         {
-            if (me.th32ProcessID == pid)
-                lstrcpynW(pszPath, me.szExePath, cchPath);
+            MODULEENTRY32 me = { sizeof(me) };
+            if (Module32First(hSnapshot, &me))
+            {
+                if (me.th32ProcessID == pid)
+                    lstrcpynW(pszPath, me.szExePath, cchPath);
+            }
             CloseHandle(hSnapshot);
         }
         if (!pszPath[0])
