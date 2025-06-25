@@ -10,6 +10,23 @@ project(WinHier VERSION 2.6 LANGUAGES C CXX RC)
 # Display CMAKE_BUILD_TYPE
 message(STATUS "CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
 
+# Don't use extra DLLs
+if (MSVC)
+    # replace "/MD" with "/MT" (building without runtime DLLs)
+    set(CompilerFlags
+        CMAKE_C_FLAGS
+        CMAKE_C_FLAGS_DEBUG
+        CMAKE_C_FLAGS_RELEASE
+        CMAKE_C_FLAGS_RELWITHDEBINFO
+        CMAKE_CXX_FLAGS
+        CMAKE_CXX_FLAGS_DEBUG
+        CMAKE_CXX_FLAGS_RELEASE
+        CMAKE_CXX_FLAGS_RELWITHDEBINFO)
+    foreach(CompilerFlags ${CompilerFlags})
+        string(REPLACE "/MD" "/MT" ${CompilerFlags} "${${CompilerFlags}}")
+    endforeach()
+endif()
+
 ##############################################################################
 
 include_directories(. include)
