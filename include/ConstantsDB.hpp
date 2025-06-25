@@ -175,8 +175,10 @@ public:
     bool HasCtrlID(NameType name) const
     {
         TableType table = GetTable(L"CTRLID");
-        for (auto& table_entry : table)
+        TableType::const_iterator it, end = table.end();
+        for (it = table.begin(); it != end; ++it)
         {
+            const EntryType& table_entry = *it;
             if (table_entry.name == name)
                 return true;
         }
@@ -185,14 +187,18 @@ public:
     bool HasResID(NameType name) const
     {
         TableType table = GetTable(L"RESOURCE.ID");
-        for (auto& table_entry : table)
+        TableType::const_iterator it, end = table.end();
+        for (it = table.begin(); it != end; ++it)
         {
+            const EntryType& table_entry = *it;
             if (table_entry.name == name)
                 return true;
         }
         table = GetTable(L"CTRLID");
-        for (auto& table_entry : table)
+        end = table.end();
+        for (it = table.begin(); it != end; ++it)
         {
+            const EntryType& table_entry = *it;
             if (table_entry.name == name)
                 return true;
         }
@@ -206,8 +212,8 @@ public:
 
         table = GetTableByPrefix(L"RESOURCE.ID", prefix);
         {
-            auto end = table.end();
-            for (auto it = table.begin(); it != end; ++it)
+            TableType::const_iterator it, end = table.end();
+            for (it = table.begin(); it != end; ++it)
             {
                 if (it->value == value)
                     return it->name;
@@ -539,8 +545,8 @@ public:
         mstr_split(values, str, L" \t\r\n|+");
 
         ValueType value = default_value;
-        auto end = values.end();
-        for (auto it = values.begin(); it != end; ++it)
+        std::vector<StringType>::iterator it, end = values.end();
+        for (it = values.begin(); it != end; ++it)
         {
             mstr_trim(*it);
             if ((*it).empty())

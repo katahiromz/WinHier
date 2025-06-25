@@ -8,7 +8,7 @@ WinHier (ウィンハイエル) はウィンドウの構造やプロパティや
 
 ダウンロード: https://katahiromz.web.fc2.com/winhier/ja
 
-対応環境: Windows XP/Vista/7/10
+対応環境: Windows 2000/XP/Vista/7/10/11
 
 ## インストール方法・アンインストール方法
 
@@ -71,6 +71,7 @@ WinHier (ウィンハイエル) はウィンドウの構造やプロパティや
 - 2025-02-12 ver.2.5
     - テキストの検索が大文字小文字を区別しないようになりました。
 - 2025-XX-YY ver.2.6
+    - Windows 2000とWindows 11を正式サポート。
 
 ## 連絡先
 
