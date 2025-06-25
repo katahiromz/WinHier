@@ -2,10 +2,10 @@
  * PROJECT:     ReactOS header files
  * LICENSE:     CC-BY-4.0 (https://spdx.org/licenses/CC-BY-4.0.html)
  * PURPOSE:     Win32API message dumping
- * COPYRIGHT:   Copyright 2018-2021 Katayama Hirofumi MZ (katayama.hirofumi.mz@gmail.com)
+ * COPYRIGHT:   Copyright 2018-2025 Katayama Hirofumi MZ (katayama.hirofumi.mz@gmail.com)
  */
 #ifndef _INC_MSGDUMP
-#define _INC_MSGDUMP    18   /* Version 18 */
+#define _INC_MSGDUMP    19   /* Version 19 */
 
 /*
  * NOTE: MD_msgdump function in this file provides Win32API message dump feature.
@@ -2218,7 +2218,7 @@ MD_ListBox_OnFindString(HWND hwnd, INT indexStart, LPCTSTR lpszFind)
         MSGDUMP_TPRINTF(TEXT("%sLB_FINDSTRING(hwnd:%p, indexStart:%d, lpszFind:%ls)\n"),
                         MSGDUMP_PREFIX, (void *)hwnd, indexStart, (LPCWSTR)lpszFind);
     else
-        MSGDUMP_TPRINTF(TEXT("%sLB_FINDSTRING(hwnd:%p, indexStart:%d, lpszFind:%ls)\n"),
+        MSGDUMP_TPRINTF(TEXT("%sLB_FINDSTRING(hwnd:%p, indexStart:%d, lpszFind:%hs)\n"),
                         MSGDUMP_PREFIX, (void *)hwnd, indexStart, (LPCSTR)lpszFind);
     return 0;
 }
@@ -2276,7 +2276,7 @@ MD_ListBox_OnAddFile(HWND hwnd, LPCTSTR lpszFilename)
         MSGDUMP_TPRINTF(TEXT("%sLB_ADDFILE(hwnd:%p, lpszFilename:%ls)\n"),
                         MSGDUMP_PREFIX, (void *)hwnd, (LPCWSTR)lpszFilename);
     else
-        MSGDUMP_TPRINTF(TEXT("%sLB_ADDFILE(hwnd:%p, lpszFilename:%ls)\n"),
+        MSGDUMP_TPRINTF(TEXT("%sLB_ADDFILE(hwnd:%p, lpszFilename:%hs)\n"),
                         MSGDUMP_PREFIX, (void *)hwnd, (LPCSTR)lpszFilename);
     return 0;
 }
@@ -2384,7 +2384,7 @@ MD_ListBox_OnFindStringExact(HWND hwnd, INT indexStart, LPCTSTR lpszFind)
 static __inline LCID MSGDUMP_API
 MD_ListBox_OnSetLocale(HWND hwnd, LCID wLocaleID)
 {
-    MSGDUMP_TPRINTF(TEXT("%sLB_SETLOCALE(hwnd:%p, wLocaleID:0x%08X)\n"),
+    MSGDUMP_TPRINTF(TEXT("%sLB_SETLOCALE(hwnd:%p, wLocaleID:0x%08lX)\n"),
                     MSGDUMP_PREFIX, (void *)hwnd, wLocaleID);
     return 0;
 }
@@ -2471,7 +2471,7 @@ MD_ComboBox_OnDir(HWND hwnd, UINT uAttrs, LPCTSTR lpszFileSpec)
         MSGDUMP_TPRINTF(TEXT("%sCB_DIR(hwnd:%p, uAttrs:%u, lpszFileSpec:%ls)\n"),
                         MSGDUMP_PREFIX, (void *)hwnd, uAttrs, (LPCWSTR)lpszFileSpec);
     else
-        MSGDUMP_TPRINTF(TEXT("%sCB_DIR(hwnd:%p, uAttrs:%u, lpszFileSpec:%ls)\n"),
+        MSGDUMP_TPRINTF(TEXT("%sCB_DIR(hwnd:%p, uAttrs:%u, lpszFileSpec:%hs)\n"),
                         MSGDUMP_PREFIX, (void *)hwnd, uAttrs, (LPCSTR)lpszFileSpec);
     return 0;
 }
@@ -2653,7 +2653,7 @@ MD_ComboBox_OnSetLocale(HWND hwnd, LCID wLocaleID)
 static __inline LCID MSGDUMP_API
 MD_ComboBox_OnGetLocale(HWND hwnd)
 {
-    MSGDUMP_TPRINTF(TEXT("%sCB_GETLOCALE(hwnd:%p, wLocaleID:0x%08lX)\n"),
+    MSGDUMP_TPRINTF(TEXT("%sCB_GETLOCALE(hwnd:%p)\n"),
                     MSGDUMP_PREFIX, (void *)hwnd);
     return 0;
 }
@@ -3602,7 +3602,7 @@ MD_ListView_OnGetView(HWND hwnd)
     MD_ListView_OnMoveGroup(HWND hwnd, WPARAM wParam, LPARAM lParam)
     {
         MSGDUMP_TPRINTF(TEXT("%sLVM_MOVEGROUP(hwnd:%p, wParam:%p, lParam:%p)\n"),
-                        MSGDUMP_PREFIX, (void *)hwnd, wParam, lParam);
+                        MSGDUMP_PREFIX, (void *)hwnd, (void *)wParam, (void *)lParam);
         return 0;
     }
 
@@ -5353,7 +5353,7 @@ MD_msgdump(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                      GetClipboardFormatName(uMsg, szMsg, _countof(szMsg)))
             {
                 MSGDUMP_TPRINTF(TEXT("%sWM_%u[\"%s\"](hwnd:%p, wParam:%p, lParam:%p)\n"),
-                                MSGDUMP_PREFIX, uMsg, szMsg, (void *)hwnd, wParam, lParam);
+                                MSGDUMP_PREFIX, uMsg, szMsg, (void *)hwnd, (void *)wParam, (void *)lParam);
             }
             else
             {
@@ -5368,7 +5368,7 @@ static __inline LRESULT MSGDUMP_API
 MD_msgresult(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam, LRESULT lResult)
 {
 #define DEFINE_RESULT(WM_) case WM_: MSGDUMP_TPRINTF(TEXT("%s") TEXT(#WM_) TEXT(": hwnd:%p, lResult:%p\n"), \
-                                                     MSGDUMP_PREFIX, (void *)hwnd, lResult); break
+                                                     MSGDUMP_PREFIX, (void *)hwnd, (void *)lResult); break
     TCHAR szClass[24], sz[2], szMsg[64];
     szClass[0] = 0;
     GetClassName(hwnd, szClass, ARRAYSIZE(szClass));

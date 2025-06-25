@@ -66,6 +66,7 @@ please right-click the treeview item and choose the appropriate menu item.
 - 2025-XX-YY ver.2.6
     - Officially supported Windows 11.
     - Able to get message outputs from the other process.
+    - Fixed message processing partially.
 
 ## Contact Us
 
