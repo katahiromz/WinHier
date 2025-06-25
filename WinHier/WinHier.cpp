@@ -770,7 +770,7 @@ public:
             *pch = 0;
 
             PVOID OldValue;
-            DisableWow64FsRedirection(&OldValue);
+            BOOL bWowFsDisabled = DisableWow64FsRedirection(&OldValue);
 
             DWORD dwBinType;
             if (bIsWow64)
@@ -786,7 +786,8 @@ public:
                 PathAppend(szPath, TEXT("MsgGetter32.exe"));
             }
 
-            RevertWow64FsRedirection(OldValue);
+            if (bWowFsDisabled)
+                RevertWow64FsRedirection(OldValue);
 
             TCHAR szText[64];
             StringCbPrintf(szText, sizeof(szText), TEXT("0x%p"), hwndTarget);
