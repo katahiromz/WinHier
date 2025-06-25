@@ -70,6 +70,7 @@ please right-click the treeview item and choose the appropriate menu item.
 - 2025-XX-YY ver.2.7
     - Handling WoW64 Filesystem redirection.
     - Officially supported Windows 2000.
+    - Added digital signature.
 
 ## Contact Us
 
