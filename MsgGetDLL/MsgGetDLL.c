@@ -173,13 +173,11 @@ BOOL APIENTRY UninstallSendProc(void)
 
 BOOL APIENTRY InstallSendProc(HWND hwndNotify, HWND hwndTarget)
 {
-    DWORD tid;
     UninstallSendProc();
 
     g_hwndNotify = hwndNotify;
     g_hwndTarget = hwndTarget;
 
-    tid = GetWindowThreadProcessId(g_hwndTarget, NULL);
     g_hSendMsgHook = SetWindowsHookEx(WH_CALLWNDPROC, MsgSendProc, g_hinstDLL, 0);
     return g_hSendMsgHook != NULL;
 }
@@ -196,13 +194,11 @@ BOOL APIENTRY UninstallSendRetProc(void)
 
 BOOL APIENTRY InstallSendRetProc(HWND hwndNotify, HWND hwndTarget)
 {
-    DWORD tid;
     UninstallSendRetProc();
 
     g_hwndNotify = hwndNotify;
     g_hwndTarget = hwndTarget;
 
-    tid = GetWindowThreadProcessId(g_hwndTarget, NULL);
     g_hSendRetMsgHook = SetWindowsHookEx(WH_CALLWNDPROCRET, MsgSendRetProc, g_hinstDLL, 0);
     return g_hSendRetMsgHook != NULL;
 }
@@ -219,13 +215,11 @@ BOOL APIENTRY UninstallPostProc(void)
 
 BOOL APIENTRY InstallPostProc(HWND hwndNotify, HWND hwndTarget)
 {
-    DWORD tid;
     UninstallPostProc();
 
     g_hwndNotify = hwndNotify;
     g_hwndTarget = hwndTarget;
 
-    tid = GetWindowThreadProcessId(g_hwndTarget, NULL);
     g_hPostMsgHook = SetWindowsHookEx(WH_GETMESSAGE, MsgPostProc, g_hinstDLL, 0);
     return g_hPostMsgHook != NULL;
 }
