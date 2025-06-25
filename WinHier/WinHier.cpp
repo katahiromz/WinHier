@@ -55,7 +55,7 @@ typedef DWORD (WINAPI *FN_GetProcessImageFileNameW)(HANDLE hProcess, LPWSTR lpIm
 FN_GetProcessImageFileNameW g_pGetProcessImageFileNameW =
     (FN_GetProcessImageFileNameW)GetProcAddress(GetModuleHandleA("psapi"), "GetProcessImageFileNameW");
 
-inline BOOL GetFileNameFromProcess(LPWSTR pszPath, DWORD cchPath, HANDLE hProcess)
+inline BOOL GetFileNameFromProcess(LPWSTR pszPath, DWORD cchPath, HANDLE hProcess, DWORD pid)
 {
     if (g_pQueryFullProcessImageNameW)
     {
@@ -71,7 +71,17 @@ inline BOOL GetFileNameFromProcess(LPWSTR pszPath, DWORD cchPath, HANDLE hProces
     }
     else
     {
-        lstrcpynW(pszPath, L"(N/A)", cchPath);
+        pszPath[0] = 0;
+        HANDLE hSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, pid);
+        MODULEENTRY32 me = { sizeof(me) };
+        if (Module32First(hSnapshot, &me))
+        {
+            if (me.th32ProcessID == pid)
+                lstrcpynW(pszPath, me.szExePath, cchPath);
+            CloseHandle(hSnapshot);
+        }
+        if (!pszPath[0])
+            lstrcpynW(pszPath, L"(N/A)", cchPath);
         return TRUE;
     }
 }
@@ -82,7 +92,7 @@ inline BOOL GetFileNameFromPID(LPWSTR pszPath, DWORD cchPath, DWORD pid)
     if (!hProcess)
         return FALSE;
 
-    BOOL ret = GetFileNameFromProcess(pszPath, cchPath, hProcess);
+    BOOL ret = GetFileNameFromProcess(pszPath, cchPath, hProcess, pid);
     CloseHandle(hProcess);
     return ret;
 }
