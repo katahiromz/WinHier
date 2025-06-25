@@ -4,6 +4,7 @@
 
 #include "targetver.h"
 #define _CRT_SECURE_NO_WARNINGS
+#define _SCL_SECURE_NO_WARNINGS
 #define _CRT_NON_CONFORMING_WCSTOK
 #define MWINDOWTREE_ADJUST_OWNER
 #include <shlwapi.h>
