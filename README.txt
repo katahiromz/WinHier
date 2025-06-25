@@ -7,7 +7,7 @@ Freeware.
 
 Download: https://katahiromz.web.fc2.com/winhier/en
 
-Platforms: Windows XP/Vista/7/10/11
+Platforms: Windows 2000/XP/Vista/7/10/11
 
 ## How to install/uninstall
 
@@ -67,6 +67,9 @@ please right-click the treeview item and choose the appropriate menu item.
     - Officially supported Windows 11.
     - Able to get message outputs from the other process.
     - Fixed message processing partially.
+- 2025-XX-YY ver.2.7
+    - Handling WoW64 Filesystem redirection.
+    - Officially supported Windows 2000.
 
 ## Contact Us
 

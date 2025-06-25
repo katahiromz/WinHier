@@ -4,6 +4,6 @@
 
 WinHier is a useful utility to investigate window hierarchy, properties and messages.
 
-Platforms: Windows XP/Vista/7/10/11
+Platforms: Windows 2000/XP/Vista/7/10/11
 
 Download: https://katahiromz.web.fc2.com/winhier/en

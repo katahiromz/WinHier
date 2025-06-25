@@ -50,6 +50,11 @@ typedef BOOL (WINAPI *QUERYFULLPROCESSIMAGENAMEW)(HANDLE, DWORD, LPWSTR, PDWORD)
 QUERYFULLPROCESSIMAGENAMEW g_pQueryFullProcessImageNameW =
     (QUERYFULLPROCESSIMAGENAMEW)GetProcAddress(GetModuleHandleA("kernel32"), "QueryFullProcessImageNameW");
 
+// GetProcessImageFileNameW
+typedef DWORD (WINAPI *FN_GetProcessImageFileNameW)(HANDLE hProcess, LPWSTR lpImageFileName, DWORD nSize);
+FN_GetProcessImageFileNameW g_pGetProcessImageFileNameW =
+    (FN_GetProcessImageFileNameW)GetProcAddress(GetModuleHandleA("psapi"), "GetProcessImageFileNameW");
+
 inline BOOL GetFileNameFromProcess(LPWSTR pszPath, DWORD cchPath, HANDLE hProcess)
 {
     if (g_pQueryFullProcessImageNameW)
@@ -57,12 +62,17 @@ inline BOOL GetFileNameFromProcess(LPWSTR pszPath, DWORD cchPath, HANDLE hProces
         DWORD cch = cchPath;
         return (*g_pQueryFullProcessImageNameW)(hProcess, 0, pszPath, &cch);
     }
-    else
+    else if (g_pGetProcessImageFileNameW)
     {
         TCHAR szPath[MAX_PATH];
-        BOOL ret = GetProcessImageFileName(hProcess, szPath, ARRAYSIZE(szPath));
+        BOOL ret = (*g_pGetProcessImageFileNameW)(hProcess, szPath, ARRAYSIZE(szPath));
         NormalizeNTPath(pszPath, cchPath, szPath);
         return ret;
+    }
+    else
+    {
+        lstrcpynW(pszPath, L"(N/A)", cchPath);
+        return TRUE;
     }
 }
 
@@ -90,6 +100,31 @@ BOOL IsWow64(HANDLE hProcess)
         (*pIsWow64Process)(hProcess, &ret);
         return ret;
     }
+    return FALSE;
+}
+
+typedef BOOL (WINAPI *FN_Wow64DisableWow64FsRedirection)(PVOID *OldValue);
+typedef BOOL (WINAPI *FN_Wow64RevertWow64FsRedirection)(PVOID OldValue);
+
+BOOL DisableWow64FsRedirection(PVOID *OldValue)
+{
+    HINSTANCE hKernel32 = GetModuleHandleA("kernel32");
+    FN_Wow64DisableWow64FsRedirection pWow64DisableWow64FsRedirection;
+    pWow64DisableWow64FsRedirection =
+        (FN_Wow64DisableWow64FsRedirection)GetProcAddress(hKernel32, "Wow64DisableWow64FsRedirection");
+    if (pWow64DisableWow64FsRedirection)
+        return (*pWow64DisableWow64FsRedirection)(OldValue);
+    return FALSE;
+}
+
+BOOL RevertWow64FsRedirection(PVOID OldValue)
+{
+    HINSTANCE hKernel32 = GetModuleHandleA("kernel32");
+    FN_Wow64RevertWow64FsRedirection pWow64RevertWow64FsRedirection;
+    pWow64RevertWow64FsRedirection =
+        (FN_Wow64RevertWow64FsRedirection)GetProcAddress(hKernel32, "Wow64RevertWow64FsRedirection");
+    if (pWow64RevertWow64FsRedirection)
+        return (*pWow64RevertWow64FsRedirection)(OldValue);
     return FALSE;
 }
 
@@ -721,19 +756,24 @@ public:
             LPTSTR pch = PathFindFileName(szPath);
             *pch = 0;
 
+            PVOID OldValue;
+            DisableWow64FsRedirection(&OldValue);
+
             DWORD dwBinType;
             if (bIsWow64)
             {
                 PathAppend(szPath, TEXT("MsgGetter32.exe"));
             }
-            else if (GetBinaryType(szTargetPath, &dwBinType) && dwBinType == SCS_32BIT_BINARY)
-            {
-                PathAppend(szPath, TEXT("MsgGetter32.exe"));
-            }
-            else
+            else if (GetBinaryType(szTargetPath, &dwBinType) && dwBinType == SCS_64BIT_BINARY)
             {
                 PathAppend(szPath, TEXT("MsgGetter64.exe"));
             }
+            else
+            {
+                PathAppend(szPath, TEXT("MsgGetter32.exe"));
+            }
+
+            RevertWow64FsRedirection(OldValue);
 
             TCHAR szText[64];
             StringCbPrintf(szText, sizeof(szText), TEXT("0x%p"), hwndTarget);
