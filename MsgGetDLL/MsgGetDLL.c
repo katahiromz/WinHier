@@ -180,7 +180,7 @@ BOOL APIENTRY InstallSendProc(HWND hwndNotify, HWND hwndTarget)
     g_hwndTarget = hwndTarget;
 
     tid = GetWindowThreadProcessId(g_hwndTarget, NULL);
-    g_hSendMsgHook = SetWindowsHookEx(WH_CALLWNDPROC, MsgSendProc, g_hinstDLL, tid);
+    g_hSendMsgHook = SetWindowsHookEx(WH_CALLWNDPROC, MsgSendProc, g_hinstDLL, 0);
     return g_hSendMsgHook != NULL;
 }
 
@@ -203,7 +203,7 @@ BOOL APIENTRY InstallSendRetProc(HWND hwndNotify, HWND hwndTarget)
     g_hwndTarget = hwndTarget;
 
     tid = GetWindowThreadProcessId(g_hwndTarget, NULL);
-    g_hSendRetMsgHook = SetWindowsHookEx(WH_CALLWNDPROCRET, MsgSendRetProc, g_hinstDLL, tid);
+    g_hSendRetMsgHook = SetWindowsHookEx(WH_CALLWNDPROCRET, MsgSendRetProc, g_hinstDLL, 0);
     return g_hSendRetMsgHook != NULL;
 }
 
@@ -226,7 +226,7 @@ BOOL APIENTRY InstallPostProc(HWND hwndNotify, HWND hwndTarget)
     g_hwndTarget = hwndTarget;
 
     tid = GetWindowThreadProcessId(g_hwndTarget, NULL);
-    g_hPostMsgHook = SetWindowsHookEx(WH_GETMESSAGE, MsgPostProc, g_hinstDLL, tid);
+    g_hPostMsgHook = SetWindowsHookEx(WH_GETMESSAGE, MsgPostProc, g_hinstDLL, 0);
     return g_hPostMsgHook != NULL;
 }
 

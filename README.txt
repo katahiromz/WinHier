@@ -63,6 +63,9 @@ please right-click the treeview item and choose the appropriate menu item.
     - Fixed a bug that caused abnormal termination when searching for a specific string.
 - 2025-02-12 ver.2.5
     - Finding text is now case-insensitive.
+- 2025-XX-YY ver.2.6
+    - Officially supported Windows 11.
+    - Able to get message outputs from the other process.
 
 ## Contact Us
 
