@@ -27,14 +27,14 @@ if (MSVC)
     endforeach()
 endif()
 
+# Unicode
+add_definitions(-DUNICODE -D_UNICODE)
+
 ##############################################################################
 
 include_directories(. include)
 
-# Unicode
-add_definitions(-DUNICODE -D_UNICODE)
-
-# WinHier.exe
+# WinHier32.exe / WinHier64.exe
 add_executable(WinHier WIN32 WinHier/WinHier.cpp WinHier/WinHier_res.rc)
 target_link_libraries(WinHier comctl32 psapi shlwapi advapi32)
 if (CMAKE_SIZEOF_VOID_P EQUAL 8)
@@ -43,7 +43,7 @@ else()
     set_target_properties(WinHier PROPERTIES OUTPUT_NAME "WinHier32")
 endif()
 
-# MsgGet32.dll/MsgGet64.dll
+# MsgGet32.dll / MsgGet64.dll
 add_library(MsgGetDLL SHARED MsgGetDLL/MsgGetDLL.c MsgGetDLL/MsgGetDLL.def)
 set_target_properties(MsgGetDLL PROPERTIES PREFIX "")
 if (CMAKE_SIZEOF_VOID_P EQUAL 8)
@@ -55,7 +55,7 @@ if (MSVC)
     target_link_options(MsgGetDLL PRIVATE /DYNAMICBASE:NO /FIXED)
 endif()
 
-# MsgGetter32.exe/MsgGetter64.exe
+# MsgGetter32.exe / MsgGetter64.exe
 add_executable(MsgGetter WIN32 MsgGetter/MsgGetter.cpp MsgGetter/MsgGetter_res.rc)
 target_link_libraries(MsgGetter shlwapi)
 if (CMAKE_SIZEOF_VOID_P EQUAL 8)
