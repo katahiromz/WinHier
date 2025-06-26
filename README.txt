@@ -71,6 +71,7 @@ please right-click the treeview item and choose the appropriate menu item.
     - Handling WoW64 Filesystem redirection.
     - Officially supported Windows 2000.
     - Added digital signature.
+    - Update main icon.
 
 ## Contact Us
 
