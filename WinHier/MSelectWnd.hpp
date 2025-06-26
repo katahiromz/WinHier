@@ -111,6 +111,7 @@ public:
         HANDLE_MSG(hwnd, WM_LBUTTONUP, OnLButtonUp);
         HANDLE_MSG(hwnd, WM_MOUSEMOVE, OnMouseMove);
         HANDLE_MESSAGE(hwnd, WM_CAPTURECHANGED, OnCaptureChanged);
+        HANDLE_MESSAGE(hwnd, WM_CANCELMODE, OnCancelMode);
         default:
             return DefaultProcDx();
         }
@@ -240,7 +241,7 @@ public:
         SetCursor(m_data.m_hTargetCursor);
     }
 
-    LRESULT OnCaptureChanged(HWND hwnd, WPARAM wParam, LPARAM lParam)
+    void CancelCapture(HWND hwnd)
     {
         if (m_hwndOverOld)
         {
@@ -273,6 +274,19 @@ public:
         }
 
         SetTargetIcon(hwnd);
+
+        InvalidateRect(NULL, NULL, TRUE);
+    }
+
+    LRESULT OnCaptureChanged(HWND hwnd, WPARAM wParam, LPARAM lParam)
+    {
+        CancelCapture(hwnd);
+        return 0;
+    }
+
+    LRESULT OnCancelMode(HWND hwnd, WPARAM wParam, LPARAM lParam)
+    {
+        CancelCapture(hwnd);
         return 0;
     }
 };

@@ -72,6 +72,7 @@ please right-click the treeview item and choose the appropriate menu item.
     - Officially supported Windows 2000.
     - Added digital signature.
     - Update main icon.
+    - Added WM_CANCELMODE handler. Redrawed when capture is canceled.
 
 ## Contact Us
 
