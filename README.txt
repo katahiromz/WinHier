@@ -67,11 +67,11 @@ please right-click the treeview item and choose the appropriate menu item.
     - Officially supported Windows 11.
     - Able to get message outputs from the other process.
     - Fixed message processing partially.
-- 2025-XX-YY ver.2.7
+- 2025-07-01 ver.2.7
     - Handling WoW64 Filesystem redirection.
     - Officially supported Windows 2000.
     - Added digital signature.
-    - Update main icon.
+    - Updated main icon.
     - Added WM_CANCELMODE handler. Redrawed when capture is canceled.
 
 ## Contact Us
