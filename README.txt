@@ -73,6 +73,8 @@ please right-click the treeview item and choose the appropriate menu item.
     - Added digital signature.
     - Updated main icon.
     - Added WM_CANCELMODE handler. Redrawed when capture is canceled.
+- 2025-09-19 ver.2.8
+    - Updated main icon.
 
 ## Contact Us
 
