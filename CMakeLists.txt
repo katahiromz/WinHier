@@ -4,8 +4,8 @@
 # CMake minimum version
 cmake_minimum_required(VERSION 3.10)
 
-# project name and language
-project(WinHier VERSION 2.8 LANGUAGES C CXX RC)
+# project name, version, and languages
+project(WinHier VERSION 2.9 LANGUAGES C CXX RC)
 
 # Display CMAKE_BUILD_TYPE
 message(STATUS "CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")

@@ -70,8 +70,8 @@ MsgSendProc(int code, WPARAM wParam, LPARAM lParam)
     {
         if (!IsWindow(g_hwndNotify) || !IsWindow(g_hwndTarget))
         {
-            assert(0);
             UninstallSendProc();
+            return 0;
         }
         else
         {
@@ -102,8 +102,8 @@ MsgSendRetProc(INT code, WPARAM wParam, LPARAM lParam)
     {
         if (!IsWindow(g_hwndNotify) || !IsWindow(g_hwndTarget))
         {
-            assert(0);
             UninstallSendRetProc();
+            return 0;
         }
         else
         {
@@ -140,8 +140,8 @@ MsgPostProc(INT nCode, WPARAM wParam, LPARAM lParam)
     {
         if (!IsWindow(g_hwndNotify) || !IsWindow(g_hwndTarget))
         {
-            assert(0);
             UninstallPostProc();
+            return 0;
         }
         else
         {

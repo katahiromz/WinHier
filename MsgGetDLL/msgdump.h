@@ -5354,7 +5354,6 @@ MD_msgdump_ex(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam, WNDPROC fnDefP
 static __inline LRESULT CALLBACK
 MD_msgdump_def_proc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-    TCHAR szMsg[64];
     if (WM_USER <= uMsg && uMsg < WM_APP)
     {
         return MD_OnUser(hwnd, uMsg, wParam, lParam);
