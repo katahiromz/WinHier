@@ -5,11 +5,8 @@
  * COPYRIGHT:   Copyright 2018-2026 Katayama Hirofumi MZ (katayama.hirofumi.mz@gmail.com)
  */
 #ifndef _INC_MSGDUMP
-#define _INC_MSGDUMP    20   /* Version 20 */
+#define _INC_MSGDUMP    21   /* Version 21 */
 
-/*
- * NOTE: MD_msgdump function in this file provides Win32API message dump feature.
- */
 #pragma once
 
 #ifndef _INC_WINXX
@@ -75,8 +72,7 @@ static __inline LRESULT MSGDUMP_API
 MD_OnUnknown(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
     TCHAR szName[64];
-    if (0xC000 <= uMsg && uMsg <= 0xFFFF &&
-        GlobalGetAtomName(uMsg, szName, ARRAYSIZE(szName)))
+    if (0xC000 <= uMsg && uMsg <= 0xFFFF && GlobalGetAtomName(uMsg, szName, ARRAYSIZE(szName)))
     {
         /* RegisterWindowMessage'd message */
         MSGDUMP_TPRINTF(TEXT("%s'%s'(%u)(hwnd:%p, wParam:%p, lParam:%p)\n"),
@@ -5367,13 +5363,6 @@ MD_msgdump_def_proc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     {
         return MD_OnApp(hwnd, uMsg, wParam, lParam);
     }
-    else if (MAXINTATOM <= uMsg && uMsg <= MAXWORD &&
-             GetClipboardFormatName(uMsg, szMsg, _countof(szMsg)))
-    {
-        MSGDUMP_TPRINTF(TEXT("%sWM_%u[\"%s\"](hwnd:%p, wParam:%p, lParam:%p)\n"),
-                        MSGDUMP_PREFIX, uMsg, szMsg, (void *)hwnd, (void *)wParam, (void *)lParam);
-        return 0;
-    }
     else
     {
         return MD_OnUnknown(hwnd, uMsg, wParam, lParam);
@@ -6100,7 +6089,7 @@ MD_msgresult_ex(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam, LRESULT lRes
 static __inline LRESULT CALLBACK
 MD_msgresult_def_proc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam, LRESULT lResult)
 {
-    TCHAR szMsg[64];
+    TCHAR szName[64];
     if (WM_USER <= uMsg && uMsg < WM_APP)
     {
         MSGDUMP_TPRINTF(TEXT("%sWM_USER+%u(hwnd:%p, lResult:%p)\n"),
@@ -6111,11 +6100,13 @@ MD_msgresult_def_proc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam, LRESUL
         MSGDUMP_TPRINTF(TEXT("%sWM_APP+%u(hwnd:%p, lResult:%p)\n"),
                         MSGDUMP_PREFIX, uMsg - WM_APP, (void *)hwnd, (void *)lResult);
     }
-    else if (MAXINTATOM <= uMsg && uMsg <= MAXWORD &&
-             GetClipboardFormatName(uMsg, szMsg, _countof(szMsg)))
+    else if (0xC000 <= uMsg && uMsg <= 0xFFFF &&
+             GlobalGetAtomName(uMsg, szName, ARRAYSIZE(szName)))
     {
-        MSGDUMP_TPRINTF(TEXT("%sWM_%u[\"%s\"](hwnd:%p, lResult:%p)\n"),
-                        MSGDUMP_PREFIX, uMsg, szMsg, (void *)hwnd, (void *)lResult);
+        /* RegisterWindowMessage'd message */
+        MSGDUMP_TPRINTF(TEXT("%s'%s'(%u)(hwnd:%p, lResult:%p)\n"),
+                        MSGDUMP_PREFIX, szName, uMsg, (void *)hwnd, (void *)lResult);
+        return 0;
     }
     else
     {
