@@ -2,15 +2,13 @@
  * PROJECT:     ReactOS header files
  * LICENSE:     CC-BY-4.0 (https://spdx.org/licenses/CC-BY-4.0.html)
  * PURPOSE:     Win32API message dumping
- * COPYRIGHT:   Copyright 2018-2025 Katayama Hirofumi MZ (katayama.hirofumi.mz@gmail.com)
+ * COPYRIGHT:   Copyright 2018-2026 Katayama Hirofumi MZ (katayama.hirofumi.mz@gmail.com)
  */
 #ifndef _INC_MSGDUMP
-#define _INC_MSGDUMP    19   /* Version 19 */
+#define _INC_MSGDUMP    20   /* Version 20 */
 
 /*
  * NOTE: MD_msgdump function in this file provides Win32API message dump feature.
- * NOTE: This header file takes time to compile.
- *       You might indirectly use MD_msgdump function.
  */
 #pragma once
 
@@ -34,13 +32,25 @@
     #define MSGDUMP_PREFIX TEXT("")
 #endif
 
+typedef LRESULT (CALLBACK *MD_MSGRESULT_PROC)(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam, LRESULT lResult);
+
 /* MD_msgdump function */
 static __inline LRESULT MSGDUMP_API
 MD_msgdump(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+static __inline LRESULT MSGDUMP_API
+MD_msgdump_ex(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam, WNDPROC fnDefProc);
 
 /* MD_msgresult function */
 static __inline LRESULT MSGDUMP_API
 MD_msgresult(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam, LRESULT lResult);
+static __inline LRESULT MSGDUMP_API
+MD_msgresult_ex(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam, LRESULT lResult, MD_MSGRESULT_PROC fnDefProc);
+
+/* default procedures */
+static __inline LRESULT CALLBACK
+MD_msgdump_def_proc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+static __inline LRESULT CALLBACK
+MD_msgresult_def_proc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam, LRESULT lResult);
 
 /*---- The below codes are boring details of MD_msgdump and MD_msgresult implementation. ----*/
 
@@ -4652,9 +4662,9 @@ MD_RichEdit_OnGetTextMode(HWND hwnd)
 }
 
 static __inline LRESULT MSGDUMP_API
-MD_msgdump(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+MD_msgdump_ex(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam, WNDPROC fnDefProc)
 {
-    TCHAR szClass[24], sz[2], szMsg[64];
+    TCHAR szClass[64], sz[2];
     szClass[0] = 0;
     GetClassName(hwnd, szClass, ARRAYSIZE(szClass));
     sz[0] = szClass[0];
@@ -5340,36 +5350,48 @@ MD_msgdump(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         HANDLE_MSG(hwnd, WM_APPCOMMAND, MD_OnAppCommand);
 #endif
         default:
-        {
-            if (WM_USER <= uMsg && uMsg < WM_APP)
-            {
-                return MD_OnUser(hwnd, uMsg, wParam, lParam);
-            }
-            if (WM_APP <= uMsg && uMsg < MAXINTATOM)
-            {
-                return MD_OnApp(hwnd, uMsg, wParam, lParam);
-            }
-            else if (MAXINTATOM <= uMsg && uMsg <= MAXWORD &&
-                     GetClipboardFormatName(uMsg, szMsg, _countof(szMsg)))
-            {
-                MSGDUMP_TPRINTF(TEXT("%sWM_%u[\"%s\"](hwnd:%p, wParam:%p, lParam:%p)\n"),
-                                MSGDUMP_PREFIX, uMsg, szMsg, (void *)hwnd, (void *)wParam, (void *)lParam);
-            }
-            else
-            {
-                return MD_OnUnknown(hwnd, uMsg, wParam, lParam);
-            }
-        }
+            return fnDefProc(hwnd, uMsg, wParam, lParam);
     }
     return 0;
 }
 
+static __inline LRESULT CALLBACK
+MD_msgdump_def_proc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+    TCHAR szMsg[64];
+    if (WM_USER <= uMsg && uMsg < WM_APP)
+    {
+        return MD_OnUser(hwnd, uMsg, wParam, lParam);
+    }
+    if (WM_APP <= uMsg && uMsg < MAXINTATOM)
+    {
+        return MD_OnApp(hwnd, uMsg, wParam, lParam);
+    }
+    else if (MAXINTATOM <= uMsg && uMsg <= MAXWORD &&
+             GetClipboardFormatName(uMsg, szMsg, _countof(szMsg)))
+    {
+        MSGDUMP_TPRINTF(TEXT("%sWM_%u[\"%s\"](hwnd:%p, wParam:%p, lParam:%p)\n"),
+                        MSGDUMP_PREFIX, uMsg, szMsg, (void *)hwnd, (void *)wParam, (void *)lParam);
+        return 0;
+    }
+    else
+    {
+        return MD_OnUnknown(hwnd, uMsg, wParam, lParam);
+    }
+}
+
 static __inline LRESULT MSGDUMP_API
-MD_msgresult(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam, LRESULT lResult)
+MD_msgdump(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+    return MD_msgdump_ex(hwnd, uMsg, wParam, lParam, MD_msgdump_def_proc);
+}
+
+static __inline LRESULT MSGDUMP_API
+MD_msgresult_ex(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam, LRESULT lResult, MD_MSGRESULT_PROC fnDefProc)
 {
 #define DEFINE_RESULT(WM_) case WM_: MSGDUMP_TPRINTF(TEXT("%s") TEXT(#WM_) TEXT(": hwnd:%p, lResult:%p\n"), \
                                                      MSGDUMP_PREFIX, (void *)hwnd, (void *)lResult); break
-    TCHAR szClass[24], sz[2], szMsg[64];
+    TCHAR szClass[64], sz[2];
     szClass[0] = 0;
     GetClassName(hwnd, szClass, ARRAYSIZE(szClass));
     sz[0] = szClass[0];
@@ -6069,30 +6091,44 @@ MD_msgresult(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam, LRESULT lResult
     DEFINE_RESULT(WM_GETTITLEBARINFOEX);
 #endif
     default:
-        if (WM_USER <= uMsg && uMsg < WM_APP)
-        {
-            MSGDUMP_TPRINTF(TEXT("%sWM_USER+%u(hwnd:%p, lResult:%p)\n"),
-                            MSGDUMP_PREFIX, uMsg - WM_USER, (void *)hwnd, (void *)lResult);
-        }
-        else if (WM_APP <= uMsg && uMsg < MAXINTATOM)
-        {
-            MSGDUMP_TPRINTF(TEXT("%sWM_APP+%u(hwnd:%p, lResult:%p)\n"),
-                            MSGDUMP_PREFIX, uMsg - WM_APP, (void *)hwnd, (void *)lResult);
-        }
-        else if (MAXINTATOM <= uMsg && uMsg <= MAXWORD &&
-                 GetClipboardFormatName(uMsg, szMsg, _countof(szMsg)))
-        {
-            MSGDUMP_TPRINTF(TEXT("%sWM_%u[\"%s\"](hwnd:%p, lResult:%p)\n"),
-                            MSGDUMP_PREFIX, uMsg, szMsg, (void *)hwnd, (void *)lResult);
-        }
-        else
-        {
-            MSGDUMP_TPRINTF(TEXT("%sWM_%u(hwnd:%p, lResult:%p)\n"),
-                            MSGDUMP_PREFIX, uMsg, (void *)hwnd, (void *)lResult);
-        }
+        fnDefProc(hwnd, uMsg, wParam, lParam, lResult);
 #undef DEFINE_RESULT
     }
     return 0;
+}
+
+static __inline LRESULT CALLBACK
+MD_msgresult_def_proc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam, LRESULT lResult)
+{
+    TCHAR szMsg[64];
+    if (WM_USER <= uMsg && uMsg < WM_APP)
+    {
+        MSGDUMP_TPRINTF(TEXT("%sWM_USER+%u(hwnd:%p, lResult:%p)\n"),
+                        MSGDUMP_PREFIX, uMsg - WM_USER, (void *)hwnd, (void *)lResult);
+    }
+    else if (WM_APP <= uMsg && uMsg < MAXINTATOM)
+    {
+        MSGDUMP_TPRINTF(TEXT("%sWM_APP+%u(hwnd:%p, lResult:%p)\n"),
+                        MSGDUMP_PREFIX, uMsg - WM_APP, (void *)hwnd, (void *)lResult);
+    }
+    else if (MAXINTATOM <= uMsg && uMsg <= MAXWORD &&
+             GetClipboardFormatName(uMsg, szMsg, _countof(szMsg)))
+    {
+        MSGDUMP_TPRINTF(TEXT("%sWM_%u[\"%s\"](hwnd:%p, lResult:%p)\n"),
+                        MSGDUMP_PREFIX, uMsg, szMsg, (void *)hwnd, (void *)lResult);
+    }
+    else
+    {
+        MSGDUMP_TPRINTF(TEXT("%sWM_%u(hwnd:%p, lResult:%p)\n"),
+                        MSGDUMP_PREFIX, uMsg, (void *)hwnd, (void *)lResult);
+    }
+    return 0;
+}
+
+static __inline LRESULT MSGDUMP_API
+MD_msgresult(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam, LRESULT lResult)
+{
+    return MD_msgresult_ex(hwnd, uMsg, wParam, lParam, lResult, MD_msgresult_def_proc);
 }
 
 #endif
