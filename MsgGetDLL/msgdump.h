@@ -6106,7 +6106,6 @@ MD_msgresult_def_proc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam, LRESUL
         /* RegisterWindowMessage'd message */
         MSGDUMP_TPRINTF(TEXT("%s'%s'(%u)(hwnd:%p, lResult:%p)\n"),
                         MSGDUMP_PREFIX, szName, uMsg, (void *)hwnd, (void *)lResult);
-        return 0;
     }
     else
     {
