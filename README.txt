@@ -75,7 +75,7 @@ please right-click the treeview item and choose the appropriate menu item.
     - Added WM_CANCELMODE handler. Redrawed when capture is canceled.
 - 2025-09-19 ver.2.8
     - Updated main icon.
-- 2026-XX-YY ver.2.9
+- 2026-07-01 ver.2.9
     - Stabilized message processing.
 
 ## Contact Us
